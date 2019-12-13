@@ -5,6 +5,6 @@ A game where you are a flower trying to stay hydrated and alive on your way of g
 
 
 
-GANTT: https://app.teamweek.com/#timeline/509831/teams/484912?zoom=month
+GANTT: https://app.teamweek.com/#pg/9HPltn6EvuumccJ_V7ggS3eFn5NegMcd
 
 GOOGLE DOCS: https://medieinstitutet-my.sharepoint.com/:w:/g/personal/lisa_bengtsson_medieinstitutet_se/ER2wWfWYvJdBmfD8DT2h4tYBVcEZCZEKdOiTMXu49sc-KQ?e=KEgDhr
