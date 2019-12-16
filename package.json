@@ -1,0 +1,16 @@
+{
+  "name": "slutprojektet-start-template",
+  "version": "1.0.0",
+  "description": "Project to quickly get something working in [p5.js](https://p5js.org/) and [typescript](https://www.typescriptlang.org/)",
+  "scripts": {
+    "start": "run-p start-compile start-run",
+    "start-compile": "tsc --watch",
+    "start-run": "live-server"
+  },
+  "devDependencies": {
+    "@types/p5": "^0.9.0",
+    "npm-run-all": "^4.1.5",
+    "live-server": "^1.2.1",
+    "typescript": "^3.7.3"
+  }
+}
