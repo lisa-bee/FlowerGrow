@@ -39,8 +39,11 @@ function draw() {
     fill('red')
     stroke('white')
     circle(width * .5, height * .5, width * 0.10)
-    image(grass, 0, 500, 600, 100);
-    image(pot, 135, 450, 130, 130);
+
+    let grass1 = new Ground(grass, 0, 500, 600, 100);
+    grass1.show();
+
+
 
 }
 
