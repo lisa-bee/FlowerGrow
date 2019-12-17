@@ -1,3 +1,4 @@
+let bg: any;
 
 /**
  * Built in preload function in P5
@@ -5,7 +6,6 @@
  * sound files, images etc...
  */
 function preload() {
-    bg = loadImage('background.png');
     // Tyvärr har jag inte fått till den globala typningen för
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
@@ -18,7 +18,8 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-    createCanvas(400,600)
+    bg = loadImage('assets/images/background400x600.png');
+    createCanvas(400, 600)
     frameRate(60)
     noCursor()
     fullscreen()
@@ -33,7 +34,7 @@ function draw() {
     background(bg)
     fill('red')
     stroke('white')
-    circle(width * .5, height * .5, width * 0.2)
+    circle(width * .5, height * .5, width * 0.10)
 }
 
 
