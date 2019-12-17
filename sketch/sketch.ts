@@ -6,6 +6,7 @@ let bg: any;
  * sound files, images etc...
  */
 function preload() {
+    bg = loadImage('assets/images/background400x600.png');
     // Tyvärr har jag inte fått till den globala typningen för
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
@@ -18,7 +19,6 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-    bg = loadImage('assets/images/background400x600.png');
     createCanvas(400, 600)
     frameRate(60)
     noCursor()
@@ -41,6 +41,6 @@ function draw() {
 /**
  *  Built in windowResize listener function in P5
  */
-function windowResized() {
+/* function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
-}
+} */
