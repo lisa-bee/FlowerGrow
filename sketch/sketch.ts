@@ -1,4 +1,6 @@
-let bg: any;
+let bg: p5.Image;
+let pot: p5.Image;
+let grass: p5.Image;
 
 /**
  * Built in preload function in P5
@@ -7,6 +9,8 @@ let bg: any;
  */
 function preload() {
     bg = loadImage('assets/images/background400x600.png');
+    pot = loadImage('assets/images/pot.png');
+    grass = loadImage('assets/images/grass.png');
     // Tyvärr har jag inte fått till den globala typningen för
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
@@ -35,6 +39,9 @@ function draw() {
     fill('red')
     stroke('white')
     circle(width * .5, height * .5, width * 0.10)
+    image(grass, 0, 500, 600, 100);
+    image(pot, 135, 450, 130, 130);
+
 }
 
 
