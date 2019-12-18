@@ -1,3 +1,4 @@
+
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -7,7 +8,9 @@ function preload() {
     // Tyvärr har jag inte fått till den globala typningen för
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
+    flower75 = loadImage('/assets/images/flower_75.png');
 }
+
 
 /**
  * Built in setup function in P5
@@ -16,10 +19,10 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-    createCanvas(400,600)
-    frameRate(60)
-    noCursor()
-    fullscreen()
+    createCanvas(400, 600);
+    frameRate(60);
+    noCursor();
+    fullscreen();
 }
 
 /**
@@ -28,11 +31,12 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-    background('blue')
-    fill('red')
-    stroke('white')
-    circle(width * .5, height * .5, width * 0.2)
+    background('lightblue')
+    let flower = new Flower(flower75, flowerX, 300, 70, 70);
+    flower.move();
+    flower.draw();
 }
+
 
 
 /**
