@@ -34,7 +34,7 @@ function preload() {
 function setup() {
     createCanvas(400, 600);
     frameRate(60);
-    noCursor();
+    //noCursor();
     game = new GameArea()
 
 }
