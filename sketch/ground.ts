@@ -19,13 +19,15 @@ class Grass {
     }
 
     public draw() {
-       return image(this.grassImg, this.x, this.y, this.width, this.height);
+        push();
+        image(this.grassImg, this.x, this.y, this.width, this.height);
+        pop();
     }
 
     public update() {
         this.move();
     }
-    
+
     private move() {
         this.y = this.y + 1;
     }
@@ -50,16 +52,17 @@ class Pot {
     }
 
     public draw() {
-
-        return image(this.potImg, this.x, this.y, this.width, this.height);
+        push();
+        image(this.potImg, this.x, this.y, this.width, this.height);
+        pop();
     }
 
     public update() {
         this.move();
     }
-    
-        private move() {
+
+    private move() {
         this.y = this.y + 1;
     }
-    
+
 }
