@@ -1,3 +1,4 @@
+let bg: p5.Image;
 let game: GameArea;
 let flowers: Flowers;
 /**
@@ -6,12 +7,12 @@ let flowers: Flowers;
  * sound files, images etc...
  */
 function preload() {
-    bg = loadImage('assets/images/background400x600.png');
-    potImg = loadImage('assets/images/pot.png');
-    grassImg = loadImage('assets/images/grass.png');
     // Tyvärr har jag inte fått till den globala typningen för
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
+    bg = loadImage('assets/images/background400x600.png');
+    potImg = loadImage('assets/images/pot.png');
+    grassImg = loadImage('assets/images/grass.png');
     flowers = {
         bud: loadImage('/assets/images/bud.png'),
         flower0: loadImage('/assets/images/flower_0.png'),
@@ -19,6 +20,7 @@ function preload() {
         flower75: loadImage('/assets/images/flower_75.png'),
         flower100: loadImage('/assets/images/flower_100.png'),
     }
+    badCloudImg = loadImage('assets/images/bad_cloud1.png');
 }
 
 
