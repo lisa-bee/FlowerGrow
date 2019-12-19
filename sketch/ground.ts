@@ -24,7 +24,7 @@ class Grass {
     }
 
     public update() {
-        this.move()
+        this.move();
     }
     
     private move() {
@@ -52,11 +52,11 @@ class Pot {
 
     public draw() {
 
-        return image(this.potImg, this.x, this.y, this.width, this.height)
+        return image(this.potImg, this.x, this.y, this.width, this.height);
     }
 
     public update() {
-        this.move()
+        this.move();
     }
     
         private move() {
