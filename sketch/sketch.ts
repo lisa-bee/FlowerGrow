@@ -12,6 +12,9 @@ function preload() {
     // Tyvärr har jag inte fått till den globala typningen för
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
+    beeLeftImage = loadImage('./assets/images/beeLeft.png');
+    beeRightImage = loadImage('./assets/images/beeRight.png');
+
     flowers = {
         bud: loadImage('/assets/images/bud.png'),
         flower0: loadImage('/assets/images/flower_0.png'),
@@ -31,9 +34,8 @@ function preload() {
 function setup() {
     createCanvas(400, 600);
     frameRate(60);
-    noCursor();
-    game = new GameArea();
-
+    //noCursor();
+    game = new GameArea()
 }
 
 /**
@@ -46,5 +48,4 @@ function draw() {
     game.update();
     game.draw();
     game.update();
-
 }
