@@ -3,6 +3,7 @@ class GameArea {
     private pot: Pot;
     private flower: Flower;
     private bee: Bee;
+    public collision: CollisionObject;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -12,16 +13,19 @@ class GameArea {
     }
 
     public update() {
-        this.flower.update()
+        this.collision = new CollisionObject();
+        this.ground.update();
+        this.pot.update();
+        this.flower.update();
         this.bee.update();
     }
-
 
     public draw() {
         this.ground.draw();
         this.pot.draw();     
         this.flower.draw();
         this.bee.draw();
+        this.collision.draw();
     }
 
 }
