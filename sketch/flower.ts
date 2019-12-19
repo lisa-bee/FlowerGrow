@@ -26,8 +26,16 @@ class Flower {
     }
 
     public update() {
-        this.move()
-        this.grow()
+        this.move();
+        this.grow();
+        this.collisionCalc();
+    }
+
+    private collisionCalc() {
+        var d = dist(this.x, this.y, collisionobjectX, collisionobjectY);
+        if (d < this.r + collisionobjectR) {
+            this.flower = flowers.flower25;
+        }
     }
 
     private grow() {
