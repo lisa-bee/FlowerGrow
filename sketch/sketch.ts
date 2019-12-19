@@ -32,12 +32,7 @@ function setup() {
     createCanvas(400, 600);
     frameRate(60);
     noCursor();
-<<<<<<< HEAD
-    /* fullscreen(); */
-    game = new gameArea()
-=======
     game = new GameArea()
->>>>>>> 8b86ad26b77ec843a211a2d469ab9fe8a5ca31ff
 
 }
 
