@@ -48,10 +48,10 @@ class Flower {
 
     private move() {
         if (keyIsDown(LEFT_ARROW)) {
-            this.x -= 6;
+            this.x -= 3;
         }
         else if (keyIsDown(RIGHT_ARROW)) {
-            this.x += 6;
+            this.x += 3;
         }
         if (this.x > width - this.width) {
             this.x = width - this.width;
@@ -62,10 +62,15 @@ class Flower {
     }
 
     public draw() {
+        push();
+        imageMode(CENTER);
         image(this.flower, this.x, this.y, this.width, this.height);
+        pop();
+        push();
         noFill();
         noStroke();
-        ellipseMode(CORNER);
+        ellipseMode(CENTER);
         ellipse(this.x, this.y, this.r * 2, this.r * 2);
+        pop();
     }
 }
