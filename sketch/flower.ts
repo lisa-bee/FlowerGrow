@@ -13,6 +13,7 @@ class Flower {
     private width: number;
     private height: number;
     private time: number;
+    private r: number;
 
     public constructor(x: number, y: number, width: number, height: number) {
         this.flower = flowers.bud;
@@ -20,7 +21,8 @@ class Flower {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.time = 0
+        this.time = 0;
+        this.r = 36;
     }
 
     public update() {
@@ -29,10 +31,10 @@ class Flower {
     }
 
     private grow() {
-        this.time += deltaTime
+        this.time += deltaTime;
 
         if (this.time > 5000) {
-            this.flower = flowers.flower75
+            this.flower = flowers.flower75;
         }
     }
 
@@ -53,5 +55,9 @@ class Flower {
 
     public draw() {
         image(this.flower, this.x, this.y, this.width, this.height);
+        noFill();
+        noStroke();
+        ellipseMode(CORNER);
+        ellipse(this.x, this.y, this.r * 2, this.r * 2);
     }
 }
