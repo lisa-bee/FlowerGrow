@@ -14,6 +14,7 @@ class Flower {
     private height: number;
     private time: number;
     private r: number;
+    private history: p5.Vector[];
 
     public constructor(x: number, y: number, width: number, height: number) {
         this.flower = flowers.bud;
@@ -23,6 +24,7 @@ class Flower {
         this.height = height;
         this.time = 0;
         this.r = 36;
+        this.history = [];
     }
 
     public update() {
@@ -39,6 +41,12 @@ class Flower {
     }
 
     private grow() {
+        var v = createVector(this.x, this.y);
+
+        this.history.push(v);
+
+        this.y = this.y - 1;
+
         this.time += deltaTime;
 
         if (this.time > 5000) {
@@ -62,6 +70,12 @@ class Flower {
     }
 
     public draw() {
+        for (var i = 0; i < this.history.length; i++) {
+            var pos = this.history[i];
+            fill(100, 215, 46);
+            noStroke();
+            ellipse(pos.x, pos.y, 4, 4);
+        }
         push();
         imageMode(CENTER);
         image(this.flower, this.x, this.y, this.width, this.height);
