@@ -8,7 +8,7 @@ class GameArea {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
         this.pot = new Pot(potImg, 135, 450, 120, 100);
         this.flower = new Flower(width / 2, 300, 70, 70);
-        this.bee = new Bee(random(startingPointX), random (startingPointY), 40, 50);
+        this.bee = new Bee(random(startingPointX), random (startingPointY), 50, 50);
     }
 
     public update() {
@@ -19,9 +19,9 @@ class GameArea {
 
     public draw() {
         this.ground.draw();
-        this.pot.draw();
-        this.bee.draw();
+        this.pot.draw();     
         this.flower.draw();
+        this.bee.draw();
     }
 
 }
