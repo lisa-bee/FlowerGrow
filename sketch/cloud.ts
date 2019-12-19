@@ -23,7 +23,7 @@ class Cloud {
     }
 
     private move() {
-
+        this.y = this.y + 1;
     }
 
     public draw() {
