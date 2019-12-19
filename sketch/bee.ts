@@ -1,8 +1,11 @@
 let beeLeftImage: p5.Image;
 let beeRightImage: p5.Image;
 
-let startingPointX = [0, 350];
-let startingPointY = [0, 550];
+let startingPointX = [0];
+let startingPointY = [0];
+let endingPointX = 200;
+let endingPointY = 300;
+
 
 class Bee{
     private img: p5.Image
@@ -25,12 +28,33 @@ class Bee{
     }
 
      public move(){
-        this.x = this.x + random(-5, 5);
+        //this.x = this.x + random(-1, 1);
         this.y = this.y + random(-5, 5);
+
+        if (this.x == endingPointX){
+            this.x = this.x;
+        }
+        else{
+            this.x += 1
+        }
+
+        if (this.y == endingPointY){
+            this.y = this.y;
+        }
+        else{
+            this.y += 1
+        }
+        
+/*         distX = endingPointX - this.x
+        this.x = distX - 1;
+
+         distY = endingPointY - this.y
+         this.y += distY + 1;  */
 
         if(this.isBeeDead){
             this.y = this.y + 3;
         }
+
     } 
 
     public update(){
