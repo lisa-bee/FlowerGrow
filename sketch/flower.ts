@@ -13,6 +13,7 @@ class Flower {
     private width: number;
     private height: number;
     private time: number;
+    private r: number;
 
     public constructor(x: number, y: number, width: number, height: number) {
         this.flower = flowers.bud;
@@ -21,11 +22,20 @@ class Flower {
         this.width = width;
         this.height = height;
         this.time = 0;
+        this.r = 36;
     }
 
     public update() {
         this.move();
         this.grow();
+        this.collisionCalc();
+    }
+
+    private collisionCalc() {
+        var d = dist(this.x, this.y, collisionobjectX, collisionobjectY);
+        if (d < this.r + collisionobjectR) {
+            this.flower = flowers.flower25;
+        }
     }
 
     private grow() {
@@ -38,10 +48,10 @@ class Flower {
 
     private move() {
         if (keyIsDown(LEFT_ARROW)) {
-            this.x -= 6;
+            this.x -= 3;
         }
         else if (keyIsDown(RIGHT_ARROW)) {
-            this.x += 6;
+            this.x += 3;
         }
         if (this.x > width - this.width) {
             this.x = width - this.width;
@@ -52,6 +62,15 @@ class Flower {
     }
 
     public draw() {
+        push();
+        imageMode(CENTER);
         image(this.flower, this.x, this.y, this.width, this.height);
+        pop();
+        push();
+        noFill();
+        noStroke();
+        ellipseMode(CENTER);
+        ellipse(this.x, this.y, this.r * 2, this.r * 2);
+        pop();
     }
 }
