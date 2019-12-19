@@ -20,19 +20,19 @@ class Flower {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.time = 0
+        this.time = 0;
     }
 
     public update() {
-        this.move()
-        this.grow()
+        this.move();
+        this.grow();
     }
 
     private grow() {
-        this.time += deltaTime
+        this.time += deltaTime;
 
         if (this.time > 5000) {
-            this.flower = flowers.flower75
+            this.flower = flowers.flower75;
         }
     }
 

@@ -32,7 +32,7 @@ function setup() {
     createCanvas(400, 600);
     frameRate(60);
     noCursor();
-    game = new GameArea()
+    game = new GameArea();
 
 }
 
@@ -45,5 +45,6 @@ function draw() {
     background(bg);
     game.update();
     game.draw();
+    game.update();
 
 }
