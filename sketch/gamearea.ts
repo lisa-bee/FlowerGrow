@@ -10,10 +10,10 @@ class GameArea {
         this.pot = new Pot(potImg, 135, 450, 120, 100);
         this.flower = new Flower(width / 2, 300, 70, 70);
         this.bee = new Bee(random(startingPointX), random (startingPointY), 50, 50);
+        this.collision = new CollisionObject();
     }
 
     public update() {
-        this.collision = new CollisionObject();
         this.ground.update();
         this.pot.update();
         this.flower.update();
