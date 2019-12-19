@@ -3,8 +3,8 @@ class gameArea {
     private pot: Pot;
 
     constructor() {
-        this.ground = new Grass(grassImg, 0, 500, 600, 100);
-        this.pot = new Pot(potImg, 135, 450, 120, 100);
+        this.ground = new Grass(grassImg, 0, grassY, 600, 100);
+        this.pot = new Pot(potImg, 135, potY, 125, 100);
     }
    
 
@@ -13,5 +13,9 @@ class gameArea {
         this.pot.draw();
     }
 
+    public update() {
+        this.ground.update();
+        this.pot.update();
+    }
 }
 

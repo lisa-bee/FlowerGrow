@@ -1,7 +1,8 @@
 let bg: p5.Image;
 let potImg: p5.Image;
 let grassImg: p5.Image;
-let y: number;
+let grassY: number = 500;
+let potY: number = 465;
 
 class Grass {
 
@@ -22,11 +23,16 @@ class Grass {
     }
 
     public draw() {
-       return image(this.grassImg, this.x, this.y, this.width, this.height);
+       return image(this.grassImg, this.x, grassY, this.width, this.height);
     }
 
-    public makeGrassMoveDown() {
-        
+    public update() {
+        this.move()
+    }
+    
+
+    private move() {
+        grassY = grassY + 1;
     }
 
 }
@@ -50,7 +56,16 @@ class Pot {
 
     public draw() {
 
-        return image(this.potImg, this.x, this.y, this.width, this.height)
+        return image(this.potImg, this.x, potY, this.width, this.height)
     }
+
+    public update() {
+        this.move()
+    }
+    
+        private move() {
+        potY = potY + 1;
+    }
+    
 
 }
