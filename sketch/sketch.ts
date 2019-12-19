@@ -48,5 +48,4 @@ function draw() {
     game.update();
     game.draw();
     game.update();
-
 }
