@@ -19,11 +19,12 @@ class Cloud {
 
 
     public update() {
-        this.move()
+        this.move();
     }
 
     private move() {
-        this.y = this.y + 1;
+        this.y = this.y + 1.5;
+        this.x = this.x + 2;
     }
 
     public draw() {
