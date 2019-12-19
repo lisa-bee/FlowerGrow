@@ -39,16 +39,17 @@ class Bee{
 
     public buzzTo(){
 
-
         if (this.x == endingPointX){
             this.x = this.x;
         }
         else{
             if (endingPointX <= this.x){
                 this.x -= 1;
+                this.img = beeLeftImage;
             }
             else{
                 this.x += 1;
+                this.img = beeRightImage;
             }
         }
 
@@ -63,7 +64,6 @@ class Bee{
                 this.y += 1;
             }
         }
-
 
     }
 
