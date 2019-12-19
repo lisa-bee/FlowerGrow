@@ -12,9 +12,10 @@ class GameArea {
     }
 
     public update() {
-        this.flower.update()
+        this.ground.update();
+        this.pot.update();
+        this.flower.update();
     }
-
 
     public draw() {
         this.ground.draw();
