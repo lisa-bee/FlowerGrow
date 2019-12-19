@@ -13,6 +13,7 @@ function preload() {
     bg = loadImage('assets/images/background400x600.png');
     potImg = loadImage('assets/images/pot.png');
     grassImg = loadImage('assets/images/grass.png');
+    badCloudImg = loadImage('assets/images/bad_cloud1.png');
     flowers = {
         bud: loadImage('/assets/images/bud.png'),
         flower0: loadImage('/assets/images/flower_0.png'),
@@ -20,7 +21,6 @@ function preload() {
         flower75: loadImage('/assets/images/flower_75.png'),
         flower100: loadImage('/assets/images/flower_100.png'),
     }
-    badCloudImg = loadImage('assets/images/bad_cloud1.png');
 }
 
 
