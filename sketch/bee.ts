@@ -4,8 +4,8 @@ let beeDeadImage: p5.Image;
 
 let startingPointX = [0, 400];
 let startingPointY = [0, 600];
-let endingPointX = 200;
-let endingPointY = 300;
+//let endingPointX = 200;
+let endingPointY = 275;
 
 class Bee {
     private img: p5.Image
@@ -45,11 +45,11 @@ class Bee {
 
     public buzzTo(flower: Flower) {
 
-        if (this.x == flower.endOfStem.x) {
+        if (this.x == flower.endOfStem.x - 25) {
             this.x = this.x;
         }
         else {
-            if (flower.endOfStem.x <= this.x) {
+            if (flower.endOfStem.x - 25 <= this.x) {
                 this.x -= 1;
                 this.img = beeLeftImage;
 
@@ -89,9 +89,9 @@ class Bee {
         }
     }
 
-    public mouseClickedBee(px:number, py:number){
+    public mouseClickedBee(mouseClickX:number, mouseClickY:number){
         
-        if(mouseIsPressed && px > this.x && px < this.x + this.width && py > this.y && py < this.y + this.height){  
+        if(mouseIsPressed && mouseClickX > this.x && mouseClickX < this.x + this.width && mouseClickY > this.y && mouseClickY < this.y + this.height){  
             
                this.isBeeDead = true;
         }
@@ -106,7 +106,7 @@ class Bee {
 
     public draw() {
         push();
-        imageMode(CENTER);
+        //imageMode(CENTER);
         image(this.img, this.x, this.y, this.width, this.height);
         pop();
     }
