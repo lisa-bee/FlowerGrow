@@ -7,17 +7,14 @@ let startingPointY = [0, 600];
 let endingPointX = 200;
 let endingPointY = 300;
 
-
 class Bee {
     private img: p5.Image
     private x: number;
     private y: number;
     private width: number;
     private height: number;
-    private isBeeDead: boolean;
+    public isBeeDead: boolean;
     private r: number;
-
-
 
     public constructor(x: any, y: any, width: number, height: number) {
 
@@ -28,6 +25,10 @@ class Bee {
         this.height = height;
         this.isBeeDead = false;
         this.r = this.width/2;
+    }
+
+    public get isBeeClicked() {
+        return this.isBeeDead;
     }
 
     public move() {
@@ -90,28 +91,17 @@ class Bee {
 
     public mouseClickedBee(px:number, py:number){
         
-        if(px > this.x && px < this.x + this.width && py > this.y && py < this.y + this.height){  
+        if(mouseIsPressed && px > this.x && px < this.x + this.width && py > this.y && py < this.y + this.height){  
             
-               
-                this.isBeeDead = true;
-                //splatBee.play(0);
-                //screamingBee.play(0);
-                
-                //this.soundEffectBee();
+               this.isBeeDead = true;
         }
     }
 
-    private mousePressed() {
-        //bubbles.forEach(bubble  => {
-            this.mouseClickedBee(mouseX, mouseY);
-            console.log('KLICKAD!')
-            
-        //})
-    }
+
 
     public update() {
         this.move();
-        this.mousePressed();
+        
     }
 
     public draw() {
@@ -121,6 +111,8 @@ class Bee {
         pop();
     }
 }
+
+
 
 
 

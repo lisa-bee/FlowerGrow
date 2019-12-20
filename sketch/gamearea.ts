@@ -13,6 +13,7 @@ class GameArea {
         this.cloud = new Cloud(badCloudImg, 50, -120, 100, 70);
         this.bee = new Bee(random(startingPointX), random(startingPointY), 50, 50);
         this.collision = new CollisionObject();
+        
     }
 
 
@@ -23,13 +24,12 @@ class GameArea {
         this.cloud.update();
         this.bee.update();
         this.spawnCloud()
+        this.spawnBee();
+        this.bee.mouseClickedBee(mouseX, mouseY);
     }
 
     private spawnCloud(){
         this.cloud.checkCollisionWithFlower(this.flower);
-        this.bee.checkCollisionWithFlower(this.flower);
-        this.bee.buzzTo(this.flower);
-        this.spawnBee()
 
         // this.checkCollision()
         // for varje moln kolla om spelaren kolliderade
@@ -37,12 +37,14 @@ class GameArea {
     }
 
 
-
     private spawnBee() {
         // Skapa en geting och lägg till i this.bees arrayen
         // Se till att g¨ra detta med ett visst intervall
-
+        this.bee.checkCollisionWithFlower(this.flower);
+        this.bee.buzzTo(this.flower);
     }
+
+
 
     public draw() {
         this.flower.draw();
@@ -51,6 +53,7 @@ class GameArea {
         this.cloud.draw();
         this.bee.draw();
         this.collision.draw();
+        
     }
 
 }
