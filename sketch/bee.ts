@@ -48,11 +48,11 @@ class Bee {
         }
         else {
             if (flower.endOfStem.x - 25 <= this.x) {
-                this.x -= 10;
+                this.x -= 1;
                 this.img = beeLeftImage;
             }
             else {
-                this.x += 10;
+                this.x += 1;
                 this.img = beeRightImage;
             }
         }
