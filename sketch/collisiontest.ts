@@ -1,5 +1,5 @@
 var collisionobjectX: number = 50;
-var collisionobjectY: number = 300;
+var collisionobjectY: number = 100;
 var collisionobjectR: number = 36;
 
 class CollisionObject {
