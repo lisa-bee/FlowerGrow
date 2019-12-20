@@ -26,7 +26,9 @@ class GameArea {
     }
 
     private spawnCloud(){
-        this.cloud.checkCollisionWithFlower(this.flower)
+        this.cloud.checkCollisionWithFlower(this.flower);
+        this.bee.checkCollisionWithFlower(this.flower);
+        this.bee.buzzTo(this.flower);
         this.spawnBee()
 
         // this.checkCollision()

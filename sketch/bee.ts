@@ -1,5 +1,6 @@
 let beeLeftImage: p5.Image;
 let beeRightImage: p5.Image;
+let beeDeadImage: p5.Image;
 
 let startingPointX = [0, 400];
 let startingPointY = [0, 600];
@@ -14,6 +15,7 @@ class Bee {
     private width: number;
     private height: number;
     private isBeeDead: boolean;
+    private r: number;
 
 
 
@@ -25,6 +27,7 @@ class Bee {
         this.width = width;
         this.height = height;
         this.isBeeDead = false;
+        this.r = this.width/2;
     }
 
     public move() {
@@ -32,24 +35,28 @@ class Bee {
         this.y = this.y + random(-5, 5);
 
         if (this.isBeeDead) {
+            this.x = this.x + random(-5, 5)
             this.y = this.y + 3;
+           
         }
-        this.buzzTo();
+        
     }
 
-    public buzzTo() {
+    public buzzTo(flower: Flower) {
 
-        if (this.x == endingPointX) {
+        if (this.x == flower.endOfStem.x) {
             this.x = this.x;
         }
         else {
-            if (endingPointX <= this.x) {
+            if (flower.endOfStem.x <= this.x) {
                 this.x -= 1;
                 this.img = beeLeftImage;
+
             }
             else {
                 this.x += 1;
                 this.img = beeRightImage;
+
             }
         }
 
@@ -63,15 +70,57 @@ class Bee {
             else {
                 this.y += 1;
             }
+
+
+        }
+
+        if(this.isBeeDead){
+            this.img = beeDeadImage;
         }
 
     }
 
+    public checkCollisionWithFlower(flower: Flower) {
+        var d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
+        if (d < this.r + flower.r) {
+
+            flower.flower = flowers.flower25
+        }
+    }
+
+    public mouseClickedBee(px:number, py:number){
+        
+        if(px > this.x && px < this.x + this.width && py > this.y && py < this.y + this.height){  
+            
+               
+                this.isBeeDead = true;
+                //splatBee.play(0);
+                //screamingBee.play(0);
+                
+                //this.soundEffectBee();
+        }
+    }
+
+    private mousePressed() {
+        //bubbles.forEach(bubble  => {
+            this.mouseClickedBee(mouseX, mouseY);
+            console.log('KLICKAD!')
+            
+        //})
+    }
+
     public update() {
         this.move();
+        this.mousePressed();
     }
 
     public draw() {
+        push();
+        imageMode(CENTER);
         image(this.img, this.x, this.y, this.width, this.height);
+        pop();
     }
 }
+
+
+
