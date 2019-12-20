@@ -22,6 +22,10 @@ class GameArea {
         this.flower.update();
         this.cloud.update();
         this.bee.update();
+        this.spawnCloud()
+    }
+
+    private spawnCloud(){
         this.cloud.checkCollisionWithFlower(this.flower)
         this.spawnBee()
 
