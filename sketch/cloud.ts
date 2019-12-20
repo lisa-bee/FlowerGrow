@@ -29,9 +29,27 @@ class Cloud {
 
     public update() {
         this.move();
-       /*  this.checkCollisionWithFlower(flower); */
+
+
+        /*  this.collisionCalc(); */
     }
 
+
+    public checkCollisionWithFlower(flower: Flower) {
+        var d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
+        if (d < this.r + flower.r) {
+
+            flower.flower = flowers.flower25
+        }
+    }
+
+
+    /*  private collisionCalc() {
+         var d = dist(this.x, this.y, collisionobjectX, collisionobjectY);
+         if (d < this.r + collisionobjectR) {
+             this.flower = flowers.bud;
+         }
+     } */
 
     private move() {
         this.y = this.y + 1.5;

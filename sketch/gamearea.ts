@@ -26,6 +26,19 @@ class GameArea {
     }
 
     private spawnCloud(){
+        this.cloud.checkCollisionWithFlower(this.flower)
+        this.spawnBee()
+
+        // this.checkCollision()
+        // for varje moln kolla om spelaren kolliderade
+        // for varje geting kolla om spelaren kollideraqde
+    }
+
+
+
+    private spawnBee() {
+        // Skapa en geting och lägg till i this.bees arrayen
+        // Se till att g¨ra detta med ett visst intervall
 
     }
 
