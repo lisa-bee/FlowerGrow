@@ -31,9 +31,9 @@ class Flower {
         this.collisionCalc();
     }
 
-    public get x() {
+    /* public get x() {
         return this.x
-    }
+    } */
     
     private collisionCalc() {
         var d = dist(this.x, this.y, collisionobjectX, collisionobjectY);
