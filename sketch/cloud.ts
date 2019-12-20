@@ -36,7 +36,7 @@ class Cloud {
         this.y = this.y + 1.5;
         if (this.y > height) {
             this.y = -100;
-            this.x = random(400);
+            this.x = random(0, 400);
         }
     }
 
