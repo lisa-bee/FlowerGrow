@@ -7,41 +7,39 @@ interface Flowers {
 }
 
 class Flower {
-    private flower: p5.Image;
-    private x: number;
-    private y: number;
+    public flower: p5.Image;
     private width: number;
     private height: number;
     private time: number;
-    private r: number;
+    private _r: number;
     private history: p5.Vector[];
 
     public constructor(x: number, y: number, width: number, height: number) {
         this.flower = flowers.bud;
-        this.x = x;
-        this.y = y;
         this.width = width;
         this.height = height;
         this.time = 0;
-        this.r = 36;
-        this.history = [];
+        this._r = 36;
+        this.history = [createVector(x, y)];
+    }
+
+    public get r() {
+        return this._r;
+    }
+
+    public get endOfStem() {
+        return this.history[this.history.length - 1]
     }
 
     public update() {
-        this.move();
-        this.grow();
-        this.collisionCalc();
+        const newX = this.handlePlayerInput();
+        this.grow(newX);
+        this.move()
     }
 
-    private collisionCalc() {
-        var d = dist(this.x, this.y, collisionobjectX, collisionobjectY);
-        if (d < this.r + collisionobjectR) {
-            this.flower = flowers.flower25;
-        }
-    }
-
-    private grow() {
-        var v = createVector(this.x, this.y);
+    private grow(x: number) {
+        const y = this.endOfStem.y - 1.5;
+        var v = createVector(x, y);
 
         this.history.push(v);
 
@@ -49,25 +47,33 @@ class Flower {
 
         if (this.time > 5000) {
             this.flower = flowers.flower75;
-            this.y = this.y - 1;
+
         }
     }
 
     private move() {
+        for (const point of this.history) {
+            point.y += 1.5;
+        }
+    }
+
+    private handlePlayerInput(): number {
+        let x = this.endOfStem.x
         if (this.time > 5000) {
             if (keyIsDown(LEFT_ARROW)) {
-                this.x -= 3;
+                x -= 3;
             }
             else if (keyIsDown(RIGHT_ARROW)) {
-                this.x += 3;
+                x += 3;
             }
-            if (this.x > width - this.width) {
-                this.x = width - this.width;
+            if (x > width - this.r) {
+                x = width - this.r;
             }
-            if (this.x < 0) {
-                this.x = 0;
+            if (x < this.r) {
+                x = this.r;
             }
         }
+        return x
     }
 
     public draw() {
@@ -77,20 +83,16 @@ class Flower {
             noStroke();
             ellipse(pos.x, pos.y, 5, 5);
         }
-        push();
-        stroke(100, 215, 46);
-        strokeWeight(5)
-        line(width / 2, 300, width / 2, 600);
-        pop();
+
         push();
         imageMode(CENTER);
-        image(this.flower, this.x, this.y, this.width, this.height);
+        image(this.flower, this.endOfStem.x, this.endOfStem.y, this.width, this.height);
         pop();
         push();
         noFill();
         noStroke();
         ellipseMode(CENTER);
-        ellipse(this.x, this.y, this.r * 2, this.r * 2);
+        ellipse(this.endOfStem.x, this.endOfStem.y, this._r * 2, this._r * 2);
         pop();
     }
 }
