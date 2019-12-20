@@ -45,27 +45,28 @@ class Flower {
 
         this.history.push(v);
 
-        this.y = this.y - 1;
-
         this.time += deltaTime;
 
         if (this.time > 5000) {
             this.flower = flowers.flower75;
+            this.y = this.y - 1;
         }
     }
 
     private move() {
-        if (keyIsDown(LEFT_ARROW)) {
-            this.x -= 3;
-        }
-        else if (keyIsDown(RIGHT_ARROW)) {
-            this.x += 3;
-        }
-        if (this.x > width - this.width) {
-            this.x = width - this.width;
-        }
-        if (this.x < 0) {
-            this.x = 0;
+        if (this.time > 5000) {
+            if (keyIsDown(LEFT_ARROW)) {
+                this.x -= 3;
+            }
+            else if (keyIsDown(RIGHT_ARROW)) {
+                this.x += 3;
+            }
+            if (this.x > width - this.width) {
+                this.x = width - this.width;
+            }
+            if (this.x < 0) {
+                this.x = 0;
+            }
         }
     }
 
@@ -74,8 +75,13 @@ class Flower {
             var pos = this.history[i];
             fill(100, 215, 46);
             noStroke();
-            ellipse(pos.x, pos.y, 4, 4);
+            ellipse(pos.x, pos.y, 5, 5);
         }
+        push();
+        stroke(100, 215, 46);
+        strokeWeight(5)
+        line(width / 2, 300, width / 2, 600);
+        pop();
         push();
         imageMode(CENTER);
         image(this.flower, this.x, this.y, this.width, this.height);
