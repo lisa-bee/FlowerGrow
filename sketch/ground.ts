@@ -1,4 +1,3 @@
-let bg: p5.Image;
 let potImg: p5.Image;
 let grassImg: p5.Image;
 class Grass {
