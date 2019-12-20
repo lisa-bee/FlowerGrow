@@ -48,11 +48,11 @@ class Bee {
         }
         else {
             if (flower.endOfStem.x - 25 <= this.x) {
-                this.x -= 1;
+                this.x -= 10;
                 this.img = beeLeftImage;
             }
             else {
-                this.x += 1;
+                this.x += 10;
                 this.img = beeRightImage;
             }
         }
@@ -76,7 +76,7 @@ class Bee {
     }
 
     public checkCollisionWithFlower(flower: Flower) {
-        let d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
+        let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
 
         if (d < this.r + flower.r) {
             flower.flower = flowers.flower25
