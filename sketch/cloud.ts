@@ -16,40 +16,42 @@ class Cloud {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.r = 50;
+        this.r = 38;
+    }
+
+    public checkCollisionWithFlower(flower: Flower) {
+        var d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
+        if (d < this.r + flower.r) {
+            flower = flowers.flower75;
+        }
     }
 
 
     public update() {
         this.move();
-       /*  this.collisionCalc(); */
+        this.checkCollisionWithFlower(flower);
     }
 
-   /*  private collisionCalc() {
-        var d = dist(this.x, this.y, collisionobjectX, collisionobjectY);
-        if (d < this.r + collisionobjectR) {
-            this.flower = flowers.bud;
-        }
-    } */
 
     private move() {
         this.y = this.y + 1.5;
         if (this.y > height) {
             this.y = -100;
-            this.x = random(500);
+            this.x = random(400);
         }
     }
 
     public draw() {
         push();
+        imageMode(CENTER);
         image(this.badCloudImg, this.x, this.y, this.width, this.height);
-        pop()
-       /*  push()
+        pop();
+        push();
         noFill();
-        noStroke();
+        stroke('black');
         ellipseMode(CENTER);
         ellipse(this.x, this.y, this.r * 2, this.r * 2);
-        pop(); */
+        pop();
 
     }
 }

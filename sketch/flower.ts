@@ -7,7 +7,7 @@ interface Flowers {
 }
 
 class Flower {
-    private flower: p5.Image;
+    public flower: p5.Image;
     private x: number;
     private y: number;
     private width: number;
@@ -31,6 +31,10 @@ class Flower {
         this.collisionCalc();
     }
 
+    public get x() {
+        return this.x
+    }
+    
     private collisionCalc() {
         var d = dist(this.x, this.y, collisionobjectX, collisionobjectY);
         if (d < this.r + collisionobjectR) {
