@@ -2,10 +2,8 @@ let beeLeftImage: p5.Image;
 let beeRightImage: p5.Image;
 let beeDeadImage: p5.Image;
 
-let startingPointX = [0, 400];
-let startingPointY = [0, 600];
+
 //let endingPointX = 200;
-let endingPointY = 275;
 
 class Bee {
     private img: p5.Image
@@ -37,13 +35,13 @@ class Bee {
 
         if (this.isBeeDead) {
             this.x = this.x + random(-5, 5)
-            this.y = this.y + 3;
-           
+            this.y = this.y + 3;      
         }
         
     }
 
     public buzzTo(flower: Flower) {
+        let endingPointY = 275;
 
         if (this.x == flower.endOfStem.x - 25) {
             this.x = this.x;
@@ -52,12 +50,10 @@ class Bee {
             if (flower.endOfStem.x - 25 <= this.x) {
                 this.x -= 1;
                 this.img = beeLeftImage;
-
             }
             else {
                 this.x += 1;
                 this.img = beeRightImage;
-
             }
         }
 
@@ -71,8 +67,6 @@ class Bee {
             else {
                 this.y += 1;
             }
-
-
         }
 
         if(this.isBeeDead){
@@ -82,9 +76,9 @@ class Bee {
     }
 
     public checkCollisionWithFlower(flower: Flower) {
-        var d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
-        if (d < this.r + flower.r) {
+        let d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
 
+        if (d < this.r + flower.r) {
             flower.flower = flowers.flower25
         }
     }
@@ -93,7 +87,7 @@ class Bee {
         
         if(mouseIsPressed && mouseClickX > this.x && mouseClickX < this.x + this.width && mouseClickY > this.y && mouseClickY < this.y + this.height){  
             
-               this.isBeeDead = true;
+            this.isBeeDead = true;
         }
     }
 
@@ -106,7 +100,6 @@ class Bee {
 
     public draw() {
         push();
-        //imageMode(CENTER);
         image(this.img, this.x, this.y, this.width, this.height);
         pop();
     }
