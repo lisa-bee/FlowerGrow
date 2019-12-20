@@ -14,6 +14,7 @@ class Flower {
     private height: number;
     private time: number;
     private r: number;
+    private history: p5.Vector[];
 
     public constructor(x: number, y: number, width: number, height: number) {
         this.flower = flowers.bud;
@@ -23,6 +24,7 @@ class Flower {
         this.height = height;
         this.time = 0;
         this.r = 36;
+        this.history = [];
     }
 
     public update() {
@@ -43,29 +45,47 @@ class Flower {
     }
 
     private grow() {
+        var v = createVector(this.x, this.y);
+
+        this.history.push(v);
+
         this.time += deltaTime;
 
         if (this.time > 5000) {
             this.flower = flowers.flower75;
+            this.y = this.y - 1;
         }
     }
 
     private move() {
-        if (keyIsDown(LEFT_ARROW)) {
-            this.x -= 3;
-        }
-        else if (keyIsDown(RIGHT_ARROW)) {
-            this.x += 3;
-        }
-        if (this.x > width - this.width) {
-            this.x = width - this.width;
-        }
-        if (this.x < 0) {
-            this.x = 0;
+        if (this.time > 5000) {
+            if (keyIsDown(LEFT_ARROW)) {
+                this.x -= 3;
+            }
+            else if (keyIsDown(RIGHT_ARROW)) {
+                this.x += 3;
+            }
+            if (this.x > width - this.width) {
+                this.x = width - this.width;
+            }
+            if (this.x < 0) {
+                this.x = 0;
+            }
         }
     }
 
     public draw() {
+        for (var i = 0; i < this.history.length; i++) {
+            var pos = this.history[i];
+            fill(100, 215, 46);
+            noStroke();
+            ellipse(pos.x, pos.y, 5, 5);
+        }
+        push();
+        stroke(100, 215, 46);
+        strokeWeight(5)
+        line(width / 2, 300, width / 2, 600);
+        pop();
         push();
         imageMode(CENTER);
         image(this.flower, this.x, this.y, this.width, this.height);
