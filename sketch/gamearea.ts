@@ -4,6 +4,9 @@ class GameArea {
     private flower: Flower;
     private cloud: Cloud;
     private bee: Bee;
+    private beeSwarm: [Bee];
+    private time: number;
+    //private beeSwarm: [];
     public collision: CollisionObject;
     private beeStartingPointX: [number, number]
     private beeStartingPointY: [number, number];
@@ -16,7 +19,10 @@ class GameArea {
         this.beeStartingPointX = [0, 400];
         this.beeStartingPointY = [0, 600];
         this.bee = new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50);
-        this.collision = new CollisionObject();     
+        this.beeSwarm = [this.bee = new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50)];
+        this.time = 0;
+        this.collision = new CollisionObject(); 
+        
     }
 
     public update() {
@@ -26,32 +32,54 @@ class GameArea {
         this.cloud.update();
         this.bee.update();
         this.spawnCloud()
-        this.spawnBee();
+        
         this.bee.mouseClickedBee(mouseX, mouseY);
     }
 
     private spawnCloud(){
         this.cloud.checkCollisionWithFlower(this.flower);
+        this.bee.checkCollisionWithFlower(this.flower);
+        //this.bee.buzzTo(this.flower);
         // this.checkCollision()
-
         // for varje moln kolla om spelaren kolliderade
         // for varje geting kolla om spelaren kollideraqde
+
     }
 
     private spawnBee() {
+        
+        this.time += deltaTime
+        if(this.time > 3000){
+            this.bee.buzzTo(this.flower);
+            this.bee.draw();   
+        }
+/*         
+        for (let index = 0; index < ; index++) {
+            this.beeSwarm[index] = new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50);
+                return this.beeSwarm[index].draw(); 
+         
+        //this.bee.draw();
         // Skapa en geting och lägg till i this.bees arrayen
         // Se till att g¨ra detta med ett visst intervall
-        this.bee.checkCollisionWithFlower(this.flower);
-        this.bee.buzzTo(this.flower);
-    }
+/*         if (deltaTime == 500){
+            this.bee.draw();
+            //this.beeSwarm.push();
+        } */ 
+
+    
+}
 
     public draw() {
         this.flower.draw();
         this.ground.draw();
         this.pot.draw();
         this.cloud.draw();
-        this.bee.draw();
-        this.collision.draw();  
+        this.spawnBee();
+/*         for (let index = 0; index < this.beeSwarm.length; index++) {
+            this.beeSwarm[index].draw();  
+        } */
+        //this.bee.draw();
+        this.collision.draw(); 
     }
 }
 
