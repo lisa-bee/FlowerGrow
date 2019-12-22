@@ -16,6 +16,7 @@ function preload() {
     badCloudImg = loadImage('assets/images/bad_cloud1.png');
     beeLeftImage = loadImage('./assets/images/beeLeft.png');
     beeRightImage = loadImage('./assets/images/beeRight.png');
+    beeDeadImage = loadImage('./assets/images/beeDead.png');
 
     flowers = {
         bud: loadImage('/assets/images/bud.png'),
