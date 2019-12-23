@@ -37,8 +37,10 @@ function preload() {
 function setup() {
     createCanvas(400, 600);
     frameRate(60);
+    //GameArea.spawnBee();
     //noCursor();
     game = new GameArea()
+    
 }
 
 /**
@@ -51,4 +53,6 @@ function draw() {
     game.update();
     game.draw();
     game.update();
+    
+    
 }
