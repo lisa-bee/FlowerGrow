@@ -4,7 +4,6 @@ class GameArea {
     private flower: Flower;
     private cloud: Cloud;
     private bee: Bee;
-    public collision: CollisionObject;
     private beeStartingPointX: [number, number]
     private beeStartingPointY: [number, number];
 
@@ -16,7 +15,6 @@ class GameArea {
         this.beeStartingPointX = [0, 400];
         this.beeStartingPointY = [0, 600];
         this.bee = new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50);
-        this.collision = new CollisionObject();     
     }
 
     public update() {
@@ -30,7 +28,7 @@ class GameArea {
         this.bee.mouseClickedBee(mouseX, mouseY);
     }
 
-    private spawnCloud(){
+    private spawnCloud() {
         this.cloud.checkCollisionWithFlower(this.flower);
         // this.checkCollision()
 
@@ -51,7 +49,6 @@ class GameArea {
         this.pot.draw();
         this.cloud.draw();
         this.bee.draw();
-        this.collision.draw();  
     }
 }
 

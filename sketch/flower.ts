@@ -7,7 +7,7 @@ interface Flowers {
 }
 
 class Flower {
-    public flower: p5.Image;
+    public currentFlower: p5.Image;
     private width: number;
     private height: number;
     private time: number;
@@ -15,7 +15,7 @@ class Flower {
     private history: p5.Vector[];
 
     public constructor(x: number, y: number, width: number, height: number) {
-        this.flower = flowers.bud;
+        this.currentFlower = listOfFlowers.bud;
         this.width = width;
         this.height = height;
         this.time = 0;
@@ -34,7 +34,7 @@ class Flower {
     public update() {
         const newX = this.handlePlayerInput();
         this.grow(newX);
-        this.move()
+        this.move();
     }
 
     private grow(x: number) {
@@ -46,7 +46,7 @@ class Flower {
         this.time += deltaTime;
 
         if (this.time > 5000) {
-            this.flower = flowers.flower75;
+            this.currentFlower = listOfFlowers.flower75;
 
         }
     }
@@ -73,20 +73,36 @@ class Flower {
                 x = this.r;
             }
         }
-        return x
+        return x;
     }
 
     public draw() {
+        noFill();
+        stroke(100, 215, 46);
+        strokeWeight(1);
+
         for (var i = 0; i < this.history.length; i++) {
-            var pos = this.history[i];
-            fill(100, 215, 46);
-            noStroke();
-            ellipse(pos.x, pos.y, 5, 5);
+            beginShape();
+            curveVertex(this.history[i].x, this.history[i].y);
+            curveVertex(this.history[i + -1].x, this.history[i + -1].y);
+            curveVertex(this.history[i + -2].x, this.history[i + -2].y);
+            curveVertex(this.history[i + -3].x, this.history[i + -3].y);
+            endShape();
+
         }
+
+
+        // for (var i = 0; i < this.history.length; i++) {
+        //     var pos = this.history[i];
+        //     fill(100, 215, 46);
+        //     noStroke();
+        //     ellipse(pos.x, pos.y, 5, 5);
+
+        // }
 
         push();
         imageMode(CENTER);
-        image(this.flower, this.endOfStem.x, this.endOfStem.y, this.width, this.height);
+        image(this.currentFlower, this.endOfStem.x, this.endOfStem.y, this.width, this.height);
         pop();
         push();
         noFill();
