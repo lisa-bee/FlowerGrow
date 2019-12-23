@@ -77,28 +77,12 @@ class Flower {
     }
 
     public draw() {
-        noFill();
-        stroke(100, 215, 46);
-        strokeWeight(1);
-
         for (var i = 0; i < this.history.length; i++) {
-            beginShape();
-            curveVertex(this.history[i].x, this.history[i].y);
-            curveVertex(this.history[i + -1].x, this.history[i + -1].y);
-            curveVertex(this.history[i + -2].x, this.history[i + -2].y);
-            curveVertex(this.history[i + -3].x, this.history[i + -3].y);
-            endShape();
-
+            var pos = this.history[i];
+            fill(100, 215, 46);
+            noStroke();
+            ellipse(pos.x, pos.y, 5, 5);
         }
-
-
-        // for (var i = 0; i < this.history.length; i++) {
-        //     var pos = this.history[i];
-        //     fill(100, 215, 46);
-        //     noStroke();
-        //     ellipse(pos.x, pos.y, 5, 5);
-
-        // }
 
         push();
         imageMode(CENTER);
