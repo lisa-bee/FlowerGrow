@@ -22,7 +22,7 @@ class GameArea {
         this.beeStartingPointX = [0, 400];
         this.beeStartingPointY = [0, 600];
         //this.bee = new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50);
-        this.beeSwarm = [new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50)];
+        this.beeSwarm = [];
         this.collision = new CollisionObject(); 
         this.time = 0;
         this.beeSpawnTime = [1000, 10000];
