@@ -71,6 +71,10 @@ class Bee {
 
         if(this.isBeeDead){
             this.img = beeDeadImage;
+            if (game.beeSwarm.length >= 5){
+                game.beeSwarm.shift();
+            }
+            
         }
 
     }

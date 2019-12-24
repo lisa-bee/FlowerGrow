@@ -4,13 +4,14 @@ class GameArea {
     private flower: Flower;
     private cloud: Cloud;
     //public bee: Bee;
-    private beeSwarm: Bee[] ;
+    public beeSwarm: Bee[] ;
     private time: number;
-    private spawnTime: number;
+    //private spawnTime: [number];
     public collision: CollisionObject;
     private beeStartingPointX: [number, number]
     private beeStartingPointY: [number, number];
     //private spawnIndex: number;
+    private beeSpawnTime: [number, number]
 
 
     constructor() {
@@ -24,7 +25,8 @@ class GameArea {
         this.beeSwarm = [new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50)];
         this.collision = new CollisionObject(); 
         this.time = 0;
-        this.spawnTime = 0;
+        this.beeSpawnTime = [1000, 10000];
+        //this.spawnTime = 0;
         //this.spawnIndex = 0;
         
     }
@@ -55,16 +57,17 @@ class GameArea {
     }
 
     public spawnBee(){
+        
 
         if (millis() >= 5000 + this.time) {
-            let i = 0
+            //let i = 0
             this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
             console.log(this.beeSwarm)
 /*             this.beeSwarm[i].checkCollisionWithFlower(this.flower);
             this.beeSwarm[i].buzzTo(this.flower);
             this.beeSwarm[i].mouseClickedBee(mouseX, mouseY);*/
             this.time = millis(); 
-            i++
+            //i++
           }
 
           this.beeSwarm.forEach(bee  => {
@@ -74,40 +77,9 @@ class GameArea {
             bee.mouseClickedBee(mouseX, mouseY);
             
         })
-          
-        
-        
+    }
 
-        //this.beeSwarm.push(this.bee);
-/*         for (let index = 0; index < 50; index++) {
-            this.beeSwarm[index] = new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50);
-        }  */
-           //this.beeSwarm.push(this.bee = new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
-        
-         //this.bee = new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50)
-        //return this.bee.draw();
-        //this.bee.draw();
-        //this.bee.draw();
-        //console.log(this.beeSwarm)
-        
-        // Skapa en geting och lägg till i this.bees arrayen
-        // Se till att g¨ra detta med ett visst intervall
-} 
- 
-public handleSpawnedBee(){
-    
 
-    if (millis() >= 5000 + this.spawnTime) {
-        let i = 0;
-        i += 1;
-        
-
-        console.log(i)
-        this.spawnTime = millis();
-
-    }    
-        
-} 
 
     public draw() {
         this.flower.draw();
@@ -115,31 +87,14 @@ public handleSpawnedBee(){
         this.pot.draw();
         this.cloud.draw();
 
+        
         this.beeSwarm.forEach(bee  => {
             bee.draw();
-            
         })
             
- /*       });
-         for (let index = 0; index < this.beeSwarm.length; index++) {
-            this.beeSwarm[index].draw();
-            console.log(index)
-        } */
-
-       
-
-        //this.bee.draw();
-        
-        //this.bee.draw();
-        //setInterval(this.spawnBee, 5000);
-        
-
-        //this.bee.draw();
-
-        //this.bee.draw();
-        //this.bee.draw();
         this.collision.draw(); 
     }
 }
+
 
 
