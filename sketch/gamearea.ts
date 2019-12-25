@@ -4,8 +4,9 @@ class GameArea {
     private flower: Flower;
     private cloud: Cloud;
     private bee: Bee;
-    private beeStartingPointX: [number, number]
+    private beeStartingPointX: [number, number];
     private beeStartingPointY: [number, number];
+    private playerScore: PlayerScore;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -15,6 +16,7 @@ class GameArea {
         this.beeStartingPointX = [0, 400];
         this.beeStartingPointY = [0, 600];
         this.bee = new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50);
+        this.playerScore = new PlayerScore();
     }
 
     public update() {
@@ -26,6 +28,11 @@ class GameArea {
         this.spawnCloud()
         this.spawnBee();
         this.bee.mouseClickedBee(mouseX, mouseY);
+        this.updatePlayerScore();
+    }
+
+    private updatePlayerScore() {
+        setTimeout(this.playerScore.printPlayerScore, 3000);
     }
 
     private spawnCloud() {
