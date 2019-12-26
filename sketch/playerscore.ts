@@ -8,12 +8,13 @@ class PlayerScore {
     }
 
     public printPlayerScore() {
-        if (millis() >= 1000 + this.time) {
+        if (millis() >= 500 + this.time) {
             this.score++;
             this.time = millis();
         }
-        textSize(32);
-        text(this.score, 10, 30);
+        fill(50);
+        textSize(25);
+        text(this.score + "m", 20, 580);
     }
     public draw() {
         this.printPlayerScore();
