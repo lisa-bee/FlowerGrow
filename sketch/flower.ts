@@ -18,7 +18,7 @@ class Flower {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
         this.r = 36;
-        this.onlyRenderEachXPoint = 25;
+        this.onlyRenderEachXPoint = 50;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
     }
@@ -81,6 +81,7 @@ class Flower {
 
     private resolveHistoryPositionsToDraw(): Array<p5.Vector> {
         const pointsToDraw = [];
+        pointsToDraw.push(this.beginningOfStem);
         for (let i = this.keepSamePointsForDifferentDrawsAdjuster % this.onlyRenderEachXPoint; i < this.history.length; i += this.onlyRenderEachXPoint) {
             pointsToDraw.push(this.history[i]);
         }
@@ -94,7 +95,7 @@ class Flower {
     }
 
     public draw() {
-        console.log("-------- draw ------------");
+        //console.log("-------- draw ------------");
         stroke(100, 215, 46)
         strokeWeight(6);
         noFill();
