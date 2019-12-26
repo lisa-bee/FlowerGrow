@@ -1,19 +1,23 @@
 class PlayerScore {
-    private lastPrint: number;
-    private timeElapsed: number;
+    private time: number;
+    private score: number;
 
     public constructor() {
-        this.lastPrint = millis() - 3000;
-        this.timeElapsed = millis() - this.lastPrint;
+        this.time = 0;
+        this.score = 0;
     }
 
     public printPlayerScore() {
-        for (let i = 0; i <= 10; i++) {
-            if (this.timeElapsed > 3000) {
-                i++;
-                console.log(this.timeElapsed);
-                this.lastPrint = millis();
-            }
+        if (millis() >= 1000 + this.time) {
+            this.score++;
+            this.time = millis();
         }
+        textSize(32);
+        text(this.score, 10, 30);
     }
+    public draw() {
+        this.printPlayerScore();
+    }
+
 }
+

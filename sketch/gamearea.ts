@@ -28,12 +28,9 @@ class GameArea {
         this.spawnCloud()
         this.spawnBee();
         this.bee.mouseClickedBee(mouseX, mouseY);
-        this.updatePlayerScore();
+        this.playerScore.draw();
     }
 
-    private updatePlayerScore() {
-        setTimeout(this.playerScore.printPlayerScore, 3000);
-    }
 
     private spawnCloud() {
         this.cloud.checkCollisionWithFlower(this.flower);
