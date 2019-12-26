@@ -8,23 +8,19 @@ interface Flowers {
 
 class Flower {
     public currentFlower: p5.Image;
-    private width: number;
-    private height: number;
     private time: number;
-    private _r: number;
+    public readonly r: number;
     private history: p5.Vector[];
 
-    public constructor(x: number, y: number, width: number, height: number) {
+    public constructor(x: number, y: number, private width: number, private height: number) {
         this.currentFlower = listOfFlowers.bud;
-        this.width = width;
-        this.height = height;
         this.time = 0;
-        this._r = 36;
+        this.r = 36;
         this.history = [createVector(x, y)];
     }
 
-    public get r() {
-        return this._r;
+    public get beginningOfStem() {
+        return this.history[0];
     }
 
     public get endOfStem() {
@@ -39,15 +35,18 @@ class Flower {
 
     private grow(x: number) {
         const y = this.endOfStem.y - 1.5;
+        const maxLength = height / 2;
         var v = createVector(x, y);
 
         this.history.push(v);
+        if (this.history.length > maxLength * 2) {
+            this.history.shift();
+        }
 
         this.time += deltaTime;
 
         if (this.time > 5000) {
             this.currentFlower = listOfFlowers.flower75;
-
         }
     }
 
@@ -76,13 +75,34 @@ class Flower {
         return x;
     }
 
+    private static readonly vertexHistoryJump = 100;
+    private magicStuff = Flower.vertexHistoryJump;
     public draw() {
-        for (var i = 0; i < this.history.length; i++) {
-            var pos = this.history[i];
-            fill(100, 215, 46);
-            noStroke();
-            ellipse(pos.x, pos.y, 5, 5);
+        stroke(100, 215, 46)
+        strokeWeight(6);
+        noFill();
+
+        beginShape();
+        curveVertex(this.beginningOfStem.x, this.beginningOfStem.y);
+        curveVertex(this.beginningOfStem.x, this.beginningOfStem.y);
+        for (let i = this.magicStuff % Flower.vertexHistoryJump; i < this.history.length; i += Flower.vertexHistoryJump) {
+            const pos = this.history[i];
+            curveVertex(pos.x, pos.y);
         }
+        curveVertex(this.endOfStem.x, this.endOfStem.y);
+        curveVertex(this.endOfStem.x, this.endOfStem.y);
+
+        endShape();
+
+        // for (let i = 0; i < pointsToDraw.length; i++) {
+        //     const pos = pointsToDraw[i];
+        //     if (i % 4 === 0) beginShape();
+        //     curveVertex(pos.x, pos.y);
+        //     if (i % 4 === 0) endShape();
+        // }
+
+        this.magicStuff--;
+        if (this.magicStuff === 0) this.magicStuff = Flower.vertexHistoryJump;
 
         push();
         imageMode(CENTER);
@@ -92,7 +112,7 @@ class Flower {
         noFill();
         noStroke();
         ellipseMode(CENTER);
-        ellipse(this.endOfStem.x, this.endOfStem.y, this._r * 2, this._r * 2);
+        ellipse(this.endOfStem.x, this.endOfStem.y, this.r * 2, this.r * 2);
         pop();
     }
 }
