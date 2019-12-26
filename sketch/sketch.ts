@@ -1,6 +1,6 @@
 let bg: p5.Image;
 let game: GameArea;
-let flowers: Flowers;
+let listOfFlowers: Flowers;
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -18,7 +18,7 @@ function preload() {
     beeRightImage = loadImage('./assets/images/beeRight.png');
     beeDeadImage = loadImage('./assets/images/beeDead.png');
 
-    flowers = {
+    listOfFlowers = {
         bud: loadImage('/assets/images/bud.png'),
         flower0: loadImage('/assets/images/flower_0.png'),
         flower25: loadImage('/assets/images/flower_25.png'),
