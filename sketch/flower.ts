@@ -11,11 +11,15 @@ class Flower {
     private time: number;
     public readonly r: number;
     private history: p5.Vector[];
+    private onlyRenderEachXPoint: number;
+    private keepSamePointsForDifferentDrawsAdjuster: number;
 
     public constructor(x: number, y: number, private width: number, private height: number) {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
         this.r = 36;
+        this.onlyRenderEachXPoint = 25;
+        this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
     }
 
@@ -39,7 +43,7 @@ class Flower {
         var v = createVector(x, y);
 
         this.history.push(v);
-        if (this.history.length > maxLength * 2) {
+        if (this.history.length > maxLength) {
             this.history.shift();
         }
 
@@ -75,34 +79,49 @@ class Flower {
         return x;
     }
 
-    private static readonly vertexHistoryJump = 100;
-    private magicStuff = Flower.vertexHistoryJump;
+    private resolveHistoryPositionsToDraw(): Array<p5.Vector> {
+        const pointsToDraw = [];
+        for (let i = this.keepSamePointsForDifferentDrawsAdjuster % this.onlyRenderEachXPoint; i < this.history.length; i += this.onlyRenderEachXPoint) {
+            pointsToDraw.push(this.history[i]);
+        }
+        pointsToDraw.push(this.endOfStem);
+        pointsToDraw.push(this.endOfStem);
+
+        this.keepSamePointsForDifferentDrawsAdjuster--;
+        if (this.keepSamePointsForDifferentDrawsAdjuster === 0) this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
+
+        return pointsToDraw;
+    }
+
     public draw() {
+        console.log("-------- draw ------------");
         stroke(100, 215, 46)
         strokeWeight(6);
         noFill();
 
-        beginShape();
-        curveVertex(this.beginningOfStem.x, this.beginningOfStem.y);
-        curveVertex(this.beginningOfStem.x, this.beginningOfStem.y);
-        for (let i = this.magicStuff % Flower.vertexHistoryJump; i < this.history.length; i += Flower.vertexHistoryJump) {
-            const pos = this.history[i];
-            curveVertex(pos.x, pos.y);
+        const maxNumberOfPointsInCurveVertex = 4;
+
+        const historyPositionsToDraw = this.resolveHistoryPositionsToDraw();
+        if (historyPositionsToDraw.length >= 2) {
+            for (let i = 0; i < historyPositionsToDraw.length; i++) {
+                beginShape();
+                if (i === 0) {
+                    curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
+                    curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
+                    curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
+                    curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
+                }
+                else {
+                    for (let j = 0; j < maxNumberOfPointsInCurveVertex; j++) {
+                        if (i + j < historyPositionsToDraw.length) {
+                            const pos = historyPositionsToDraw[i + j];
+                            curveVertex(pos.x, pos.y);
+                        }
+                    }
+                }
+                endShape();
+            }
         }
-        curveVertex(this.endOfStem.x, this.endOfStem.y);
-        curveVertex(this.endOfStem.x, this.endOfStem.y);
-
-        endShape();
-
-        // for (let i = 0; i < pointsToDraw.length; i++) {
-        //     const pos = pointsToDraw[i];
-        //     if (i % 4 === 0) beginShape();
-        //     curveVertex(pos.x, pos.y);
-        //     if (i % 4 === 0) endShape();
-        // }
-
-        this.magicStuff--;
-        if (this.magicStuff === 0) this.magicStuff = Flower.vertexHistoryJump;
 
         push();
         imageMode(CENTER);
