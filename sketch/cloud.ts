@@ -1,8 +1,11 @@
-let badCloudImg: p5.Image;
-
+let badCloudImg1: p5.Image;
+let badCloudImg2: p5.Image;
+let badCloudImg3: p5.Image;
+let badCloud: [p5.Image, p5.Image, p5.Image];
 class Cloud {
-
-    public badCloudImg: p5.Image;
+    
+    public badCloud: [p5.Image, p5.Image, p5.Image];
+    public badCloudImg1: p5.Image;
     public x: number;
     public y: number;
     public width: number;
@@ -10,8 +13,10 @@ class Cloud {
     public r: number;
 
 
-    public constructor(badCloudImg: p5.Image, x: number, y: number, width: number, height: number) {
-        this.badCloudImg = badCloudImg;
+    public constructor(badCloudImg1: p5.Image, x: number, y: number, width: number, height: number) {
+        
+        this.badCloud = [badCloudImg1, badCloudImg2, badCloudImg3]
+        this.badCloudImg1 = badCloudImg1;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -27,9 +32,12 @@ class Cloud {
     public checkCollisionWithFlower(flower: Flower) {
         var d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.r + flower.r) {
-
-            flower.flower = flowers.flower25
+            flower.flower = flowers.flower25;
         }
+    }
+
+    public spawnRandomBadClouds() {
+
     }
 
     private move() {
@@ -43,7 +51,7 @@ class Cloud {
     public draw() {
         push();
         imageMode(CENTER);
-        image(this.badCloudImg, this.x, this.y, this.width, this.height);
+        image(this.badCloudImg1, this.x, this.y, this.width, this.height);
         pop();
         push();
         noFill();
