@@ -2,9 +2,6 @@ let beeLeftImage: p5.Image;
 let beeRightImage: p5.Image;
 let beeDeadImage: p5.Image;
 
-
-//let endingPointX = 200;
-
 class Bee {
     private img: p5.Image
     private x: number;
@@ -34,7 +31,6 @@ class Bee {
     }
 
     public move() {
-        //this.x = this.x + random(-1, 1);
         this.y = this.y + random(-5, 5);
 
         if (this.isBeeDead) {
@@ -88,7 +84,7 @@ class Bee {
     private buzzAwayAfterHitFlower(flower:Flower){
         this.time += deltaTime;
         if (this.time > 1000) {
-            this.y -= 3;
+            this.y -= 5;
             if (flower.endOfStem.x >= 200){
                 this.x -= 4;
                 this.img = beeLeftImage;
@@ -112,7 +108,6 @@ class Bee {
     public mouseClickedBee(mouseClickX: number, mouseClickY: number) {
 
         if (mouseIsPressed && mouseClickX > this.x && mouseClickX < this.x + this.width && mouseClickY > this.y && mouseClickY < this.y + this.height) {
-
             this.isBeeDead = true;
         }
     }
