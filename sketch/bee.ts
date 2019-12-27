@@ -77,21 +77,27 @@ class Bee {
             }
 
             if(this.beeHitFlower){
-                this.time += deltaTime;
-
-                if (this.time > 5000) {
-                    this.y -= 3;
-                    this.x += 3;
-    
-                }
-
+                this.buzzAwayAfterHitFlower(flower)
             }
 
         if (game.beeSwarm.length >= 5){
             game.beeSwarm.shift();
         } 
-        
-    
+    }
+
+    private buzzAwayAfterHitFlower(flower:Flower){
+        this.time += deltaTime;
+        if (this.time > 1000) {
+            this.y -= 3;
+            if (flower.endOfStem.x >= 200){
+                this.x -= 4;
+                this.img = beeLeftImage;
+            }
+            else{
+                this.x += 4;
+                this.img = beeRightImage;
+            }
+        }
     }
 
     public checkCollisionWithFlower(flower: Flower) {
