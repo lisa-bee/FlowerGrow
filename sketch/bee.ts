@@ -22,7 +22,7 @@ class Bee {
         this.width = width;
         this.height = height;
         this.isBeeDead = false;
-        this.r = this.width/2;
+        this.r = this.width / 2;
     }
 
     public get isBeeClicked() {
@@ -35,9 +35,9 @@ class Bee {
 
         if (this.isBeeDead) {
             this.x = this.x + random(-5, 5)
-            this.y = this.y + 3;      
+            this.y = this.y + 3;
         }
-        
+
     }
 
     public buzzTo(flower: Flower) {
@@ -69,7 +69,7 @@ class Bee {
             }
         }
 
-        if(this.isBeeDead){
+        if (this.isBeeDead) {
             this.img = beeDeadImage;
             if (game.beeSwarm.length >= 5){
                 game.beeSwarm.shift();
@@ -83,14 +83,14 @@ class Bee {
         let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
 
         if (d < this.r + flower.r) {
-            flower.flower = flowers.flower25
+            flower.currentFlower = listOfFlowers.flower25;
         }
     }
 
-    public mouseClickedBee(mouseClickX:number, mouseClickY:number){
-        
-        if(mouseIsPressed && mouseClickX > this.x && mouseClickX < this.x + this.width && mouseClickY > this.y && mouseClickY < this.y + this.height){  
-            
+    public mouseClickedBee(mouseClickX: number, mouseClickY: number) {
+
+        if (mouseIsPressed && mouseClickX > this.x && mouseClickX < this.x + this.width && mouseClickY > this.y && mouseClickY < this.y + this.height) {
+
             this.isBeeDead = true;
         }
     }
@@ -99,7 +99,7 @@ class Bee {
 
     public update() {
         this.move();
-        
+
     }
 
     public draw() {

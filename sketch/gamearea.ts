@@ -5,9 +5,9 @@ class GameArea {
     private cloud: Cloud;
     public beeSwarm: Bee[] ;
     private beeSpawnTime: number;
-    public collision: CollisionObject;
     private beeStartingPointX: [number, number];
     private beeStartingPointY: [number, number];
+    public collision: CollisionObject;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -31,8 +31,9 @@ class GameArea {
         this.spawnBee();
     }
 
-    private spawnCloud(){
-        this.cloud.checkCollisionWithFlower(this.flower);   
+
+    private spawnCloud() {
+        this.cloud.checkCollisionWithFlower(this.flower);
         // this.checkCollision()
         // for varje moln kolla om spelaren kolliderade
         // for varje geting kolla om spelaren kollideraqde
