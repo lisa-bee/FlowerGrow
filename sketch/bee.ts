@@ -13,6 +13,8 @@ class Bee {
     private height: number;
     public isBeeDead: boolean;
     private r: number;
+    private beeHitFlower: boolean;
+    private time: number;
 
     public constructor(x: any, y: any, width: number, height: number) {
 
@@ -23,6 +25,8 @@ class Bee {
         this.height = height;
         this.isBeeDead = false;
         this.r = this.width / 2;
+        this.beeHitFlower = false;
+        this.time = 0;
     }
 
     public get isBeeClicked() {
@@ -37,46 +41,57 @@ class Bee {
             this.x = this.x + random(-5, 5)
             this.y = this.y + 3;
         }
-
     }
 
     public buzzTo(flower: Flower) {
         let endingPointY = 275;
 
-        if (this.x == flower.endOfStem.x - 25) {
-            this.x = this.x;
-        }
-        else {
-            if (flower.endOfStem.x - 25 <= this.x) {
-                this.x -= 1;
-                this.img = beeLeftImage;
+            if (this.x == flower.endOfStem.x - 25) {
+                this.x = this.x;
             }
             else {
-                this.x += 1;
-                this.img = beeRightImage;
+                if (flower.endOfStem.x - 25 <= this.x) {
+                    this.x -= 1;
+                    this.img = beeLeftImage;
+                }
+                else {
+                    this.x += 1;
+                    this.img = beeRightImage;
+                }
             }
-        }
 
-        if (this.y == endingPointY) {
-            this.y = this.y;
-        }
-        else {
-            if (endingPointY <= this.y) {
-                this.y -= 1;
+            if (this.y == endingPointY) {
+                this.y = this.y;
             }
             else {
-                this.y += 1;
+                if (endingPointY <= this.y) {
+                    this.y -= 1;
+                }
+                else {
+                    this.y += 1;
+                }
             }
-        }
 
-        if (this.isBeeDead) {
-            this.img = beeDeadImage;
-            if (game.beeSwarm.length >= 5){
-                game.beeSwarm.shift();
+            if (this.isBeeDead) {
+                this.img = beeDeadImage;     
             }
-            
-        }
 
+            if(this.beeHitFlower){
+                this.time += deltaTime;
+
+                if (this.time > 5000) {
+                    this.y -= 3;
+                    this.x += 3;
+    
+                }
+
+            }
+
+        if (game.beeSwarm.length >= 5){
+            game.beeSwarm.shift();
+        } 
+        
+    
     }
 
     public checkCollisionWithFlower(flower: Flower) {
@@ -84,6 +99,7 @@ class Bee {
 
         if (d < this.r + flower.r) {
             flower.currentFlower = listOfFlowers.flower25;
+            this.beeHitFlower = true;
         }
     }
 
@@ -95,11 +111,8 @@ class Bee {
         }
     }
 
-
-
     public update() {
         this.move();
-
     }
 
     public draw() {
