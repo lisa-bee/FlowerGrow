@@ -1,6 +1,6 @@
 let bg: p5.Image;
 let game: GameArea;
-let flowers: Flowers;
+let listOfFlowers: Flowers;
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -18,8 +18,9 @@ function preload() {
     badCloudImg3 = loadImage('assets/images/bad_cloud3.png');
     beeLeftImage = loadImage('./assets/images/beeLeft.png');
     beeRightImage = loadImage('./assets/images/beeRight.png');
+    beeDeadImage = loadImage('./assets/images/beeDead.png');
 
-    flowers = {
+    listOfFlowers = {
         bud: loadImage('/assets/images/bud.png'),
         flower0: loadImage('/assets/images/flower_0.png'),
         flower25: loadImage('/assets/images/flower_25.png'),
@@ -38,8 +39,9 @@ function preload() {
 function setup() {
     createCanvas(400, 600);
     frameRate(60);
+    //GameArea.spawnBee();
     //noCursor();
-    game = new GameArea()
+    game = new GameArea();
 }
 
 /**

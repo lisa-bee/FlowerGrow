@@ -32,7 +32,8 @@ class Cloud {
     public checkCollisionWithFlower(flower: Flower) {
         var d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.r + flower.r) {
-            flower.flower = flowers.flower25;
+
+            flower.currentFlower = listOfFlowers.flower25;
         }
     }
 
@@ -55,7 +56,7 @@ class Cloud {
         pop();
         push();
         noFill();
-        stroke('black');
+        noStroke();
         ellipseMode(CENTER);
         ellipse(this.x, this.y, this.r * 2, this.r * 2);
         pop();

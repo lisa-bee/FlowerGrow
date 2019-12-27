@@ -1,11 +1,9 @@
 let beeLeftImage: p5.Image;
 let beeRightImage: p5.Image;
+let beeDeadImage: p5.Image;
 
-let startingPointX = [0, 400];
-let startingPointY = [0, 600];
-let endingPointX = 200;
-let endingPointY = 300;
 
+//let endingPointX = 200;
 
 class Bee {
     private img: p5.Image
@@ -13,9 +11,8 @@ class Bee {
     private y: number;
     private width: number;
     private height: number;
-    private isBeeDead: boolean;
-
-
+    public isBeeDead: boolean;
+    private r: number;
 
     public constructor(x: any, y: any, width: number, height: number) {
 
@@ -25,6 +22,11 @@ class Bee {
         this.width = width;
         this.height = height;
         this.isBeeDead = false;
+        this.r = this.width / 2;
+    }
+
+    public get isBeeClicked() {
+        return this.isBeeDead;
     }
 
     public move() {
@@ -32,18 +34,20 @@ class Bee {
         this.y = this.y + random(-5, 5);
 
         if (this.isBeeDead) {
+            this.x = this.x + random(-5, 5)
             this.y = this.y + 3;
         }
-        this.buzzTo();
+
     }
 
-    public buzzTo() {
+    public buzzTo(flower: Flower) {
+        let endingPointY = 275;
 
-        if (this.x == endingPointX) {
+        if (this.x == flower.endOfStem.x - 25) {
             this.x = this.x;
         }
         else {
-            if (endingPointX <= this.x) {
+            if (flower.endOfStem.x - 25 <= this.x) {
                 this.x -= 1;
                 this.img = beeLeftImage;
             }
@@ -65,13 +69,47 @@ class Bee {
             }
         }
 
+        if (this.isBeeDead) {
+            this.img = beeDeadImage;
+            if (game.beeSwarm.length >= 5){
+                game.beeSwarm.shift();
+            }
+            
+        }
+
     }
+
+    public checkCollisionWithFlower(flower: Flower) {
+        let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
+
+        if (d < this.r + flower.r) {
+            flower.currentFlower = listOfFlowers.flower25;
+        }
+    }
+
+    public mouseClickedBee(mouseClickX: number, mouseClickY: number) {
+
+        if (mouseIsPressed && mouseClickX > this.x && mouseClickX < this.x + this.width && mouseClickY > this.y && mouseClickY < this.y + this.height) {
+
+            this.isBeeDead = true;
+        }
+    }
+
+
 
     public update() {
         this.move();
+
     }
 
     public draw() {
+        push();
         image(this.img, this.x, this.y, this.width, this.height);
+        pop();
     }
 }
+
+
+
+
+
