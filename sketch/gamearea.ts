@@ -7,17 +7,18 @@ class GameArea {
     private beeSpawnTime: number;
     private beeStartingPointX: [number, number];
     private beeStartingPointY: [number, number];
+    private playerScore: PlayerScore;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
         this.pot = new Pot(potImg, 135, 450, 120, 100);
         this.flower = new Flower(width / 2, 300, 70, 70);
         this.cloud = new Cloud(badCloudImg, 50, -120, 100, 70);
-
         this.beeStartingPointX = [0, 400];
         this.beeStartingPointY = [0, 600];
         this.beeSwarm = [];
         this.beeSpawnTime = 0;
+        this.playerScore = new PlayerScore();
     }
 
     public update() {
@@ -57,6 +58,7 @@ class GameArea {
         this.ground.draw();
         this.pot.draw();
         this.cloud.draw();
+        this.playerScore.draw();
 
         this.beeSwarm.forEach(bee => {
             bee.draw();
