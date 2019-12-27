@@ -18,7 +18,7 @@ class Flower {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
         this.r = 36;
-        this.onlyRenderEachXPoint = 50;
+        this.onlyRenderEachXPoint = 40;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
     }
@@ -86,7 +86,6 @@ class Flower {
         for (let i = this.keepSamePointsForDifferentDrawsAdjuster % this.onlyRenderEachXPoint; i < this.history.length; i += this.onlyRenderEachXPoint) {
             pointsToDraw.push(this.history[i]);
         }
-        // pointsToDraw.push(this.endOfStem);
         pointsToDraw.push(this.endOfStem);
 
         this.keepSamePointsForDifferentDrawsAdjuster--;
@@ -99,33 +98,14 @@ class Flower {
         stroke(100, 215, 46)
         strokeWeight(8);
         noFill();
-
-        // const maxNumberOfPointsInCurveVertex = 4;
-
         const historyPositionsToDraw = this.resolveHistoryPositionsToDraw();
         beginShape();
         curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
-        curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
         for (let i = 0; i < historyPositionsToDraw.length; i++) {
-            // if (i === 0) {
-            //     curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
-            //     curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
-            //     curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
-            //     curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
-            // }
-            // else {
-            // for (let j = 0; j < maxNumberOfPointsInCurveVertex; j++) {
-            //     if (i + j < historyPositionsToDraw.length) {
-            //         const pos = historyPositionsToDraw[i + j];
             curveVertex(historyPositionsToDraw[i].x, historyPositionsToDraw[i].y);
-            // }
-            // }
-            // }
         }
-        curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
-        curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
+        curveVertex(historyPositionsToDraw[historyPositionsToDraw.length - 1].x - 1, historyPositionsToDraw[historyPositionsToDraw.length - 1].y - 1);
         endShape();
-
         push();
         imageMode(CENTER);
         image(this.currentFlower, this.endOfStem.x, this.endOfStem.y, this.width, this.height);
@@ -138,13 +118,3 @@ class Flower {
         pop();
     }
 }
-
-// class ArrayUtils {
-//     public static range(start: number, end: number) {
-//         const ans = [];
-//         for (let i = start; i <= end; i++) {
-//             ans.push(i);
-//         }
-//         return ans;
-//     }
-// }
