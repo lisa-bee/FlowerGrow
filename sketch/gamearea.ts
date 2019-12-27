@@ -59,7 +59,6 @@ class GameArea {
         this.pot.draw();
         this.cloud.draw();
         this.playerScore.draw();
-
         this.beeSwarm.forEach(bee => {
             bee.draw();
         })
