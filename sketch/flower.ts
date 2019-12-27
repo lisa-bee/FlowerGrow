@@ -9,8 +9,6 @@ interface Flowers {
 class Flower {
     public currentFlower: p5.Image;
     private time: number;
-    private x: number;
-    private y: number;
     public readonly r: number;
     private history: p5.Vector[];
     private onlyRenderEachXPoint: number;
@@ -20,9 +18,9 @@ class Flower {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
         this.r = 36;
-        this.onlyRenderEachXPoint = 35;
+        this.onlyRenderEachXPoint = 50;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
-        this.history = [];
+        this.history = [createVector(x, y)];
     }
 
     public get beginningOfStem() {
@@ -36,7 +34,7 @@ class Flower {
     public update() {
         const newX = this.handlePlayerInput();
         this.grow(newX);
-        // this.move();
+        this.move();
     }
 
     private grow(x: number) {
@@ -56,11 +54,11 @@ class Flower {
         }
     }
 
-    // private move() {
-    //     for (const point of this.history) {
-    //         point.y += 1.5;
-    //     }
-    // }
+    private move() {
+        for (const point of this.history) {
+            point.y += 1.5;
+        }
+    }
 
     private handlePlayerInput(): number {
         let x = this.endOfStem.x
@@ -88,7 +86,7 @@ class Flower {
         for (let i = this.keepSamePointsForDifferentDrawsAdjuster % this.onlyRenderEachXPoint; i < this.history.length; i += this.onlyRenderEachXPoint) {
             pointsToDraw.push(this.history[i]);
         }
-        pointsToDraw.push(this.endOfStem);
+        // pointsToDraw.push(this.endOfStem);
         pointsToDraw.push(this.endOfStem);
 
         this.keepSamePointsForDifferentDrawsAdjuster--;
@@ -99,29 +97,33 @@ class Flower {
 
     public draw() {
         stroke(100, 215, 46)
-        strokeWeight(6);
+        strokeWeight(8);
         noFill();
 
         // const maxNumberOfPointsInCurveVertex = 4;
 
         const historyPositionsToDraw = this.resolveHistoryPositionsToDraw();
         beginShape();
+        curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
+        curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
         for (let i = 0; i < historyPositionsToDraw.length; i++) {
-            if (i === 0) {
-                curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
-                curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
-                curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
-                curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
-            }
-            else {
-                // for (let j = 0; j < maxNumberOfPointsInCurveVertex; j++) {
-                //     if (i + j < historyPositionsToDraw.length) {
-                //         const pos = historyPositionsToDraw[i + j];
-                curveVertex(historyPositionsToDraw[i].x, historyPositionsToDraw[i].y);
-                // }
-                // }
-            }
+            // if (i === 0) {
+            //     curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
+            //     curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
+            //     curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
+            //     curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
+            // }
+            // else {
+            // for (let j = 0; j < maxNumberOfPointsInCurveVertex; j++) {
+            //     if (i + j < historyPositionsToDraw.length) {
+            //         const pos = historyPositionsToDraw[i + j];
+            curveVertex(historyPositionsToDraw[i].x, historyPositionsToDraw[i].y);
+            // }
+            // }
+            // }
         }
+        curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
+        curveVertex(historyPositionsToDraw[1].x, historyPositionsToDraw[1].y);
         endShape();
 
         push();
