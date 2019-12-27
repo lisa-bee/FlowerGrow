@@ -12,6 +12,8 @@ class PlayerScore {
             this.score++;
             this.time = millis();
         }
+        strokeWeight(3);
+        stroke(100, 200, 0);
         fill(50);
         textSize(25);
         text(this.score + "m", 20, 580);

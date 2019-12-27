@@ -8,23 +8,23 @@ interface Flowers {
 
 class Flower {
     public currentFlower: p5.Image;
-    private width: number;
-    private height: number;
     private time: number;
-    private _r: number;
+    public readonly r: number;
     private history: p5.Vector[];
+    private onlyRenderEachXPoint: number;
+    private keepSamePointsForDifferentDrawsAdjuster: number;
 
-    public constructor(x: number, y: number, width: number, height: number) {
+    public constructor(x: number, y: number, private width: number, private height: number) {
         this.currentFlower = listOfFlowers.bud;
-        this.width = width;
-        this.height = height;
         this.time = 0;
-        this._r = 36;
+        this.r = 36;
+        this.onlyRenderEachXPoint = 40;
+        this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
     }
 
-    public get r() {
-        return this._r;
+    public get beginningOfStem() {
+        return this.history[0];
     }
 
     public get endOfStem() {
@@ -39,15 +39,18 @@ class Flower {
 
     private grow(x: number) {
         const y = this.endOfStem.y - 1.5;
+        const maxLength = height / 2;
         var v = createVector(x, y);
 
         this.history.push(v);
+        if (this.history.length > maxLength) {
+            this.history.shift();
+        }
 
         this.time += deltaTime;
 
         if (this.time > 5000) {
             this.currentFlower = listOfFlowers.flower75;
-
         }
     }
 
@@ -76,14 +79,33 @@ class Flower {
         return x;
     }
 
-    public draw() {
-        for (var i = 0; i < this.history.length; i++) {
-            var pos = this.history[i];
-            fill(100, 215, 46);
-            noStroke();
-            ellipse(pos.x, pos.y, 5, 5);
+    private resolveHistoryPositionsToDraw(): Array<p5.Vector> {
+        const pointsToDraw = [];
+        pointsToDraw.push(createVector(this.beginningOfStem.x, 600));
+        pointsToDraw.push(this.beginningOfStem);
+        for (let i = this.keepSamePointsForDifferentDrawsAdjuster % this.onlyRenderEachXPoint; i < this.history.length; i += this.onlyRenderEachXPoint) {
+            pointsToDraw.push(this.history[i]);
         }
+        pointsToDraw.push(this.endOfStem);
 
+        this.keepSamePointsForDifferentDrawsAdjuster--;
+        if (this.keepSamePointsForDifferentDrawsAdjuster === 0) this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
+
+        return pointsToDraw;
+    }
+
+    public draw() {
+        stroke(100, 215, 46)
+        strokeWeight(8);
+        noFill();
+        const historyPositionsToDraw = this.resolveHistoryPositionsToDraw();
+        beginShape();
+        curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
+        for (let i = 0; i < historyPositionsToDraw.length; i++) {
+            curveVertex(historyPositionsToDraw[i].x, historyPositionsToDraw[i].y);
+        }
+        curveVertex(historyPositionsToDraw[historyPositionsToDraw.length - 1].x - 1, historyPositionsToDraw[historyPositionsToDraw.length - 1].y - 1);
+        endShape();
         push();
         imageMode(CENTER);
         image(this.currentFlower, this.endOfStem.x, this.endOfStem.y, this.width, this.height);
@@ -92,7 +114,7 @@ class Flower {
         noFill();
         noStroke();
         ellipseMode(CENTER);
-        ellipse(this.endOfStem.x, this.endOfStem.y, this._r * 2, this._r * 2);
+        ellipse(this.endOfStem.x, this.endOfStem.y, this.r * 2, this.r * 2);
         pop();
     }
 }
