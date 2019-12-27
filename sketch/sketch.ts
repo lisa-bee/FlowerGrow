@@ -37,8 +37,9 @@ function preload() {
 function setup() {
     createCanvas(400, 600);
     frameRate(60);
+    //GameArea.spawnBee();
     //noCursor();
-    game = new GameArea()
+    game = new GameArea();
 }
 
 /**
