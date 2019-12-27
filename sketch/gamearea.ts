@@ -7,7 +7,7 @@ class GameArea {
     private beeSpawnTime: number;
     private beeStartingPointX: [number, number];
     private beeStartingPointY: [number, number];
-    public collision: CollisionObject;
+   // public collision: CollisionObject;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -18,7 +18,7 @@ class GameArea {
         this.beeStartingPointX = [0, 400];
         this.beeStartingPointY = [0, 600];
         this.beeSwarm = [];
-        this.collision = new CollisionObject(); 
+       // this.collision = new CollisionObject(); 
         this.beeSpawnTime = 0;    
     }
 
@@ -59,7 +59,7 @@ class GameArea {
         this.ground.draw();
         this.pot.draw();
         this.cloud.draw();
-        this.collision.draw();
+        //this.collision.draw();
 
         this.beeSwarm.forEach(bee  => {
             bee.draw();
