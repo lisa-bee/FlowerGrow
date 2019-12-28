@@ -63,10 +63,10 @@ class Flower {
     private handlePlayerInput(): number {
         let x = this.endOfStem.x
         if (this.time > 5000) {
-            if (keyIsDown(LEFT_ARROW)) {
+            if (keyIsDown(65)) {
                 x -= 3;
             }
-            else if (keyIsDown(RIGHT_ARROW)) {
+            else if (keyIsDown(68)) {
                 x += 3;
             }
             if (x > width - this.r) {
