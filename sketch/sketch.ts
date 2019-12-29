@@ -13,7 +13,10 @@ function preload() {
     bg = loadImage('assets/images/background400x600.png');
     potImg = loadImage('assets/images/pot.png');
     grassImg = loadImage('assets/images/grass.png');
-    badCloudImg = loadImage('assets/images/bad_cloud1.png');
+    badCloudImg1 = loadImage('assets/images/bad_cloud1.png');
+    badCloudImg2 = loadImage('assets/images/bad_cloud2.png');
+    badCloudImg3 = loadImage('assets/images/bad_cloud3.png');
+    goodCloudImg = loadImage('assets/images/good_cloud.png');
     beeLeftImage = loadImage('./assets/images/beeLeft.png');
     beeRightImage = loadImage('./assets/images/beeRight.png');
     beeDeadImage = loadImage('./assets/images/beeDead.png');
