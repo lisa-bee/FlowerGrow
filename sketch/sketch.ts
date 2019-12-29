@@ -51,7 +51,7 @@ function setup() {
  * This is a good place to call public funcions of the object
  * you created in the setup function above
  */
-function draw(instructionMenu: InstructionMenu) {
+function draw() {
     background(bg);
     game.update();
     game.draw();

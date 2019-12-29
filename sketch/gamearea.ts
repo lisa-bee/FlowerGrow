@@ -11,6 +11,7 @@ class GameArea {
     private playerScore: PlayerScore;
     private instructionMenu: InstructionMenu;
     private waterContainer: WaterContainer;
+    private isGameRunning: boolean;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -25,18 +26,21 @@ class GameArea {
         this.playerScore = new PlayerScore();
         this.instructionMenu = new InstructionMenu();
         this.waterContainer = new WaterContainer();
+        this.isGameRunning = false;
     }
 
 
     public update() {
-        this.ground.update();
-        this.pot.update();
-        this.flower.update();
-        this.cloud.update();
-        this.goodCloud.update();
-        this.spawnCloud();
-        this.spawnBee();
-        this.instructionMenu.draw();
+        this.isGameRunning = this.instructionMenu.startGame();
+        if (this.isGameRunning) {
+            this.ground.update();
+            this.pot.update();
+            this.flower.update();
+            this.cloud.update();
+            this.goodCloud.update();
+            this.spawnCloud();
+            this.spawnBee();
+        }
     }
 
 
@@ -64,16 +68,22 @@ class GameArea {
     }
 
     public draw() {
-        this.flower.draw();
-        this.ground.draw();
-        this.pot.draw();
-        this.cloud.draw();
-        this.goodCloud.draw();
-        this.playerScore.draw();
-        this.waterContainer.draw();
-        this.beeSwarm.forEach(bee => {
-            bee.draw();
-        })
+        if (!this.isGameRunning) {
+            this.instructionMenu.draw();
+            return;
+        }
+        else if (this.isGameRunning) {
+            this.flower.draw();
+            this.ground.draw();
+            this.pot.draw();
+            this.cloud.draw();
+            this.goodCloud.draw();
+            this.playerScore.draw();
+            this.waterContainer.draw();
+            this.beeSwarm.forEach(bee => {
+                bee.draw();
+            })
+        }
     }
 
 }

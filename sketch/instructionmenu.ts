@@ -7,25 +7,24 @@ class InstructionMenu {
     private instructionY: number;
     private radius: number;
     private message: string;
-    private isGameRunning: boolean;
 
     public constructor() {
         this.boxColor = "green";
         this.textColor = "black";
-        this.height = 350;
-        this.width = 250;
+        this.height = 500;
+        this.width = 300;
         this.instructionX = 200;
         this.instructionY = 300;
-        this.radius = 30;
+        this.radius = 50;
         this.message = "Welcome!";
-        this.isGameRunning = false;
     }
 
-    public update() {
-        let isGameRunning = this.isGameRunning;
-        if (isGameRunning = false) {
-            this.draw();
+    public startGame(): boolean {
+        if (keyCode === ENTER) {
+            return true;
         }
+
+        return false;
     }
 
     public draw() {
