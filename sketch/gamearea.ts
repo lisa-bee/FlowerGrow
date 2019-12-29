@@ -25,6 +25,7 @@ class GameArea {
         this.instructionMenu = new InstructionMenu();
     }
 
+
     public update() {
         this.ground.update();
         this.pot.update();
@@ -33,6 +34,7 @@ class GameArea {
         this.goodCloud.update();
         this.spawnCloud();
         this.spawnBee();
+        this.instructionMenu.draw();
     }
 
 
@@ -69,9 +71,6 @@ class GameArea {
         this.beeSwarm.forEach(bee => {
             bee.draw();
         })
-        this.instructionMenu.draw();
-        console.log(this.instructionMenu.hasGameStarted)
     }
-
 
 }

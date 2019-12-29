@@ -7,7 +7,7 @@ class InstructionMenu {
     private instructionY: number;
     private radius: number;
     private message: string;
-    private gameState: number;
+    private isGameRunning: boolean;
 
     public constructor() {
         this.boxColor = "green";
@@ -18,11 +18,14 @@ class InstructionMenu {
         this.instructionY = 300;
         this.radius = 30;
         this.message = "Welcome!";
-        this.gameState = 0;
+        this.isGameRunning = false;
     }
 
-    public get hasGameStarted() {
-        return this.gameState;
+    public update() {
+        let isGameRunning = this.isGameRunning;
+        if (isGameRunning = false) {
+            this.draw();
+        }
     }
 
     public draw() {
