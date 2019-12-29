@@ -1,6 +1,7 @@
 let beeLeftImage: p5.Image;
 let beeRightImage: p5.Image;
 let beeDeadImage: p5.Image;
+let buzzingBee:p5.SoundFile;
 
 class Bee {
     private img: p5.Image
@@ -107,6 +108,15 @@ class Bee {
         }
     }
 
+    public beeBuzzingSound(){
+        if(!this.isBeeDead || this.x >= -20 || this.x <= 420){
+            buzzingBee.play()
+        }
+        else{
+            buzzingBee.stop();
+        }
+    }
+
     public mouseClickedBee(mouseClickX: number, mouseClickY: number) {
 
         if (mouseIsPressed && mouseClickX > this.x && mouseClickX < this.x + this.width && mouseClickY > this.y && mouseClickY < this.y + this.height) {
@@ -116,6 +126,7 @@ class Bee {
 
     public update() {
         this.move();
+        //this.beeBuzzingSound();
     }
 
     public draw() {
