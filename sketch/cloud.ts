@@ -1,10 +1,10 @@
 let badCloudImg1: p5.Image;
 let badCloudImg2: p5.Image;
 let badCloudImg3: p5.Image;
-let badCloud: [p5.Image, p5.Image, p5.Image];
+/* let badCloud: [p5.Image, p5.Image, p5.Image]; */
 class Cloud {
     
-    public badCloud: [p5.Image, p5.Image, p5.Image];
+/*     public badCloud: [p5.Image, p5.Image, p5.Image]; */
     public badCloudImg1: p5.Image;
     public x: number;
     public y: number;
@@ -15,7 +15,7 @@ class Cloud {
 
     public constructor(badCloudImg1: p5.Image, x: number, y: number, width: number, height: number) {
         
-        this.badCloud = [badCloudImg1, badCloudImg2, badCloudImg3]
+       /*  this.badCloud = [badCloudImg1, badCloudImg2, badCloudImg3] */
         this.badCloudImg1 = badCloudImg1;
         this.x = x;
         this.y = y;
