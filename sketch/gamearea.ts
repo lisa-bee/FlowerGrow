@@ -2,7 +2,7 @@ class GameArea {
     private ground: Grass;
     private pot: Pot;
     private flower: Flower;
-    private cloud: Cloud;
+    private cloud: BadCloud;
     public goodCloud: GoodCloud;
     public beeSwarm: Bee[];
     private beeSpawnTime: number;
@@ -15,7 +15,7 @@ class GameArea {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
         this.pot = new Pot(potImg, 135, 450, 120, 100);
         this.flower = new Flower(width / 2, 300, 70, 70);
-        this.cloud = new Cloud(badCloudImg1, 50, -120, 100, 70);
+        this.cloud = new BadCloud(badCloudImg1, 50, -120, 100, 70);
         this.goodCloud = new GoodCloud(goodCloudImg, 200, -120, 90, 100);
         this.beeStartingPointX = [0, 400];
         this.beeStartingPointY = [0, 600];

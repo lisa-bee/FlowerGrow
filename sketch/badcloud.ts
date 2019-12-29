@@ -2,7 +2,7 @@ let badCloudImg1: p5.Image;
 let badCloudImg2: p5.Image;
 let badCloudImg3: p5.Image;
 /* let badCloud: [p5.Image, p5.Image, p5.Image]; */
-class Cloud {
+class BadCloud {
     
 /*     public badCloud: [p5.Image, p5.Image, p5.Image]; */
     public badCloudImg1: p5.Image;
