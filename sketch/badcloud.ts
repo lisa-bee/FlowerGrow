@@ -28,7 +28,7 @@ class BadCloud {
 
     public update() {
         this.time += deltaTime;
-        if (this.time > 7000) {
+        if (this.time > 6000) {
             this.move();
         }
     }
@@ -43,7 +43,6 @@ class BadCloud {
     }
 
     public spawnRandomBadClouds() {
-
     }
 
     private move() {

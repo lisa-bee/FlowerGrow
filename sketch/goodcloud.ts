@@ -43,7 +43,7 @@ public checkCollisionWithFlower(flower: Flower) {
 
 private move() {
     this.y = this.y + 2;
-    if (this.y > height) {
+    if (this.y > height * 4) {
         this.y = -100;
         this.x = random(30, 370);
     }
