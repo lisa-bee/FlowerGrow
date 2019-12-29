@@ -10,6 +10,7 @@ class GameArea {
     private beeStartingPointY: [number, number];
     private playerScore: PlayerScore;
     private instructionMenu: InstructionMenu;
+    private waterContainer: WaterContainer;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -23,6 +24,7 @@ class GameArea {
         this.beeSpawnTime = 0;
         this.playerScore = new PlayerScore();
         this.instructionMenu = new InstructionMenu();
+        this.waterContainer = new WaterContainer();
     }
 
 
@@ -68,6 +70,7 @@ class GameArea {
         this.cloud.draw();
         this.goodCloud.draw();
         this.playerScore.draw();
+        this.waterContainer.draw();
         this.beeSwarm.forEach(bee => {
             bee.draw();
         })
