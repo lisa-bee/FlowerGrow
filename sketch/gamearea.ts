@@ -8,6 +8,7 @@ class GameArea {
     private beeStartingPointX: [number, number];
     private beeStartingPointY: [number, number];
     private playerScore: PlayerScore;
+    private instructionMenu: InstructionMenu;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -19,6 +20,7 @@ class GameArea {
         this.beeSwarm = [];
         this.beeSpawnTime = 0;
         this.playerScore = new PlayerScore();
+        this.instructionMenu = new InstructionMenu();
     }
 
     public update() {
@@ -62,5 +64,9 @@ class GameArea {
         this.beeSwarm.forEach(bee => {
             bee.draw();
         })
+        this.instructionMenu.draw();
+        console.log(this.instructionMenu.hasGameStarted)
     }
+
+
 }

@@ -40,6 +40,7 @@ function setup() {
     //GameArea.spawnBee();
     //noCursor();
     game = new GameArea();
+
 }
 
 /**
@@ -52,3 +53,4 @@ function draw() {
     game.update();
     game.draw();
 }
+
