@@ -97,11 +97,13 @@ class Bee {
     }
 
     public checkCollisionWithFlower(flower: Flower) {
-        let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
+        if(!this.isBeeDead){
+            let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
 
-        if (d < this.r + flower.r) {
-            flower.currentFlower = listOfFlowers.flower25;
-            this.beeHitFlower = true;
+            if (d < this.r + flower.r) {
+                flower.currentFlower = listOfFlowers.flower25;
+                this.beeHitFlower = true;
+            }
         }
     }
 
