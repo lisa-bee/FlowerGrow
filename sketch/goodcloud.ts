@@ -8,6 +8,7 @@ public y: number;
 public width: number;
 public height: number;
 public r: number;
+public time: number;
 
 
 public constructor(goodCloudImg: p5.Image, x: number, y: number, width: number, height: number) {
@@ -18,11 +19,17 @@ public constructor(goodCloudImg: p5.Image, x: number, y: number, width: number, 
     this.width = width;
     this.height = height;
     this.r = 38;
+    this.time = 0;
 
 }
 
+
+
 public update() {
-    this.move();
+    this.time += deltaTime;
+    if (this.time > 15000) {
+        this.move();
+    }
 }
 
 public checkCollisionWithFlower(flower: Flower) {
@@ -32,6 +39,7 @@ public checkCollisionWithFlower(flower: Flower) {
         flower.currentFlower = listOfFlowers.flower100;
     }
 }
+
 
 private move() {
     this.y = this.y + 2;
