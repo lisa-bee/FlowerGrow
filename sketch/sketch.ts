@@ -53,5 +53,4 @@ function draw() {
     background(bg);
     game.update();
     game.draw();
-    game.update();
 }
