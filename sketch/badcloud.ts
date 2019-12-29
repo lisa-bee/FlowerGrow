@@ -11,6 +11,7 @@ class BadCloud {
     public width: number;
     public height: number;
     public r: number;
+    public time: number;
 
 
     public constructor(badCloudImg1: p5.Image, x: number, y: number, width: number, height: number) {
@@ -22,10 +23,14 @@ class BadCloud {
         this.width = width;
         this.height = height;
         this.r = 38;
+        this.time = 0;
     }
 
     public update() {
-        this.move();
+        this.time += deltaTime;
+        if (this.time > 7000) {
+            this.move();
+        }
     }
 
 
