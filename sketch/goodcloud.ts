@@ -3,11 +3,12 @@ let goodCloudImg: p5.Image;
 class GoodCloud {
 
 public goodCloudImg: p5.Image;
-public x: number;
-public y: number;
-public width: number;
-public height: number;
-public r: number;
+private x: number;
+private y: number;
+private width: number;
+private height: number;
+private r: number;
+private time: number;
 
 
 public constructor(goodCloudImg: p5.Image, x: number, y: number, width: number, height: number) {
@@ -18,11 +19,17 @@ public constructor(goodCloudImg: p5.Image, x: number, y: number, width: number, 
     this.width = width;
     this.height = height;
     this.r = 38;
+    this.time = 0;
 
 }
 
+
+
 public update() {
-    this.move();
+    this.time += deltaTime;
+    if (this.time > 15000) {
+        this.move();
+    }
 }
 
 public checkCollisionWithFlower(flower: Flower) {
@@ -33,9 +40,10 @@ public checkCollisionWithFlower(flower: Flower) {
     }
 }
 
+
 private move() {
     this.y = this.y + 2;
-    if (this.y > height) {
+    if (this.y > height * 4) {
         this.y = -100;
         this.x = random(30, 370);
     }
