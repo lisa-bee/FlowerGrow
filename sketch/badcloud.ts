@@ -2,15 +2,16 @@ let badCloudImg1: p5.Image;
 let badCloudImg2: p5.Image;
 let badCloudImg3: p5.Image;
 /* let badCloud: [p5.Image, p5.Image, p5.Image]; */
-class Cloud {
+class BadCloud {
     
 /*     public badCloud: [p5.Image, p5.Image, p5.Image]; */
     public badCloudImg1: p5.Image;
-    public x: number;
-    public y: number;
-    public width: number;
-    public height: number;
-    public r: number;
+    private x: number;
+    private y: number;
+    private width: number;
+    private height: number;
+    private r: number;
+    private time: number;
 
 
     public constructor(badCloudImg1: p5.Image, x: number, y: number, width: number, height: number) {
@@ -22,10 +23,14 @@ class Cloud {
         this.width = width;
         this.height = height;
         this.r = 38;
+        this.time = 0;
     }
 
     public update() {
-        this.move();
+        this.time += deltaTime;
+        if (this.time > 6000) {
+            this.move();
+        }
     }
 
 
@@ -38,7 +43,6 @@ class Cloud {
     }
 
     public spawnRandomBadClouds() {
-
     }
 
     private move() {
