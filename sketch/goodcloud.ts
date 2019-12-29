@@ -3,12 +3,12 @@ let goodCloudImg: p5.Image;
 class GoodCloud {
 
 public goodCloudImg: p5.Image;
-public x: number;
-public y: number;
-public width: number;
-public height: number;
-public r: number;
-public time: number;
+private x: number;
+private y: number;
+private width: number;
+private height: number;
+private r: number;
+private time: number;
 
 
 public constructor(goodCloudImg: p5.Image, x: number, y: number, width: number, height: number) {

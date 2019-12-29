@@ -6,12 +6,12 @@ class BadCloud {
     
 /*     public badCloud: [p5.Image, p5.Image, p5.Image]; */
     public badCloudImg1: p5.Image;
-    public x: number;
-    public y: number;
-    public width: number;
-    public height: number;
-    public r: number;
-    public time: number;
+    private x: number;
+    private y: number;
+    private width: number;
+    private height: number;
+    private r: number;
+    private time: number;
 
 
     public constructor(badCloudImg1: p5.Image, x: number, y: number, width: number, height: number) {
