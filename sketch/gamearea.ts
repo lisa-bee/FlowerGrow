@@ -3,6 +3,7 @@ class GameArea {
     private pot: Pot;
     private flower: Flower;
     private cloud: Cloud;
+    public goodCloud: GoodCloud;
     public beeSwarm: Bee[];
     private beeSpawnTime: number;
     private beeStartingPointX: [number, number];
@@ -13,7 +14,8 @@ class GameArea {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
         this.pot = new Pot(potImg, 135, 450, 120, 100);
         this.flower = new Flower(width / 2, 300, 70, 70);
-        this.cloud = new Cloud(badCloudImg, 50, -120, 100, 70);
+        this.cloud = new Cloud(badCloudImg1, 50, -120, 100, 70);
+        this.goodCloud = new GoodCloud(goodCloudImg, 200, -120, 90, 100);
         this.beeStartingPointX = [0, 400];
         this.beeStartingPointY = [0, 600];
         this.beeSwarm = [];
@@ -26,6 +28,7 @@ class GameArea {
         this.pot.update();
         this.flower.update();
         this.cloud.update();
+        this.goodCloud.update();
         this.spawnCloud();
         this.spawnBee();
     }
@@ -33,6 +36,7 @@ class GameArea {
 
     private spawnCloud() {
         this.cloud.checkCollisionWithFlower(this.flower);
+        this.goodCloud.checkCollisionWithFlower(this.flower);
         // this.checkCollision()
         // for varje moln kolla om spelaren kolliderade
         // for varje geting kolla om spelaren kollideraqde
@@ -58,6 +62,7 @@ class GameArea {
         this.ground.draw();
         this.pot.draw();
         this.cloud.draw();
+        this.goodCloud.draw();
         this.playerScore.draw();
         this.beeSwarm.forEach(bee => {
             bee.draw();
