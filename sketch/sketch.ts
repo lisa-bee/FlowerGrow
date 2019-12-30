@@ -20,12 +20,10 @@ function preload() {
     beeLeftImage = loadImage('./assets/images/beeLeft.png');
     beeRightImage = loadImage('./assets/images/beeRight.png');
     beeDeadImage = loadImage('./assets/images/beeDead.png');
-<<<<<<< HEAD
     buzzingBee = (window as any).loadSound('./assets/sounds/bee-buzz.wav');
     happyFlowerSound = (window as any).loadSound('./assets/sounds/happyFlower.wav');
-=======
     logo = loadImage('assets/images/logo.png')
->>>>>>> master
+
 
     listOfFlowers = {
         bud: loadImage('/assets/images/bud.png'),
@@ -49,11 +47,6 @@ function setup() {
     //GameArea.spawnBee();
     //noCursor();
     game = new GameArea();
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> master
 }
 
 /**
