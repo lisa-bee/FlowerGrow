@@ -4,8 +4,8 @@ let badCloudImg3: p5.Image;
 /* let badCloud: [p5.Image, p5.Image, p5.Image]; */
 class BadCloud {
     
-/*     public badCloud: [p5.Image, p5.Image, p5.Image]; */
-    public badCloudImg1: p5.Image;
+    public badCloud: [p5.Image, p5.Image, p5.Image];
+    public badCloudImg: p5.Image;
     private x: number;
     private y: number;
     private width: number;
@@ -14,10 +14,10 @@ class BadCloud {
     private time: number;
 
 
-    public constructor(badCloudImg1: p5.Image, x: number, y: number, width: number, height: number) {
+    public constructor(x: number, y: number, width: number = 100, height: number = 70) {
         
-       /*  this.badCloud = [badCloudImg1, badCloudImg2, badCloudImg3] */
-        this.badCloudImg1 = badCloudImg1;
+        this.badCloud = [badCloudImg1, badCloudImg2, badCloudImg3];
+        this.badCloudImg = random(this.badCloud);
         this.x = x;
         this.y = y;
         this.width = width;
@@ -43,6 +43,9 @@ class BadCloud {
     }
 
     public spawnRandomBadClouds() {
+        /* for (let i = 0; i < 50; i++) {
+            this.badCloud.push(new BadCloud(50, -120, 100, 70));
+          } */
     }
 
     private move() {
@@ -56,7 +59,7 @@ class BadCloud {
     public draw() {
         push();
         imageMode(CENTER);
-        image(this.badCloudImg1, this.x, this.y, this.width, this.height);
+        image(this.badCloudImg, this.x, this.y, this.width, this.height);
         pop();
         push();
         noFill();
@@ -65,5 +68,9 @@ class BadCloud {
         ellipse(this.x, this.y, this.r * 2, this.r * 2);
         pop();
 
+    }
+
+    public getY() {
+        return this.y
     }
 }
