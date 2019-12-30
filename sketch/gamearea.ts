@@ -31,7 +31,9 @@ class GameArea {
 
 
     public update() {
-        this.isGameRunning = this.instructionMenu.startGame();
+        if (!this.isGameRunning) {
+            this.isGameRunning = this.instructionMenu.startGame();
+        }
         if (this.isGameRunning) {
             this.ground.update();
             this.pot.update();
@@ -70,7 +72,6 @@ class GameArea {
     public draw() {
         if (!this.isGameRunning) {
             this.instructionMenu.draw();
-            return;
         }
         else if (this.isGameRunning) {
             this.flower.draw();

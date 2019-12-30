@@ -20,6 +20,7 @@ function preload() {
     beeLeftImage = loadImage('./assets/images/beeLeft.png');
     beeRightImage = loadImage('./assets/images/beeRight.png');
     beeDeadImage = loadImage('./assets/images/beeDead.png');
+    logo = loadImage('assets/images/logo.png')
 
     listOfFlowers = {
         bud: loadImage('/assets/images/bud.png'),
