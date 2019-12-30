@@ -56,7 +56,7 @@ class GameArea {
             bee.buzzTo(this.flower);
             bee.update();
             bee.mouseClickedBee(mouseX, mouseY);
-            bee.beeBuzzingSound();
+            //bee.beeBuzzingSound();
         })
     }
 

@@ -107,15 +107,15 @@ class Bee {
             }
         }
     }
-
+/* 
     public beeBuzzingSound(){
-        if(!this.isBeeDead || this.x >= -20 || this.x <= 420){
+        if(!this.isBeeDead && this.x >= -20 || this.x <= 420){
             buzzingBee.play()
         }
         else{
             buzzingBee.stop();
         }
-    }
+    } */
 
     public mouseClickedBee(mouseClickX: number, mouseClickY: number) {
 

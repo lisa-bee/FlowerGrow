@@ -21,6 +21,7 @@ function preload() {
     beeRightImage = loadImage('./assets/images/beeRight.png');
     beeDeadImage = loadImage('./assets/images/beeDead.png');
     buzzingBee = (window as any).loadSound('./assets/sounds/bee-buzz.wav');
+    happyFlowerSound = (window as any).loadSound('./assets/sounds/happyFlower.wav');
 
     listOfFlowers = {
         bud: loadImage('/assets/images/bud.png'),
