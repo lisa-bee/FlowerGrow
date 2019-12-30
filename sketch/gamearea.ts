@@ -33,12 +33,25 @@ class GameArea {
         this.goodCloud.update();
         this.spawnCloud();
         this.spawnBee();
+
+        if (this.badCloud.checkCollisionWithFlower(this.flower)) {
+            if (this.badCloud.hasChangedWaterLevel === false) {
+                this.waterContainer.decreaseWaterLevel(0.2);
+                this.badCloud.hasChangedWaterLevel = true;
+            }
+        }
+
+        if (this.goodCloud.checkCollisionWithFlower(this.flower)) {
+            if (this.goodCloud.hasChangedWaterLevel === false) {
+                this.waterContainer.increaseWaterLevel(0.2);
+                this.goodCloud.hasChangedWaterLevel = true;
+            }
+        }
     }
 
 
     private spawnCloud() {
-        this.badCloud.checkCollisionWithFlower(this.flower);
-        this.goodCloud.checkCollisionWithFlower(this.flower);
+
         // this.checkCollision()
         // for varje moln kolla om spelaren kolliderade
         // for varje geting kolla om spelaren kollideraqde
@@ -56,6 +69,12 @@ class GameArea {
             bee.buzzTo(this.flower);
             bee.update();
             bee.mouseClickedBee(mouseX, mouseY);
+            if (bee.checkCollisionWithFlower(this.flower)) {
+                if (bee.hasChangedWaterLevel === false) {
+                    this.waterContainer.decreaseWaterLevel(0.2);
+                    bee.hasChangedWaterLevel = true;
+                }
+            }
         })
     }
 
