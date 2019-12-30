@@ -44,8 +44,6 @@ class GameArea {
 
 
     private spawnCloud() {
-        // this.badClouds.forEach(badCloud => 
-        //     badCloud.checkCollisionWithFlower(this.flower))
         if (millis() >= 3000 + this.cloudSpawnTime) {
             this.badClouds.push(new BadCloud(random(0, 400), -100));
             this.cloudSpawnTime = millis();
@@ -57,12 +55,7 @@ class GameArea {
             }
             badCloud.checkCollisionWithFlower(this.flower)
         }
-
-        // for(let i=0; i<this.badClouds.length; i++) {
-        //     const badCloud = this.badClouds[i];
-        //     badCloud.checkCollisionWithFlower(this.flower)
-        // }
-
+        
         this.goodCloud.checkCollisionWithFlower(this.flower);
         // this.checkCollision()
         // for varje moln kolla om spelaren kolliderade
