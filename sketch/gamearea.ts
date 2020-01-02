@@ -10,7 +10,9 @@ class GameArea {
     private beeStartingPointX: [number, number];
     private beeStartingPointY: [number, number];
     private playerScore: PlayerScore;
+    private instructionMenu: InstructionMenu;
     private waterContainer: WaterContainer;
+    private isGameRunning: boolean;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -24,22 +26,28 @@ class GameArea {
         this.beeSpawnTime = 0;
         this.cloudSpawnTime = 0;
         this.playerScore = new PlayerScore();
+        this.instructionMenu = new InstructionMenu();
         this.waterContainer = new WaterContainer();
+        this.isGameRunning = false;
     }
 
+
     public update() {
-        this.ground.update();
-        this.pot.update();
-        this.flower.update();
-        for (let i = 0; i < this.badClouds.length; i++) {
-            let badCloud = this.badClouds[i];
-            badCloud.update();
+        if (!this.isGameRunning) {
+            this.isGameRunning = this.instructionMenu.startGame();
         }
-        this.goodCloud.update();
-        this.spawnCloud();
-        this.spawnBee();
-
-
+        if (this.isGameRunning) {
+            for (let i = 0; i < this.badClouds.length; i++) {
+                let badCloud = this.badClouds[i];
+                badCloud.update();
+            }
+            this.ground.update();
+            this.pot.update();
+            this.flower.update();
+            this.goodCloud.update();
+            this.spawnCloud();
+            this.spawnBee();
+        }
     }
 
 
@@ -86,20 +94,23 @@ class GameArea {
     }
 
     public draw() {
-        this.flower.draw();
-        this.ground.draw();
-        this.pot.draw();
-        /* for(const badCloud of this.badClouds) {
-            badCloud.draw();
-        } */
-        this.badClouds.forEach(badCloud => {
-            badCloud.draw();
-        })
-        this.goodCloud.draw();
-        this.playerScore.draw();
-        this.waterContainer.draw();
-        this.beeSwarm.forEach(bee => {
-            bee.draw();
-        })
+        if (!this.isGameRunning) {
+            this.instructionMenu.draw();
+        }
+        else if (this.isGameRunning) {
+            this.badClouds.forEach(badCloud => {
+                badCloud.draw();
+            })
+            this.flower.draw();
+            this.ground.draw();
+            this.pot.draw();
+            this.goodCloud.draw();
+            this.playerScore.draw();
+            this.waterContainer.draw();
+            this.beeSwarm.forEach(bee => {
+                bee.draw();
+            })
+        }
     }
+
 }
