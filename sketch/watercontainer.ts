@@ -19,8 +19,8 @@ class WaterContainer {
         noStroke();
         const c = color(31, 99, 224);
         fill(c);
-        const steps = 4 * this.waterlevel;
-        const stepSize = this.height / 4;
+        const steps = 10 * this.waterlevel;
+        const stepSize = this.height / 10;
         for(let i = 1; i <= steps; i++) {
             rect(this.x, this.y + this.height - (i * stepSize), this.width, stepSize);
         }

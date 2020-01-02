@@ -50,7 +50,7 @@ class GameArea {
     
             if (this.goodCloud.checkCollisionWithFlower(this.flower)) {
                 if (this.goodCloud.hasChangedWaterLevel === false) {
-                    this.waterContainer.increaseWaterLevel(0.2);
+                    this.waterContainer.increaseWaterLevel(0.1);
                     this.goodCloud.hasChangedWaterLevel = true;
                 }
         }
@@ -66,15 +66,16 @@ class GameArea {
         }
 
         for (const badCloud of this.badClouds) {
-            if (badCloud.y > height + 800) {
-                this.badClouds.shift(); // tar bort första molnet i arrayen
-                badCloud.update();
+            if (badCloud.Y > height + 800) {
+                this.badClouds.shift();
+            } // tar bort första molnet i arrayen
                 if (badCloud.checkCollisionWithFlower(this.flower)) {
                     if (badCloud.hasChangedWaterLevel === false) {
-                        this.waterContainer.decreaseWaterLevel(0.2);
+                        this.waterContainer.decreaseWaterLevel(0.1);
                         badCloud.hasChangedWaterLevel = true;
-                    }
+                    
                 }
+                badCloud.update();
 
             }
         }
@@ -99,7 +100,7 @@ class GameArea {
             bee.mouseClickedBee(mouseX, mouseY);
             if (bee.checkCollisionWithFlower(this.flower)) {
                 if (bee.hasChangedWaterLevel === false) {
-                    this.waterContainer.decreaseWaterLevel(0.2);
+                    this.waterContainer.decreaseWaterLevel(0.1);
                     bee.hasChangedWaterLevel = true;
                 }
             }
@@ -111,9 +112,6 @@ class GameArea {
             this.instructionMenu.draw();
         }
         else if (this.isGameRunning) {
-            this.badClouds.forEach(badCloud => {
-                badCloud.draw();
-            })
             this.flower.draw();
             this.ground.draw();
             this.pot.draw();
@@ -122,6 +120,9 @@ class GameArea {
             this.waterContainer.draw();
             this.beeSwarm.forEach(bee => {
                 bee.draw();
+            })
+            this.badClouds.forEach(badCloud => {
+                badCloud.draw();
             })
         }
     }

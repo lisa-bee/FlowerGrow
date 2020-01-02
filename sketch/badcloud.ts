@@ -6,7 +6,7 @@ class BadCloud {
     public badCloud: [p5.Image, p5.Image, p5.Image];
     public badCloudImg: p5.Image;
     private x: number;
-    public y: number;
+    private y: number;
     private width: number;
     private height: number;
     private r: number;
@@ -48,7 +48,7 @@ class BadCloud {
     }
 
     private move() {
-        this.y = this.y + 0.5;
+        this.y = this.y + 1.5;
     }
 
     public draw() {
@@ -71,6 +71,7 @@ class BadCloud {
     public set hasChangedWaterLevel(boolean) {
         this._hasChangedWaterLevel = boolean;
     }
-    /*   public getY() {
-      } */
+    public get Y() {
+        return this.y;
+      }
 }
