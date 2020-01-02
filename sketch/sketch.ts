@@ -25,6 +25,8 @@ function preload() {
     sadFlowerCloudSound = (window as any).loadSound('./assets/sounds/sadFlowerCloudSound.wav');
     sadFlowerBeeSound = (window as any).loadSound('./assets/sounds/sadFlowerBeeSound.wav');
     cloudThumpSound = (window as any).loadSound('./assets/sounds/cloudThumpSound.wav');
+    beeBuzzToSound = (window as any).loadSound('./assets/sounds/beeBuzzToSound.wav');
+    beeBuzzAwaySound = (window as any).loadSound('./assets/sounds/beeBuzzAwaySound.wav');
     logo = loadImage('assets/images/logo.png')
 
 

@@ -2,6 +2,8 @@ let beeLeftImage: p5.Image;
 let beeRightImage: p5.Image;
 let beeDeadImage: p5.Image;
 let buzzingBee:p5.SoundFile;
+let beeBuzzToSound: p5.SoundFile;
+let beeBuzzAwaySound: p5.SoundFile;
 
 class Bee {
     private img: p5.Image
@@ -80,6 +82,10 @@ class Bee {
         if (game.beeSwarm.length >= 5){
             game.beeSwarm.shift();
         } 
+
+        if(!beeBuzzToSound.isPlaying()){
+            beeBuzzToSound.play();
+        }
     }
 
     private buzzAwayAfterHitFlower(flower:Flower){
@@ -93,6 +99,10 @@ class Bee {
             else{
                 this.x += 4;
                 this.img = beeRightImage;
+            }
+            if(!beeBuzzAwaySound.isPlaying()){
+                beeBuzzToSound.stop();
+                beeBuzzAwaySound.play();       
             }
         }
     }
