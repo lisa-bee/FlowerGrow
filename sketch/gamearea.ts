@@ -2,11 +2,11 @@ class GameArea {
     private ground: Grass;
     private pot: Pot;
     private flower: Flower;
-    private badClouds: BadCloud[];
+/*     public badClouds: BadCloud[]; */
     private goodCloud: GoodCloud;
     public beeSwarm: Bee[];
     private beeSpawnTime: number;
-    private cloudSpawnTime: number;
+  /*   private cloudSpawnTime: number; */
     private beeStartingPointX: [number, number];
     private beeStartingPointY: [number, number];
     private playerScore: PlayerScore;
@@ -16,13 +16,13 @@ class GameArea {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
         this.pot = new Pot(potImg, 135, 450, 120, 100);
         this.flower = new Flower(width / 2, 300, 70, 70);
-        this.badClouds = [new BadCloud(50, -120)];
+       /*  this.badClouds = [new BadCloud(50, -120, 100, 70)]; */
         this.goodCloud = new GoodCloud(goodCloudImg, 200, -120, 90, 100);
         this.beeStartingPointX = [0, 400];
         this.beeStartingPointY = [0, 600];
         this.beeSwarm = [];
         this.beeSpawnTime = 0;
-        this.cloudSpawnTime = 0;
+       /*  this.cloudSpawnTime = 0; */
         this.playerScore = new PlayerScore();
         this.waterContainer = new WaterContainer();
     }
@@ -31,10 +31,10 @@ class GameArea {
         this.ground.update();
         this.pot.update();
         this.flower.update();
-        for (let i = 0; i < this.badClouds.length; i++) {
+        /* for (let i = 0; i < this.badClouds.length; i++) {
             let badCloud = this.badClouds[i];
             badCloud.update();
-        }
+        } */
         this.goodCloud.update();
         this.spawnCloud();
         this.spawnBee();
@@ -44,18 +44,24 @@ class GameArea {
 
 
     private spawnCloud() {
-        if (millis() >= 3000 + this.cloudSpawnTime) {
-            this.badClouds.push(new BadCloud(random(0, 400), -100));
+        /* if (millis() >= 4000 + this.cloudSpawnTime) {
+            this.badClouds.push(new BadCloud(random(0, 400), -100, 100, 70));
             this.cloudSpawnTime = millis();
         }
 
         for(const badCloud of this.badClouds) {
-            if(badCloud.getY() > height)  {
+            if(badCloud.y > height)  {
                  this.badClouds.shift(); // tar bort första molnet i arrayen
+                 console.log(badCloud.y)
             }
             badCloud.checkCollisionWithFlower(this.flower)
-        }
-        
+            
+            for (let i = 0; i < this.badClouds.length; i++) {
+                let badCloud = this.badClouds[i];
+                badCloud.update();
+            }
+        } */
+    
         this.goodCloud.checkCollisionWithFlower(this.flower);
         // this.checkCollision()
         // for varje moln kolla om spelaren kolliderade
@@ -81,9 +87,12 @@ class GameArea {
         this.flower.draw();
         this.ground.draw();
         this.pot.draw();
-        for(const badCloud of this.badClouds) {
+        /* for(const badCloud of this.badClouds) {
             badCloud.draw();
-        }
+        } */
+       /*  this.badClouds.forEach(badCloud => {
+            badCloud.draw();
+        }) */
         this.goodCloud.draw();
         this.playerScore.draw();
         this.waterContainer.draw();
