@@ -1,36 +1,35 @@
 let badCloudImg1: p5.Image;
 let badCloudImg2: p5.Image;
 let badCloudImg3: p5.Image;
-/* let badCloud: [p5.Image, p5.Image, p5.Image]; */
 class BadCloud {
-    
-/*     public badCloud: [p5.Image, p5.Image, p5.Image]; */
-    public badCloudImg1: p5.Image;
+
+    public badCloud: [p5.Image, p5.Image, p5.Image];
+    public badCloudImg: p5.Image;
     private x: number;
-    private y: number;
+    public y: number;
     private width: number;
     private height: number;
     private r: number;
-    private time: number;
+    /*  private time: number; */
 
 
-    public constructor(badCloudImg1: p5.Image, x: number, y: number, width: number, height: number) {
-        
-       /*  this.badCloud = [badCloudImg1, badCloudImg2, badCloudImg3] */
-        this.badCloudImg1 = badCloudImg1;
+    public constructor(x: number, y: number, width: number, height: number) {
+
+        this.badCloud = [badCloudImg1, badCloudImg2, badCloudImg3];
+        this.badCloudImg = random(this.badCloud);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.r = 38;
-        this.time = 0;
+        /* this.time = 0; */
     }
 
     public update() {
-        this.time += deltaTime;
+        /* this.time += deltaTime;
         if (this.time > 6000) {
-            this.move();
-        }
+        } */
+        this.move();
     }
 
 
@@ -46,17 +45,13 @@ class BadCloud {
     }
 
     private move() {
-        this.y = this.y + 1.5;
-        if (this.y > height) {
-            this.y = -100;
-            this.x = random(0, 400);
-        }
+        this.y = this.y + 0.5;
     }
 
     public draw() {
         push();
         imageMode(CENTER);
-        image(this.badCloudImg1, this.x, this.y, this.width, this.height);
+        image(this.badCloudImg, this.x, this.y, this.width, this.height);
         pop();
         push();
         noFill();
@@ -66,4 +61,8 @@ class BadCloud {
         pop();
 
     }
+
+    /*   public getY() {
+          return this.y;
+      } */
 }
