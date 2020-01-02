@@ -2,8 +2,9 @@ let beeLeftImage: p5.Image;
 let beeRightImage: p5.Image;
 let beeDeadImage: p5.Image;
 let buzzingBee:p5.SoundFile;
-let beeBuzzToSound: p5.SoundFile;
-let beeBuzzAwaySound: p5.SoundFile;
+let beeBuzzToSound:p5.SoundFile;
+let beeBuzzAwaySound: p5.SoundFile
+
 
 class Bee {
     private img: p5.Image
@@ -15,6 +16,7 @@ class Bee {
     private r: number;
     private beeHitFlower: boolean;
     private time: number;
+    public _beeBuzzToSound: p5.SoundFile;
 
     public constructor(x: any, y: any, width: number, height: number) {
 
@@ -27,6 +29,7 @@ class Bee {
         this.r = this.width / 2;
         this.beeHitFlower = false;
         this.time = 0;
+        this._beeBuzzToSound = beeBuzzToSound;
     }
 
     public get isBeeClicked() {
@@ -79,13 +82,18 @@ class Bee {
                 this.buzzAwayAfterHitFlower(flower)
             }
 
-        if (game.beeSwarm.length >= 5){
+        if (game.beeSwarm.length >= 2){
             game.beeSwarm.shift();
         } 
 
-        if(!beeBuzzToSound.isPlaying()){
-            beeBuzzToSound.play();
+        if(!this._beeBuzzToSound.isPlaying()){
+            this._beeBuzzToSound.play();
         }
+
+        else if(this.isBeeDead){
+            this._beeBuzzToSound.stop();
+        }
+        
     }
 
     private buzzAwayAfterHitFlower(flower:Flower){
@@ -101,7 +109,6 @@ class Bee {
                 this.img = beeRightImage;
             }
             if(!beeBuzzAwaySound.isPlaying()){
-                beeBuzzToSound.stop();
                 beeBuzzAwaySound.play();       
             }
         }

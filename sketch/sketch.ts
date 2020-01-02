@@ -1,6 +1,7 @@
 let bg: p5.Image;
 let game: GameArea;
 let listOfFlowers: Flowers;
+let backgroundMusic: p5.SoundFile;
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -20,6 +21,7 @@ function preload() {
     beeLeftImage = loadImage('./assets/images/beeLeft.png');
     beeRightImage = loadImage('./assets/images/beeRight.png');
     beeDeadImage = loadImage('./assets/images/beeDead.png');
+    backgroundMusic = (window as any).loadSound('./assets/music/backgroundMusic.mp3'); 
     buzzingBee = (window as any).loadSound('./assets/sounds/bee-buzz.wav');
     happyFlowerSound = (window as any).loadSound('./assets/sounds/happyFlower.wav');
     sadFlowerCloudSound = (window as any).loadSound('./assets/sounds/sadFlowerCloudSound.wav');
@@ -52,7 +54,8 @@ function setup() {
     //GameArea.spawnBee();
     //noCursor();
     game = new GameArea();
-
+    backgroundMusic.setVolume(0.1);
+    backgroundMusic.play();
 }
 
 /**
