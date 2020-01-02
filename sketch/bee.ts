@@ -104,6 +104,9 @@ class Bee {
             if (d < this.r + flower.r) {
                 flower.currentFlower = listOfFlowers.flower25;
                 this.beeHitFlower = true;
+                if(!sadFlowerBeeSound.isPlaying()){
+                    sadFlowerBeeSound.play(0.5);
+                }
             }
         }
     }

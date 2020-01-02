@@ -1,4 +1,6 @@
 let happyFlowerSound: p5.SoundFile;
+let sadFlowerCloudSound: p5.SoundFile;
+let sadFlowerBeeSound: p5.SoundFile;
 
 interface Flowers {
     bud: p5.Image,

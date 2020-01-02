@@ -39,6 +39,11 @@ class BadCloud {
         if (d < this.r + flower.r) {
 
             flower.currentFlower = listOfFlowers.flower25;
+            if(!sadFlowerCloudSound.isPlaying() && !cloudThumpSound.isPlaying()){
+                cloudThumpSound.rate(.7);
+                cloudThumpSound.play(0.25);
+                sadFlowerCloudSound.play(0.25);
+            }
         }
     }
 

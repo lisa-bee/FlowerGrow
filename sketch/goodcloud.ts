@@ -1,4 +1,5 @@
 let goodCloudImg: p5.Image;
+let cloudThumpSound: p5.SoundFile;
 
 class GoodCloud {
 
@@ -37,6 +38,10 @@ public checkCollisionWithFlower(flower: Flower) {
     if (d < this.r + flower.r) {
 
         flower.currentFlower = listOfFlowers.flower100;
+        if(!happyFlowerSound.isPlaying() && !cloudThumpSound.isPlaying()){
+            happyFlowerSound.play(0.7);
+            cloudThumpSound.play(0.5);
+        }
     }
 }
 
