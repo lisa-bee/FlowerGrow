@@ -21,17 +21,17 @@ class WaterContainer {
         fill(c);
         const steps = 10 * this.waterlevel;
         const stepSize = this.height / 10;
-        for(let i = 1; i <= steps; i++) {
+        for (let i = 1; i <= steps; i++) {
             rect(this.x, this.y + this.height - (i * stepSize), this.width, stepSize);
         }
         pop();
     }
 
-    public decreaseWaterLevel(amount : number) {
+    public decreaseWaterLevel(amount: number) {
         this.waterlevel -= amount;
     }
 
-    public increaseWaterLevel(amount : number) {
+    public increaseWaterLevel(amount: number) {
         if (this.waterlevel + amount <= 1) {
             this.waterlevel += amount;
         }

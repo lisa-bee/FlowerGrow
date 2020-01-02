@@ -13,6 +13,7 @@ class GameArea {
     private instructionMenu: InstructionMenu;
     private waterContainer: WaterContainer;
     private isGameRunning: boolean;
+    private gameOver: GameOver;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -29,6 +30,7 @@ class GameArea {
         this.instructionMenu = new InstructionMenu();
         this.waterContainer = new WaterContainer();
         this.isGameRunning = false;
+        this.gameOver = new GameOver;
     }
 
 
@@ -47,15 +49,15 @@ class GameArea {
             this.goodCloud.update();
             this.spawnCloud();
             this.spawnBee();
-    
+
             if (this.goodCloud.checkCollisionWithFlower(this.flower)) {
                 if (this.goodCloud.hasChangedWaterLevel === false) {
                     this.waterContainer.increaseWaterLevel(0.1);
                     this.goodCloud.hasChangedWaterLevel = true;
                 }
+            }
         }
     }
-}
 
 
     private spawnCloud() {
@@ -69,11 +71,11 @@ class GameArea {
             if (badCloud.Y > height + 800) {
                 this.badClouds.shift();
             } // tar bort första molnet i arrayen
-                if (badCloud.checkCollisionWithFlower(this.flower)) {
-                    if (badCloud.hasChangedWaterLevel === false) {
-                        this.waterContainer.decreaseWaterLevel(0.1);
-                        badCloud.hasChangedWaterLevel = true;
-                    
+            if (badCloud.checkCollisionWithFlower(this.flower)) {
+                if (badCloud.hasChangedWaterLevel === false) {
+                    this.waterContainer.decreaseWaterLevel(0.1);
+                    badCloud.hasChangedWaterLevel = true;
+
                 }
                 badCloud.update();
 
@@ -112,6 +114,7 @@ class GameArea {
             this.instructionMenu.draw();
         }
         else if (this.isGameRunning) {
+            this.gameOver.draw();
             this.flower.draw();
             this.ground.draw();
             this.pot.draw();
