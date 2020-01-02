@@ -6,10 +6,11 @@ class BadCloud {
     public badCloud: [p5.Image, p5.Image, p5.Image];
     public badCloudImg: p5.Image;
     private x: number;
-    public y: number;
+    private y: number;
     private width: number;
     private height: number;
     private r: number;
+    private _hasChangedWaterLevel : boolean;
     /*  private time: number; */
 
 
@@ -22,6 +23,7 @@ class BadCloud {
         this.width = width;
         this.height = height;
         this.r = 38;
+        this._hasChangedWaterLevel = false;
         /* this.time = 0; */
     }
 
@@ -33,19 +35,20 @@ class BadCloud {
     }
 
 
-    public checkCollisionWithFlower(flower: Flower) {
-        var d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
+    public checkCollisionWithFlower(flower: Flower): boolean {
+        const d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.r + flower.r) {
-
             flower.currentFlower = listOfFlowers.flower25;
+            return true;
         }
+        return false;
     }
 
     public spawnRandomBadClouds() {
     }
 
     private move() {
-        this.y = this.y + 0.5;
+        this.y = this.y + 1.5;
     }
 
     public draw() {
@@ -61,8 +64,14 @@ class BadCloud {
         pop();
 
     }
+    public get hasChangedWaterLevel(): boolean {
+        return this._hasChangedWaterLevel;
+    }
 
-    /*   public getY() {
-          return this.y;
-      } */
+    public set hasChangedWaterLevel(boolean) {
+        this._hasChangedWaterLevel = boolean;
+    }
+    public get Y() {
+        return this.y;
+      }
 }
