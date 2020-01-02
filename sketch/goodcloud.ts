@@ -2,35 +2,37 @@ let goodCloudImg: p5.Image;
 
 class GoodCloud {
 
+    public goodCloud: [p5.Image, p5.Image];
     public goodCloudImg: p5.Image;
     private x: number;
     private y: number;
     private width: number;
     private height: number;
     private r: number;
-    private time: number;
+   /*  private time: number; */
     private _hasChangedWaterLevel: boolean;
 
 
-    public constructor(goodCloudImg: p5.Image, x: number, y: number, width: number, height: number) {
+    public constructor(x: number, y: number, width: number, height: number) {
 
-        this.goodCloudImg = goodCloudImg;
+        this.goodCloud = [goodCloudImg, goodCloudImg];
+        this.goodCloudImg = random(this.goodCloud);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.r = 38;
-        this.time = 0;
+       /*  this.time = 0; */
         this._hasChangedWaterLevel = false;
     }
 
 
 
     public update() {
-        this.time += deltaTime;
+       /*  this.time += deltaTime;
         if (this.time > 15000) {
-            this.move();
-        }
+        } */
+        this.move();
     }
 
     public checkCollisionWithFlower(flower: Flower) : boolean {
@@ -45,10 +47,10 @@ class GoodCloud {
 
     private move() {
         this.y = this.y + 2;
-        if (this.y > height * 4) {
+        /* if (this.y > height * 4) {
             this.y = -100;
             this.x = random(30, 370);
-        }
+        } */
     }
 
 
@@ -75,4 +77,7 @@ class GoodCloud {
         this._hasChangedWaterLevel = boolean;
     }
 
+    public get Y() {
+        return this.y;
+      }
 }
