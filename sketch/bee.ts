@@ -12,6 +12,7 @@ class Bee {
     private r: number;
     private beeHitFlower: boolean;
     private time: number;
+    private _hasChangedWaterLevel : boolean;
 
     public constructor(x: any, y: any, width: number, height: number) {
 
@@ -24,6 +25,7 @@ class Bee {
         this.r = this.width / 2;
         this.beeHitFlower = false;
         this.time = 0;
+        this._hasChangedWaterLevel = false;
     }
 
     public get isBeeClicked() {
@@ -96,15 +98,17 @@ class Bee {
         }
     }
 
-    public checkCollisionWithFlower(flower: Flower) {
+    public checkCollisionWithFlower(flower: Flower): boolean {
         if(!this.isBeeDead){
             let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
 
             if (d < this.r + flower.r) {
                 flower.currentFlower = listOfFlowers.flower25;
                 this.beeHitFlower = true;
+                return true;
             }
         }
+        return false;
     }
 
     public mouseClickedBee(mouseClickX: number, mouseClickY: number) {
@@ -122,5 +126,13 @@ class Bee {
         push();
         image(this.img, this.x, this.y, this.width, this.height);
         pop();
+    }
+
+    public get hasChangedWaterLevel() : boolean {
+        return this._hasChangedWaterLevel;
+    }
+
+    public set hasChangedWaterLevel(boolean) {
+        this._hasChangedWaterLevel = boolean;
     }
 }
