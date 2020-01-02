@@ -6,7 +6,7 @@ class GameArea {
     private goodClouds: GoodCloud[];
     public beeSwarm: Bee[];
     private beeSpawnTime: number;
-    private cloudSpawnTime: number;
+    private badCloudSpawnTime: number;
     private goodCloudSpawnTime: number;
     private beeStartingPointX: [number, number];
     private beeStartingPointY: [number, number];
@@ -25,7 +25,7 @@ class GameArea {
         this.beeStartingPointY = [0, 600];
         this.beeSwarm = [];
         this.beeSpawnTime = 0;
-        this.cloudSpawnTime = 0;
+        this.badCloudSpawnTime = 0;
         this.goodCloudSpawnTime = 0;
         this.playerScore = new PlayerScore();
         this.instructionMenu = new InstructionMenu();
@@ -50,15 +50,9 @@ class GameArea {
             this.ground.update();
             this.pot.update();
             this.flower.update();
-            this.spawnCloud();
+            this.spawnBadCloud();
             this.spawnGoodCloud();
             this.spawnBee();
-    
-            /* if (this.goodCloud.checkCollisionWithFlower(this.flower)) {
-                if (this.goodCloud.hasChangedWaterLevel === false) {
-                    this.waterContainer.increaseWaterLevel(0.1);
-                    this.goodCloud.hasChangedWaterLevel = true;
-                } */
         }
     }
 
@@ -82,7 +76,6 @@ class GameArea {
                         
                     }
                     goodCloud.update();
-    
                 }
             }
     
@@ -93,11 +86,11 @@ class GameArea {
     }
 
 
-    private spawnCloud() {
-        if (millis() >= 4000 + this.cloudSpawnTime) {
+    private spawnBadCloud() {
+        if (millis() >= 4000 + this.badCloudSpawnTime) {
             this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
             this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
-            this.cloudSpawnTime = millis();
+            this.badCloudSpawnTime = millis();
         }
 
         for (const badCloud of this.badClouds) {
