@@ -3,7 +3,7 @@ let beeRightImage: p5.Image;
 let beeDeadImage: p5.Image;
 let buzzingBee:p5.SoundFile;
 let beeBuzzToSound:p5.SoundFile;
-let beeBuzzAwaySound: p5.SoundFile
+let beeBuzzAwaySound: p5.SoundFile;
 
 
 class Bee {
@@ -16,7 +16,8 @@ class Bee {
     private r: number;
     private beeHitFlower: boolean;
     private time: number;
-    public _beeBuzzToSound: p5.SoundFile;
+    private _beeBuzzToSound: p5.SoundFile;
+    //private _beeBuzzAwaySound: p5.SoundFile;
 
     public constructor(x: any, y: any, width: number, height: number) {
 
@@ -30,6 +31,7 @@ class Bee {
         this.beeHitFlower = false;
         this.time = 0;
         this._beeBuzzToSound = beeBuzzToSound;
+        //this._beeBuzzAwaySound = beeBuzzAwaySound;
     }
 
     public get isBeeClicked() {
@@ -90,7 +92,7 @@ class Bee {
             this._beeBuzzToSound.play();
         }
 
-        else if(this.isBeeDead){
+        else if(this.isBeeDead || this.beeHitFlower){
             this._beeBuzzToSound.stop();
         }
         
@@ -108,9 +110,10 @@ class Bee {
                 this.x += 4;
                 this.img = beeRightImage;
             }
-            if(!beeBuzzAwaySound.isPlaying()){
+/*             if(!beeBuzzAwaySound.isPlaying()){
+                this._beeBuzzToSound.stop();
                 beeBuzzAwaySound.play();       
-            }
+            } */
         }
     }
 
@@ -121,8 +124,9 @@ class Bee {
             if (d < this.r + flower.r) {
                 flower.currentFlower = listOfFlowers.flower25;
                 this.beeHitFlower = true;
-                if(!sadFlowerBeeSound.isPlaying()){
+                if(!sadFlowerBeeSound.isPlaying() && !beeBuzzAwaySound.isPlaying()){
                     sadFlowerBeeSound.play(0.5);
+                    beeBuzzAwaySound.play();
                 }
             }
         }
