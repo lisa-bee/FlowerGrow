@@ -26,7 +26,6 @@ function preload() {
     happyFlowerSound = (window as any).loadSound('./assets/sounds/happyFlower.wav');
     sadFlowerCloudSound = (window as any).loadSound('./assets/sounds/sadFlowerCloudSound.wav');
     sadFlowerBeeSound = (window as any).loadSound('./assets/sounds/sadFlowerBeeSound.wav');
-    cloudThumpSound = (window as any).loadSound('./assets/sounds/cloudThumpSound.wav');
     beeBuzzToSound = (window as any).loadSound('./assets/sounds/beeBuzzToSound.wav');
     beeBuzzAwaySound = (window as any).loadSound('./assets/sounds/beeBuzzAwaySound.wav');
     logo = loadImage('assets/images/logo.png')
@@ -54,8 +53,8 @@ function setup() {
     //GameArea.spawnBee();
     //noCursor();
     game = new GameArea();
-    backgroundMusic.setVolume(0.1);
-    backgroundMusic.play();
+    backgroundMusic.setVolume(0.2);
+    backgroundMusic.loop();
 }
 
 /**

@@ -42,8 +42,8 @@ class Bee {
         this.y = this.y + random(-5, 5);
 
         if (this.isBeeDead) {
-            this.x = this.x + random(-5, 5)
-            this.y = this.y + 3;
+            //this.x = this.x //+ random(-5, 5)
+            this.y = this.y + 6;
         }
     }
 
@@ -80,14 +80,19 @@ class Bee {
                 this.img = beeDeadImage;     
             }
 
-            if(this.beeHitFlower){
+            if(this.beeHitFlower && !this.isBeeDead){
                 this.buzzAwayAfterHitFlower(flower)
             }
 
+            
+
         if (game.beeSwarm.length >= 2){
+           //if(this.y >= 630 || this.y <= -30){
             game.beeSwarm.shift();
         } 
+    }
 
+    public handleBuzzToSounds(){
         if(!this._beeBuzzToSound.isPlaying()){
             this._beeBuzzToSound.play();
         }
@@ -95,7 +100,10 @@ class Bee {
         else if(this.isBeeDead || this.beeHitFlower){
             this._beeBuzzToSound.stop();
         }
-        
+ 
+/*         else if(this.y >= 630 || this.y <= -30){
+            this._beeBuzzToSound.stop();
+        }  */
     }
 
     private buzzAwayAfterHitFlower(flower:Flower){
@@ -110,10 +118,6 @@ class Bee {
                 this.x += 4;
                 this.img = beeRightImage;
             }
-/*             if(!beeBuzzAwaySound.isPlaying()){
-                this._beeBuzzToSound.stop();
-                beeBuzzAwaySound.play();       
-            } */
         }
     }
 
@@ -127,19 +131,15 @@ class Bee {
                 if(!sadFlowerBeeSound.isPlaying() && !beeBuzzAwaySound.isPlaying()){
                     sadFlowerBeeSound.play(0.5);
                     beeBuzzAwaySound.play();
+
                 }
             }
         }
-    }
-/* 
-    public beeBuzzingSound(){
-        if(!this.isBeeDead && this.x >= -20 || this.x <= 420){
-            buzzingBee.play()
-        }
+
         else{
-            buzzingBee.stop();
+            beeBuzzAwaySound.stop();
         }
-    } */
+    }
 
     public mouseClickedBee(mouseClickX: number, mouseClickY: number) {
 
@@ -150,6 +150,9 @@ class Bee {
 
     public update() {
         this.move();
+        this.mouseClickedBee(mouseX, mouseY);
+        this.handleBuzzToSounds();
+        
         //this.beeBuzzingSound();
     }
 
