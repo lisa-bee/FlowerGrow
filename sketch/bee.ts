@@ -18,6 +18,7 @@ class Bee {
     private time: number;
     private _beeBuzzToSound: p5.SoundFile;
     //private _beeBuzzAwaySound: p5.SoundFile;
+    private _hasChangedWaterLevel : boolean;
 
     public constructor(x: any, y: any, width: number, height: number) {
 
@@ -32,6 +33,7 @@ class Bee {
         this.time = 0;
         this._beeBuzzToSound = beeBuzzToSound;
         //this._beeBuzzAwaySound = beeBuzzAwaySound;
+        this._hasChangedWaterLevel = false;
     }
 
     public get isBeeClicked() {
@@ -84,8 +86,6 @@ class Bee {
                 this.buzzAwayAfterHitFlower(flower)
             }
 
-            
-
         if (game.beeSwarm.length >= 2){
            //if(this.y >= 630 || this.y <= -30){
             game.beeSwarm.shift();
@@ -121,24 +121,28 @@ class Bee {
         }
     }
 
-    public checkCollisionWithFlower(flower: Flower) {
+    public checkCollisionWithFlower(flower: Flower): boolean {
+
         if(!this.isBeeDead){
             let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
 
             if (d < this.r + flower.r) {
                 flower.currentFlower = listOfFlowers.flower25;
                 this.beeHitFlower = true;
+                
                 if(!sadFlowerBeeSound.isPlaying() && !beeBuzzAwaySound.isPlaying()){
                     sadFlowerBeeSound.play(0.5);
                     beeBuzzAwaySound.play();
-
                 }
+                return true;
             }
-        }
+        }  
 
         else{
             beeBuzzAwaySound.stop();
         }
+
+        return false;
     }
 
     public mouseClickedBee(mouseClickX: number, mouseClickY: number) {
@@ -151,8 +155,7 @@ class Bee {
     public update() {
         this.move();
         this.mouseClickedBee(mouseX, mouseY);
-        this.handleBuzzToSounds();
-        
+        this.handleBuzzToSounds();   
         //this.beeBuzzingSound();
     }
 
@@ -160,5 +163,13 @@ class Bee {
         push();
         image(this.img, this.x, this.y, this.width, this.height);
         pop();
+    }
+
+    public get hasChangedWaterLevel() : boolean {
+        return this._hasChangedWaterLevel;
+    }
+
+    public set hasChangedWaterLevel(boolean) {
+        this._hasChangedWaterLevel = boolean;
     }
 }
