@@ -15,7 +15,7 @@ class WaterContainer {
 
     public draw() {
         push();
-        rect(this.x, this.y, this.width, this.height);
+        rect(this.x, this.y, this.width, this.height, 100);
         noStroke();
         const c = color(31, 99, 224);
         fill(c);
