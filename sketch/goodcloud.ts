@@ -12,7 +12,6 @@ class GoodCloud {
    /*  private time: number; */
     private _hasChangedWaterLevel: boolean;
 
-
     public constructor(x: number, y: number, width: number, height: number) {
 
         this.goodCloud = [goodCloudImg, goodCloudImg];
@@ -26,8 +25,6 @@ class GoodCloud {
         this._hasChangedWaterLevel = false;
     }
 
-
-
     public update() {
        /*  this.time += deltaTime;
         if (this.time > 15000) {
@@ -39,16 +36,17 @@ class GoodCloud {
         const d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.r + flower.r) {
             flower.currentFlower = listOfFlowers.flower100;
+            if(!happyFlowerSound.isPlaying()){
+                happyFlowerSound.play(0.7);
+            }
             return true;
         }
         return false;
     }
 
-
     private move() {
         this.y = this.y + 2;
     }
-
 
     public draw() {
         push();
@@ -61,9 +59,7 @@ class GoodCloud {
         ellipseMode(CENTER);
         ellipse(this.x, this.y, this.r * 2, this.r * 2);
         pop();
-
     }
-
 
     public get hasChangedWaterLevel(): boolean {
         return this._hasChangedWaterLevel;

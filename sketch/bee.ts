@@ -1,6 +1,10 @@
 let beeLeftImage: p5.Image;
 let beeRightImage: p5.Image;
 let beeDeadImage: p5.Image;
+let buzzingBee:p5.SoundFile;
+let beeBuzzToSound:p5.SoundFile;
+let beeBuzzAwaySound: p5.SoundFile;
+
 
 class Bee {
     private img: p5.Image
@@ -12,6 +16,8 @@ class Bee {
     private r: number;
     private beeHitFlower: boolean;
     private time: number;
+    private _beeBuzzToSound: p5.SoundFile;
+    //private _beeBuzzAwaySound: p5.SoundFile;
     private _hasChangedWaterLevel : boolean;
 
     public constructor(x: any, y: any, width: number, height: number) {
@@ -25,6 +31,8 @@ class Bee {
         this.r = this.width / 2;
         this.beeHitFlower = false;
         this.time = 0;
+        this._beeBuzzToSound = beeBuzzToSound;
+        //this._beeBuzzAwaySound = beeBuzzAwaySound;
         this._hasChangedWaterLevel = false;
     }
 
@@ -36,8 +44,8 @@ class Bee {
         this.y = this.y + random(-5, 5);
 
         if (this.isBeeDead) {
-            this.x = this.x + random(-5, 5)
-            this.y = this.y + 3;
+            //this.x = this.x //+ random(-5, 5)
+            this.y = this.y + 6;
         }
     }
 
@@ -74,13 +82,28 @@ class Bee {
                 this.img = beeDeadImage;     
             }
 
-            if(this.beeHitFlower){
+            if(this.beeHitFlower && !this.isBeeDead){
                 this.buzzAwayAfterHitFlower(flower)
             }
 
-        if (game.beeSwarm.length >= 5){
+        if (game.beeSwarm.length >= 2){
+           //if(this.y >= 630 || this.y <= -30){
             game.beeSwarm.shift();
         } 
+    }
+
+    public handleBuzzToSounds(){
+        if(!this._beeBuzzToSound.isPlaying()){
+            this._beeBuzzToSound.play();
+        }
+
+        else if(this.isBeeDead || this.beeHitFlower){
+            this._beeBuzzToSound.stop();
+        }
+ 
+/*         else if(this.y >= 630 || this.y <= -30){
+            this._beeBuzzToSound.stop();
+        }  */
     }
 
     private buzzAwayAfterHitFlower(flower:Flower){
@@ -99,15 +122,26 @@ class Bee {
     }
 
     public checkCollisionWithFlower(flower: Flower): boolean {
+
         if(!this.isBeeDead){
             let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
 
             if (d < this.r + flower.r) {
                 flower.currentFlower = listOfFlowers.flower25;
                 this.beeHitFlower = true;
+                
+                if(!sadFlowerBeeSound.isPlaying() && !beeBuzzAwaySound.isPlaying()){
+                    sadFlowerBeeSound.play(0.5);
+                    beeBuzzAwaySound.play();
+                }
                 return true;
             }
+        }  
+
+        else{
+            beeBuzzAwaySound.stop();
         }
+
         return false;
     }
 
@@ -120,6 +154,9 @@ class Bee {
 
     public update() {
         this.move();
+        this.mouseClickedBee(mouseX, mouseY);
+        this.handleBuzzToSounds();   
+        //this.beeBuzzingSound();
     }
 
     public draw() {
