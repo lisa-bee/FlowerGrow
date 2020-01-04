@@ -19,7 +19,7 @@ class Flower {
     private history: p5.Vector[];
     private onlyRenderEachXPoint: number;
     private keepSamePointsForDifferentDrawsAdjuster: number;
-    //private leafs: [];
+    private leafs: [];
     private leafX: number;
     private leafY: number;
 
@@ -31,7 +31,7 @@ class Flower {
         this.onlyRenderEachXPoint = 40;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
-        //this.leafs = []
+        this.leafs = []
         this.leafX = this.endOfStem.x;
         this.leafY = 300;
     }
@@ -48,7 +48,6 @@ class Flower {
         const newX = this.handlePlayerInput();
         this.grow(newX);
         this.move();
-        
     }
 
     private grow(x: number) {
@@ -73,21 +72,26 @@ class Flower {
         let leafTime = 0;
         let isLeafTurnedLeft = false;
 
-        if (millis() >= 3000 + leafTime) {
-            if (isLeafTurnedLeft){
+        if (millis() >= 3000 + leafTime && isLeafTurnedLeft) {
                 image(leafRight, this.leafX, this.leafY, 50,25);
-                isLeafTurnedLeft = false;
                 leafTime = millis();
+                isLeafTurnedLeft = false
             }
-            else{
-                image(leafLeft, this.leafX -50, this.leafY, 50,25);
-                isLeafTurnedLeft = true;
-                leafTime = millis();
-            }
-            console.log(isLeafTurnedLeft);
+
+        if (millis() >= 3000 + leafTime && !isLeafTurnedLeft){
+            image(leafLeft, this.leafX - 50, this.leafY - 12, 50,25);
+            leafTime = millis();
+            isLeafTurnedLeft = true;
         }
 
         this.leafY += 1.5;
+
+        if (this.leafY >= 600){
+            this.leafY = 288;
+            this.leafX = this.endOfStem.x;
+        }
+
+        console.log(this.leafY);
     
     }
 
@@ -144,6 +148,10 @@ class Flower {
         curveVertex(historyPositionsToDraw[historyPositionsToDraw.length - 1].x - 1, historyPositionsToDraw[historyPositionsToDraw.length - 1].y - 1);
         endShape();
         push();
+        push();
+        //imageMode(CENTER);
+        this.growingLeaf();
+        pop();
         imageMode(CENTER);
         image(this.currentFlower, this.endOfStem.x, this.endOfStem.y, this.width, this.height);
         pop();
@@ -153,8 +161,6 @@ class Flower {
         ellipseMode(CENTER);
         ellipse(this.endOfStem.x, this.endOfStem.y, this.r * 2, this.r * 2);
         pop();
-        push();
-        this.growingLeaf();
-        pop();
+
     }
 }
