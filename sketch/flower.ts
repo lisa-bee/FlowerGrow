@@ -22,7 +22,7 @@ class Flower {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
         this.r = 36;
-        this.onlyRenderEachXPoint = 40;
+        this.onlyRenderEachXPoint = 35;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
     }
@@ -42,31 +42,40 @@ class Flower {
     }
 
     private grow(x: number) {
-        const y = this.endOfStem.y - 1.5;
-        const maxLength = height / 2;
-        var v = createVector(x, y);
+        if (this.time < 2000) {
+            const y = this.endOfStem.y - 5.5;
+            var v = createVector(x, y);
+            this.history.push(v);
+        }
+        if (this.time > 2000) {
+            const y = this.endOfStem.y - 1.5;
+            var v = createVector(x, y);
+            this.history.push(v);
+        }
 
-        this.history.push(v);
+        const maxLength = height / 2;
         if (this.history.length > maxLength) {
             this.history.shift();
         }
 
         this.time += deltaTime;
 
-        if (this.time > 5000) {
+        if (this.time > 3000) {
             this.currentFlower = listOfFlowers.flower75;
         }
     }
 
     private move() {
-        for (const point of this.history) {
-            point.y += 1.5;
+        if (this.time > 2000) {
+            for (const point of this.history) {
+                point.y += 1.5;
+            }
         }
     }
 
     private handlePlayerInput(): number {
         let x = this.endOfStem.x
-        if (this.time > 5000) {
+        if (this.time > 4700) {
             if (keyIsDown(65)) {
                 x -= 3;
             }
