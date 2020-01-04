@@ -15,6 +15,7 @@ class GameArea {
     private waterContainer: WaterContainer;
     private isGameRunning: boolean;
     private gameOver: GameOver;
+    private gameIsOver: boolean;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -33,6 +34,7 @@ class GameArea {
         this.waterContainer = new WaterContainer();
         this.isGameRunning = false;
         this.gameOver = new GameOver;
+        this.gameIsOver = false;
     }
 
 
@@ -41,6 +43,7 @@ class GameArea {
             this.isGameRunning = this.instructionMenu.startGame();
         }
         if (this.isGameRunning) {
+            this.gameIsOver = this.gameOver.endGame(this.waterContainer);
             for (let i = 0; i < this.badClouds.length; i++) {
                 let badCloud = this.badClouds[i];
                 badCloud.update();
@@ -147,8 +150,7 @@ class GameArea {
         if (!this.isGameRunning) {
             this.instructionMenu.draw();
         }
-        else if (this.isGameRunning) {
-            this.gameOver.draw();
+        else if (this.isGameRunning && !this.gameIsOver) {
             this.flower.draw();
             this.ground.draw();
             this.pot.draw();
@@ -163,6 +165,9 @@ class GameArea {
             this.goodClouds.forEach(goodCloud => {
                 goodCloud.draw();
             })
+        }
+        if (this.gameIsOver) {
+            this.gameOver.draw(this.playerScore);
         }
     }
 

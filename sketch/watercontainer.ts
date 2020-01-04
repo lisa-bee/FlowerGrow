@@ -37,4 +37,8 @@ class WaterContainer {
         }
     }
 
+    public get _waterlevel() {
+        return this.waterlevel;
+    }
+
 }
