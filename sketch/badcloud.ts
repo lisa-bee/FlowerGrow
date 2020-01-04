@@ -11,7 +11,7 @@ class BadCloud {
     private height: number;
     private r: number;
     private _hasChangedWaterLevel : boolean;
-    /*  private time: number; */
+    private time: number;
 
 
     public constructor(x: number, y: number, width: number, height: number) {
@@ -24,14 +24,14 @@ class BadCloud {
         this.height = height;
         this.r = 38;
         this._hasChangedWaterLevel = false;
-        /* this.time = 0; */
+        this.time = 0;
     }
 
     public update() {
-        /* this.time += deltaTime;
-        if (this.time > 6000) {
-        } */
-        this.move();
+        this.time += deltaTime;
+        if (this.time > 1500) {
+            this.move();
+        }
     }
 
 

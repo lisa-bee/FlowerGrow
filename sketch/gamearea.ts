@@ -14,7 +14,6 @@ class GameArea {
     private instructionMenu: InstructionMenu;
     private waterContainer: WaterContainer;
     private isGameRunning: boolean;
-    private delayTime: number;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -32,7 +31,8 @@ class GameArea {
         this.instructionMenu = new InstructionMenu();
         this.waterContainer = new WaterContainer();
         this.isGameRunning = false;
-        this.delayTime = 0;
+        
+       
     }
 
 
@@ -58,11 +58,9 @@ class GameArea {
         }
     }
 
-
-
     private spawnGoodCloud() {
 
-        if (millis() >= random(10000, 20000) + this.goodCloudSpawnTime) {
+        if (millis() >= random(15000, 30000) + this.goodCloudSpawnTime) {
             this.goodClouds.push(new GoodCloud(random(0, 400), -100, 90, 110));
             this.goodCloudSpawnTime = millis();
         }
@@ -109,17 +107,13 @@ class GameArea {
             }
         }
 
+        
+
         // this.checkCollision()
         // for varje moln kolla om spelaren kolliderade
         // for varje geting kolla om spelaren kollideraqde
     }
 
-    public delayOfSpawnClouds() {
-        this.delayTime += deltaTime;
-        if (this.delayTime > 6000) {
-            badcloud.update()
-        }
-    }
 
     public spawnBee() {
 
