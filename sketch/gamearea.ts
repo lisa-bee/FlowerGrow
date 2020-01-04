@@ -118,7 +118,7 @@ class GameArea {
     public delayOfSpawnClouds() {
         this.delayTime += deltaTime;
         if (this.delayTime > 6000) {
-            badCloud.update()
+            badcloud.update()
         }
     }
 
