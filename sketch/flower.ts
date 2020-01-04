@@ -69,10 +69,26 @@ class Flower {
     }
 
     private growingLeaf(){
-        this.time += deltaTime;
-        if (this.time > 3000) {   
-        image(leafRight, this.leafX, this.leafY, 100,50);
+
+        let leafTime = 0;
+        let isLeafTurnedLeft = false;
+
+        if (millis() >= 3000 + leafTime) {
+            if (isLeafTurnedLeft){
+                image(leafRight, this.leafX, this.leafY, 50,25);
+                isLeafTurnedLeft = false;
+                leafTime = millis();
+            }
+            else{
+                image(leafLeft, this.leafX -50, this.leafY, 50,25);
+                isLeafTurnedLeft = true;
+                leafTime = millis();
+            }
+            console.log(isLeafTurnedLeft);
         }
+
+        this.leafY += 1.5;
+    
     }
 
     private move() {
