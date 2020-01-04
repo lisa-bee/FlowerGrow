@@ -12,7 +12,7 @@ class GameOver {
     public constructor() {
         this.gameOverX = 200;
         this.gameOverY = 300;
-        this.message = "Game Over!\nYou grew "
+        this.message = "Grow Over!\nYou grew "
         this.boxX = 200;
         this.boxY = 300;
         this.boxWidth = 300;
