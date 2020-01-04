@@ -47,7 +47,7 @@ class InstructionMenu {
         push();
         strokeWeight(5);
         stroke("#9b4c00");
-        fill(102, 204, 0, 90);
+        fill(255, 255, 255, 90);
         tint(100);
         rectMode(CENTER);
         rect(this.boxX, this.boxY, this.boxWidth, this.boxHeight, this.radius);
