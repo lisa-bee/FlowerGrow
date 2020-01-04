@@ -119,7 +119,7 @@ class GameArea {
 
     public spawnBee() {
 
-        if (millis() >= 5000 + this.beeSpawnTime) {
+        if (millis()>= 10000 + this.beeSpawnTime) {
             this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
             this.beeSpawnTime = millis();
         }
@@ -128,7 +128,7 @@ class GameArea {
             bee.checkCollisionWithFlower(this.flower);
             bee.buzzTo(this.flower);
             bee.update();
-            bee.mouseClickedBee(mouseX, mouseY);
+            //bee.mouseClickedBee(mouseX, mouseY);
             if (bee.checkCollisionWithFlower(this.flower)) {
                 if (bee.hasChangedWaterLevel === false) {
                     this.waterContainer.decreaseWaterLevel(0.1);
