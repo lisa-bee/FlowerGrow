@@ -1,6 +1,8 @@
 let happyFlowerSound: p5.SoundFile;
 let sadFlowerCloudSound: p5.SoundFile;
 let sadFlowerBeeSound: p5.SoundFile;
+let leafLeft: p5.Image;
+let leafRight: p5.Image;
 
 interface Flowers {
     bud: p5.Image,
@@ -17,6 +19,10 @@ class Flower {
     private history: p5.Vector[];
     private onlyRenderEachXPoint: number;
     private keepSamePointsForDifferentDrawsAdjuster: number;
+    //private leafs: [];
+    private leafX: number;
+    private leafY: number;
+
 
     public constructor(x: number, y: number, private width: number, private height: number) {
         this.currentFlower = listOfFlowers.bud;
@@ -25,6 +31,9 @@ class Flower {
         this.onlyRenderEachXPoint = 40;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
+        //this.leafs = []
+        this.leafX = this.endOfStem.x;
+        this.leafY = 300;
     }
 
     public get beginningOfStem() {
@@ -39,6 +48,7 @@ class Flower {
         const newX = this.handlePlayerInput();
         this.grow(newX);
         this.move();
+        
     }
 
     private grow(x: number) {
@@ -55,6 +65,13 @@ class Flower {
 
         if (this.time > 5000) {
             this.currentFlower = listOfFlowers.flower75;
+        }
+    }
+
+    private growingLeaf(){
+        this.time += deltaTime;
+        if (this.time > 3000) {   
+        image(leafRight, this.leafX, this.leafY, 100,50);
         }
     }
 
@@ -119,6 +136,9 @@ class Flower {
         noStroke();
         ellipseMode(CENTER);
         ellipse(this.endOfStem.x, this.endOfStem.y, this.r * 2, this.r * 2);
+        pop();
+        push();
+        this.growingLeaf();
         pop();
     }
 }
