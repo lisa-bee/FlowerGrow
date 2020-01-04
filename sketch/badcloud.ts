@@ -47,9 +47,6 @@ class BadCloud {
         return false;
     }
 
-    public spawnRandomBadClouds() {
-    }
-
     private move() {
         this.y = this.y + 1.5;
     }
