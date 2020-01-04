@@ -81,7 +81,7 @@ class GameArea {
                             goodCloud.hasChangedWaterLevel = true;
                         
                     }
-                    goodCloud.update();
+
     
                 }
             }
@@ -108,9 +108,7 @@ class GameArea {
                     if (badCloud.hasChangedWaterLevel === false) {
                         this.waterContainer.decreaseWaterLevel(0.1);
                         badCloud.hasChangedWaterLevel = true;
-                    
                 }
-                badCloud.update();
             }
         }
 
@@ -148,8 +146,6 @@ class GameArea {
             this.flower.draw();
             this.ground.draw();
             this.pot.draw();
-            this.playerScore.draw();
-            this.waterContainer.draw();
             this.beeSwarm.forEach(bee => {
                 bee.draw();
             })
@@ -159,6 +155,8 @@ class GameArea {
             this.goodClouds.forEach(goodCloud => {
                 goodCloud.draw();
             })
+            this.playerScore.draw();
+            this.waterContainer.draw();
         }
     }
 
