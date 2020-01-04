@@ -84,10 +84,7 @@ class GameArea {
                 if (goodCloud.hasChangedWaterLevel === false) {
                     this.waterContainer.increaseWaterLevel(0.1);
                     goodCloud.hasChangedWaterLevel = true;
-
                 }
-                goodCloud.update();
-
             }
         }
 
