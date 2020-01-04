@@ -14,6 +14,7 @@ class GameArea {
     private instructionMenu: InstructionMenu;
     private waterContainer: WaterContainer;
     private isGameRunning: boolean;
+    private delayTime: number;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -31,6 +32,7 @@ class GameArea {
         this.instructionMenu = new InstructionMenu();
         this.waterContainer = new WaterContainer();
         this.isGameRunning = false;
+        this.delayTime = 0;
     }
 
 
@@ -59,30 +61,30 @@ class GameArea {
 
 
     private spawnGoodCloud() {
-            
+
         if (millis() >= random(10000, 20000) + this.goodCloudSpawnTime) {
-                this.goodClouds.push(new GoodCloud(random(0, 400), -100, 90, 110));
-                this.goodCloudSpawnTime = millis();
-            }
-    
-            for (const goodCloud of this.goodClouds) {
-                if (goodCloud.Y > height + 800) {
-                    this.goodClouds.shift();
-                } // tar bort första molnet i arrayen
-                    if (goodCloud.checkCollisionWithFlower(this.flower)) {
-                        if (goodCloud.hasChangedWaterLevel === false) {
-                            this.waterContainer.increaseWaterLevel(0.1);
-                            goodCloud.hasChangedWaterLevel = true;
-                        
-                    }
-                    goodCloud.update();
+            this.goodClouds.push(new GoodCloud(random(0, 400), -100, 90, 110));
+            this.goodCloudSpawnTime = millis();
+        }
+
+        for (const goodCloud of this.goodClouds) {
+            if (goodCloud.Y > height + 800) {
+                this.goodClouds.shift();
+            } // tar bort första molnet i arrayen
+            if (goodCloud.checkCollisionWithFlower(this.flower)) {
+                if (goodCloud.hasChangedWaterLevel === false) {
+                    this.waterContainer.increaseWaterLevel(0.1);
+                    goodCloud.hasChangedWaterLevel = true;
+
                 }
+                goodCloud.update();
             }
-    
-            // this.checkCollision()
-            // for varje moln kolla om spelaren kolliderade
-            // for varje geting kolla om spelaren kollideraqde
-        
+        }
+
+        // this.checkCollision()
+        // for varje moln kolla om spelaren kolliderade
+        // for varje geting kolla om spelaren kollideraqde
+
     }
 
 
@@ -97,11 +99,11 @@ class GameArea {
             if (badCloud.Y > height + 800) {
                 this.badClouds.shift();
             } // tar bort första molnet i arrayen
-                if (badCloud.checkCollisionWithFlower(this.flower)) {
-                    if (badCloud.hasChangedWaterLevel === false) {
-                        this.waterContainer.decreaseWaterLevel(0.1);
-                        badCloud.hasChangedWaterLevel = true;
-                    
+            if (badCloud.checkCollisionWithFlower(this.flower)) {
+                if (badCloud.hasChangedWaterLevel === false) {
+                    this.waterContainer.decreaseWaterLevel(0.1);
+                    badCloud.hasChangedWaterLevel = true;
+
                 }
                 badCloud.update();
 
@@ -111,6 +113,13 @@ class GameArea {
         // this.checkCollision()
         // for varje moln kolla om spelaren kolliderade
         // for varje geting kolla om spelaren kollideraqde
+    }
+
+    public delayOfSpawnClouds() {
+        this.delayTime += deltaTime;
+        if (this.delayTime > 6000) {
+            badCloud.update()
+        }
     }
 
     public spawnBee() {
