@@ -21,7 +21,7 @@ function preload() {
     beeLeftImage = loadImage('./assets/images/beeLeft.png');
     beeRightImage = loadImage('./assets/images/beeRight.png');
     beeDeadImage = loadImage('./assets/images/beeDead.png');
-    backgroundMusic = (window as any).loadSound('./assets/music/backgroundMusic.mp3'); 
+    backgroundMusic = (window as any).loadSound('./assets/music/backgroundMusic.mp3');
     buzzingBee = (window as any).loadSound('./assets/sounds/bee-buzz.wav');
     happyFlowerSound = (window as any).loadSound('./assets/sounds/happyFlower.wav');
     sadFlowerCloudSound = (window as any).loadSound('./assets/sounds/sadFlowerCloudSound.wav');
@@ -32,7 +32,7 @@ function preload() {
 
 
     listOfFlowers = {
-        bud: loadImage('/assets/images/bud.png'),
+        bud: loadImage('/assets/images/bud_new.png'),
         flower0: loadImage('/assets/images/flower_0.png'),
         flower25: loadImage('/assets/images/flower_25.png'),
         flower75: loadImage('/assets/images/flower_75.png'),

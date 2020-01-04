@@ -32,11 +32,11 @@ class GoodCloud {
         }
     }
 
-    public checkCollisionWithFlower(flower: Flower) : boolean {
+    public checkCollisionWithFlower(flower: Flower): boolean {
         const d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.r + flower.r) {
             flower.currentFlower = listOfFlowers.flower100;
-            if(!happyFlowerSound.isPlaying()){
+            if (!happyFlowerSound.isPlaying()) {
                 happyFlowerSound.play(0.7);
             }
             return true;
@@ -71,5 +71,5 @@ class GoodCloud {
 
     public get Y() {
         return this.y;
-      }
+    }
 }

@@ -14,6 +14,8 @@ class GameArea {
     private instructionMenu: InstructionMenu;
     private waterContainer: WaterContainer;
     private isGameRunning: boolean;
+    private gameOver: GameOver;
+    private gameIsOver: boolean;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -31,16 +33,17 @@ class GameArea {
         this.instructionMenu = new InstructionMenu();
         this.waterContainer = new WaterContainer();
         this.isGameRunning = false;
-        
-       
+        this.gameOver = new GameOver;
+        this.gameIsOver = false;
     }
 
 
     public update() {
+        this.gameIsOver = this.gameOver.endGame(this.waterContainer);
         if (!this.isGameRunning) {
             this.isGameRunning = this.instructionMenu.startGame();
         }
-        if (this.isGameRunning) {
+        if (this.isGameRunning && !this.gameIsOver) {
             for (let i = 0; i < this.badClouds.length; i++) {
                 let badCloud = this.badClouds[i];
                 badCloud.update();
@@ -101,9 +104,7 @@ class GameArea {
                 if (badCloud.hasChangedWaterLevel === false) {
                     this.waterContainer.decreaseWaterLevel(0.1);
                     badCloud.hasChangedWaterLevel = true;
-
                 }
-                badCloud.update();
             }
         }
 
@@ -117,7 +118,7 @@ class GameArea {
 
     public spawnBee() {
 
-        if (millis()>= 10000 + this.beeSpawnTime) {
+        if (millis() >= 10000 + this.beeSpawnTime) {
             this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
             this.beeSpawnTime = millis();
         }
@@ -140,12 +141,13 @@ class GameArea {
         if (!this.isGameRunning) {
             this.instructionMenu.draw();
         }
-        else if (this.isGameRunning) {
+        if (this.gameIsOver) {
+            this.gameOver.draw(this.playerScore);
+        }
+        else if (this.isGameRunning && !this.gameIsOver) {
             this.flower.draw();
             this.ground.draw();
             this.pot.draw();
-            this.playerScore.draw();
-            this.waterContainer.draw();
             this.beeSwarm.forEach(bee => {
                 bee.draw();
             })
@@ -155,6 +157,8 @@ class GameArea {
             this.goodClouds.forEach(goodCloud => {
                 goodCloud.draw();
             })
+            this.playerScore.draw();
+            this.waterContainer.draw();
         }
     }
 

@@ -15,26 +15,37 @@ class WaterContainer {
 
     public draw() {
         push();
-        rect(this.x, this.y, this.width, this.height);
+        rect(this.x, this.y, this.width, this.height, 10);
         noStroke();
         const c = color(31, 99, 224);
         fill(c);
         const steps = 10 * this.waterlevel;
         const stepSize = this.height / 10;
-        for(let i = 1; i <= steps; i++) {
-            rect(this.x, this.y + this.height - (i * stepSize), this.width, stepSize);
+        for (let i = 1; i <= steps; i++) {
+            if (i == 1) {
+                rect(this.x + 1.5, this.y + this.height - (i * stepSize) - 1.5, this.width - 3, stepSize, 0, 0, 100, 100);
+            } else if (i == steps && this.waterlevel == 1) {
+                rect(this.x + 1.5, this.y + this.height - (i * stepSize) + 1.5, this.width - 3, stepSize, 100, 100, 0, 0);
+            }
+            else {
+                rect(this.x + 1.5, this.y + this.height - (i * stepSize), this.width - 3, stepSize);
+            }
         }
         pop();
     }
 
-    public decreaseWaterLevel(amount : number) {
+    public decreaseWaterLevel(amount: number) {
         this.waterlevel -= amount;
     }
 
-    public increaseWaterLevel(amount : number) {
+    public increaseWaterLevel(amount: number) {
         if (this.waterlevel + amount <= 1) {
             this.waterlevel += amount;
         }
+    }
+
+    public get _waterlevel() {
+        return this.waterlevel;
     }
 
 }
