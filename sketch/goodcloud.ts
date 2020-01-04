@@ -9,7 +9,7 @@ class GoodCloud {
     private width: number;
     private height: number;
     private r: number;
-   /*  private time: number; */
+    /*  private time: number; */
     private _hasChangedWaterLevel: boolean;
 
     public constructor(x: number, y: number, width: number, height: number) {
@@ -21,22 +21,22 @@ class GoodCloud {
         this.width = width;
         this.height = height;
         this.r = 38;
-       /*  this.time = 0; */
+        /*  this.time = 0; */
         this._hasChangedWaterLevel = false;
     }
 
     public update() {
-       /*  this.time += deltaTime;
-        if (this.time > 15000) {
-        } */
+        /*  this.time += deltaTime;
+         if (this.time > 15000) {
+         } */
         this.move();
     }
 
-    public checkCollisionWithFlower(flower: Flower) : boolean {
+    public checkCollisionWithFlower(flower: Flower): boolean {
         const d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.r + flower.r) {
             flower.currentFlower = listOfFlowers.flower100;
-            if(!happyFlowerSound.isPlaying()){
+            if (!happyFlowerSound.isPlaying()) {
                 happyFlowerSound.play(0.7);
             }
             return true;
@@ -75,5 +75,5 @@ class GoodCloud {
 
     public get Y() {
         return this.y;
-      }
+    }
 }

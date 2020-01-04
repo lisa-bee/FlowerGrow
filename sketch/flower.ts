@@ -100,7 +100,7 @@ class Flower {
 
     public draw() {
         stroke(100, 215, 46)
-        strokeWeight(8);
+        strokeWeight(6);
         noFill();
         const historyPositionsToDraw = this.resolveHistoryPositionsToDraw();
         beginShape();

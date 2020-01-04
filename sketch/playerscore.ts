@@ -22,5 +22,9 @@ class PlayerScore {
         this.printPlayerScore();
     }
 
+    public get _score() {
+        return this.score;
+    }
+
 }
 
