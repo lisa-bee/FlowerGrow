@@ -21,7 +21,7 @@ class GameOver {
     }
 
     public endGame(waterContainer: WaterContainer): boolean {
-        if (waterContainer._waterlevel <= 0) {
+        if (waterContainer._waterlevel <= 0.1) {
             return true;
         }
         return false;
