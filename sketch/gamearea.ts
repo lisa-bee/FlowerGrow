@@ -39,11 +39,11 @@ class GameArea {
 
 
     public update() {
+        this.gameIsOver = this.gameOver.endGame(this.waterContainer);
         if (!this.isGameRunning) {
             this.isGameRunning = this.instructionMenu.startGame();
         }
-        if (this.isGameRunning) {
-            this.gameIsOver = this.gameOver.endGame(this.waterContainer);
+        if (this.isGameRunning && !this.gameIsOver) {
             for (let i = 0; i < this.badClouds.length; i++) {
                 let badCloud = this.badClouds[i];
                 badCloud.update();
@@ -126,7 +126,7 @@ class GameArea {
 
     public spawnBee() {
 
-        if (millis()>= 10000 + this.beeSpawnTime) {
+        if (millis() >= 10000 + this.beeSpawnTime) {
             this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
             this.beeSpawnTime = millis();
         }
@@ -149,6 +149,9 @@ class GameArea {
         if (!this.isGameRunning) {
             this.instructionMenu.draw();
         }
+        if (this.gameIsOver) {
+            this.gameOver.draw(this.playerScore);
+        }
         else if (this.isGameRunning && !this.gameIsOver) {
             this.flower.draw();
             this.ground.draw();
@@ -164,9 +167,6 @@ class GameArea {
             this.goodClouds.forEach(goodCloud => {
                 goodCloud.draw();
             })
-        }
-        if (this.gameIsOver) {
-            this.gameOver.draw(this.playerScore);
         }
     }
 

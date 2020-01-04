@@ -13,10 +13,10 @@ class GameOver {
         this.gameOverX = 200;
         this.gameOverY = 300;
         this.message = "Game Over!\nYou grew "
-        this.boxX = 300;
-        this.boxY = 200;
+        this.boxX = 200;
+        this.boxY = 300;
         this.boxWidth = 300;
-        this.boxHeight = 400;
+        this.boxHeight = 250;
         this.radius = 50;
     }
 
@@ -32,6 +32,7 @@ class GameOver {
         strokeWeight(5);
         stroke("#9b4c00");
         fill(255, 255, 255, 90);
+        tint(100);
         rectMode(CENTER);
         rect(this.boxX, this.boxY, this.boxWidth, this.boxHeight, this.radius);
         pop();
@@ -41,7 +42,7 @@ class GameOver {
         noStroke();
         textAlign(CENTER);
         rectMode(CENTER);
-        text(this.message + playerscore._score + " m.", this.gameOverX, this.gameOverY);
+        text(this.message + playerscore._score + " m.", this.gameOverX, this.gameOverY, 300, 70);
         pop();
     }
 }

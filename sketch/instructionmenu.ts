@@ -6,7 +6,6 @@ class InstructionMenu {
     private logoY: number;
     private logoHeight: number;
     private logoWidth: number;
-    // private boxColor: string;
     private textColor: string;
     private boxHeight: number;
     private boxWidth: number;
@@ -23,7 +22,6 @@ class InstructionMenu {
         this.logoY = 130;
         this.logoWidth = 300;
         this.logoHeight = 150;
-        // this.boxColor = "green";
         this.textColor = "black";
         this.boxHeight = 400;
         this.boxWidth = 300;
