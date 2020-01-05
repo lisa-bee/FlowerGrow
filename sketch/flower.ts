@@ -22,7 +22,7 @@ class Flower {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
         this.r = 36;
-        this.onlyRenderEachXPoint = 35;
+        this.onlyRenderEachXPoint = 8;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
     }
@@ -32,7 +32,7 @@ class Flower {
     }
 
     public get endOfStem() {
-        return this.history[this.history.length - 1]
+        return this.history[this.history.length - 1];
     }
 
     public update() {
@@ -42,16 +42,16 @@ class Flower {
     }
 
     private grow(x: number) {
-        if (this.time < 2000) {
-            const y = this.endOfStem.y - 5.5;
-            var v = createVector(x, y);
-            this.history.push(v);
-        }
-        if (this.time > 2000) {
-            const y = this.endOfStem.y - 1.5;
-            var v = createVector(x, y);
-            this.history.push(v);
-        }
+        // if (this.time < 500) {
+        //     const y = this.endOfStem.y - 4;
+        //     var v = createVector(x, y);
+        //     this.history.push(v);
+        // }
+        // if (this.time > 2000) {
+        const y = this.endOfStem.y - 13;
+        var v = createVector(x, y);
+        this.history.push(v);
+        // }
 
         const maxLength = height / 2;
         if (this.history.length > maxLength) {
@@ -60,22 +60,22 @@ class Flower {
 
         this.time += deltaTime;
 
-        if (this.time > 3000) {
+        if (this.time > 2000) {
             this.currentFlower = listOfFlowers.flower75;
         }
     }
 
     private move() {
-        if (this.time > 2000) {
+        if (this.time > 410) {
             for (const point of this.history) {
-                point.y += 1.5;
+                point.y += 13;
             }
         }
     }
 
     private handlePlayerInput(): number {
         let x = this.endOfStem.x
-        if (this.time > 4700) {
+        if (this.time > 2500) {
             if (keyIsDown(65)) {
                 x -= 3;
             }
@@ -94,7 +94,6 @@ class Flower {
 
     private resolveHistoryPositionsToDraw(): Array<p5.Vector> {
         const pointsToDraw = [];
-        pointsToDraw.push(createVector(this.beginningOfStem.x, 600));
         pointsToDraw.push(this.beginningOfStem);
         for (let i = this.keepSamePointsForDifferentDrawsAdjuster % this.onlyRenderEachXPoint; i < this.history.length; i += this.onlyRenderEachXPoint) {
             pointsToDraw.push(this.history[i]);

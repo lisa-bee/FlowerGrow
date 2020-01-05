@@ -20,7 +20,7 @@ class GameArea {
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
         this.pot = new Pot(potImg, 135, 450, 120, 100);
-        this.flower = new Flower(width / 2, 960, 70, 70);
+        this.flower = new Flower(width / 2, 600, 70, 70);
         this.badClouds = [];
         this.goodClouds = [];
         this.beeStartingPointX = [0, 400];
