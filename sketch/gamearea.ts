@@ -16,6 +16,7 @@ class GameArea {
     private isGameRunning: boolean;
     private gameOver: GameOver;
     private gameIsOver: boolean;
+    private DTime: number;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -35,6 +36,7 @@ class GameArea {
         this.isGameRunning = false;
         this.gameOver = new GameOver;
         this.gameIsOver = false;
+        this.DTime = 0;
     }
 
 
@@ -98,6 +100,7 @@ class GameArea {
             if (badCloud.Y > height + 800) {
                 this.badClouds.shift();
             } // tar bort första molnet i arrayen
+            
             if (badCloud.checkCollisionWithFlower(this.flower)) {
                 if (badCloud.hasChangedWaterLevel === false) {
                     this.waterContainer.decreaseWaterLevel(0.1);

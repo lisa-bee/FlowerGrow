@@ -32,7 +32,7 @@ class BadCloud {
         if (this.time > 1500) {
             this.move();
         }
-        if (millis() >= 15000) {
+        if (millis() >= 30000 + this.time) {
             this.moveFaster();
         }
     }
