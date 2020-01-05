@@ -10,7 +10,7 @@ class BadCloud {
     private width: number;
     private height: number;
     private r: number;
-    private _hasChangedWaterLevel : boolean;
+    private _hasChangedWaterLevel: boolean;
     private time: number;
 
 
@@ -35,12 +35,15 @@ class BadCloud {
     }
 
 
-    public checkCollisionWithFlower(flower: Flower): boolean {
+    public checkCollisionWithFlower(flower: Flower, waterContainer: WaterContainer): boolean {
         const d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.r + flower.r) {
             flower.currentFlower = listOfFlowers.flower25;
-            if(!sadFlowerCloudSound.isPlaying()){
+            if (!sadFlowerCloudSound.isPlaying()) {
                 sadFlowerCloudSound.play(0.25);
+            }
+            if (d < this.r + flower.r && waterContainer._waterlevel <= 0.25) {
+                flower.currentFlower = listOfFlowers.flower25Brown;
             }
             return true;
         }
@@ -73,5 +76,5 @@ class BadCloud {
     }
     public get Y() {
         return this.y;
-      }
+    }
 }

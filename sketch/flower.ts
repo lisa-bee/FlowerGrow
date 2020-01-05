@@ -6,6 +6,7 @@ interface Flowers {
     bud: p5.Image,
     flower0: p5.Image,
     flower25: p5.Image,
+    flower25Brown: p5.Image,
     flower75: p5.Image,
     flower100: p5.Image,
 }
@@ -35,11 +36,23 @@ class Flower {
         return this.history[this.history.length - 1]
     }
 
-    public update(watercontainer: WaterContainer) {
+    public update(waterContainer: WaterContainer) {
         const newX = this.handlePlayerInput();
         this.grow(newX);
         this.move();
-        // if (watercontainer._waterlevel <=  )
+        if (waterContainer._waterlevel <= 1) {
+            this.currentFlower = listOfFlowers.flower100;
+        }
+        if (waterContainer._waterlevel <= 0.75) {
+            this.currentFlower = listOfFlowers.flower75;
+        }
+        if (waterContainer._waterlevel <= 0.5) {
+            this.currentFlower = listOfFlowers.flower25;
+        }
+        if (waterContainer._waterlevel <= 0.25) {
+            this.currentFlower = listOfFlowers.flower0;
+        }
+
     }
 
     private grow(x: number) {

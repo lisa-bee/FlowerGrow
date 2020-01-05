@@ -35,6 +35,7 @@ function preload() {
         bud: loadImage('/assets/images/bud_new.png'),
         flower0: loadImage('/assets/images/flower_0.png'),
         flower25: loadImage('/assets/images/flower_25.png'),
+        flower25Brown: loadImage('/assets/images/flower_25_brown.png'),
         flower75: loadImage('/assets/images/flower_75.png'),
         flower100: loadImage('/assets/images/flower_100.png'),
     }
