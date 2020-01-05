@@ -19,9 +19,14 @@ class Flower {
     private history: p5.Vector[];
     private onlyRenderEachXPoint: number;
     private keepSamePointsForDifferentDrawsAdjuster: number;
-    private leafs: [];
-    private leafX: number;
-    private leafY: number;
+    //private leafs: [];
+    //private leafX: number;
+    //private leafY: number;
+    private leafYLeft: number; 
+    private leafXLeft: number;
+
+    private leafYRight: number;
+    private leafXRight: number;
 
 
     public constructor(x: number, y: number, private width: number, private height: number) {
@@ -31,9 +36,13 @@ class Flower {
         this.onlyRenderEachXPoint = 40;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
-        this.leafs = []
-        this.leafX = this.endOfStem.x;
-        this.leafY = 300;
+        //this.leafs = []
+        //this.leafX = this.endOfStem.x;
+        //this.leafY = 300;
+        this.leafYLeft = 300; 
+        this.leafXLeft = this.endOfStem.x;
+        this.leafYRight = 300; 
+        this.leafXRight = this.endOfStem.x  
     }
 
     public get beginningOfStem() {
@@ -69,31 +78,61 @@ class Flower {
 
     private growingLeaf(){
 
-        let leafTime = 0;
-        let isLeafTurnedLeft = false;
 
-        if (millis() >= 3000 + leafTime && isLeafTurnedLeft) {
-                image(leafRight, this.leafX, this.leafY, 50,25);
-                leafTime = millis();
-                isLeafTurnedLeft = false
+        if (this.time > 1500) {
+            let leafTime = 0;
+
+            if (millis() >= 3000 + leafTime ){
+                
+                image(leafLeft, this.leafXLeft - 50, this.leafYLeft - 12, 50,25);
+                leafTime = millis(); 
+                
+                this.leafYLeft += 1.5;
+
+                if (this.leafYLeft >= 600){
+                    this.leafYLeft = 288;
+                    this.leafXLeft = this.endOfStem.x;
+                }   
             }
-
-        if (millis() >= 3000 + leafTime && !isLeafTurnedLeft){
-            image(leafLeft, this.leafX - 50, this.leafY - 12, 50,25);
-            leafTime = millis();
-            isLeafTurnedLeft = true;
         }
 
-        this.leafY += 1.5;
+        if (this.time > 3000) {
 
-        if (this.leafY >= 600){
-            this.leafY = 288;
-            this.leafX = this.endOfStem.x;
-        }
-
-        console.log(this.leafY);
+            let leafTime = 0;
+                if (millis() >= 3000 + leafTime ){
+                    image(leafRight, this.leafXRight, this.leafYRight - 12, 50,25);
+                    leafTime = millis(); 
+                    
+                    this.leafYRight += 1.5;
     
+                    if (this.leafYRight >= 600){
+                        this.leafYRight = 288;
+                        this.leafXRight = this.endOfStem.x;
+                    }   
+                }
+            }
     }
+
+/*     private growingLeaf(){
+        if (this.time > 3000) {
+
+        let leafTime = 0;
+        let leafY = 300; 
+        let leafX = this.endOfStem.x  
+
+        if (millis() >= 4500 + leafTime ){
+            image(leafRight, leafX, leafY - 12, 50,25);
+            leafTime = millis();  
+        }
+
+        leafY += 1.5;
+
+        if (leafY >= 600){
+            leafY = 288;
+            leafX = this.endOfStem.x;
+        }
+    }
+} */
 
     private move() {
         for (const point of this.history) {
@@ -148,10 +187,10 @@ class Flower {
         curveVertex(historyPositionsToDraw[historyPositionsToDraw.length - 1].x - 1, historyPositionsToDraw[historyPositionsToDraw.length - 1].y - 1);
         endShape();
         push();
-        push();
         //imageMode(CENTER);
         this.growingLeaf();
         pop();
+        push();
         imageMode(CENTER);
         image(this.currentFlower, this.endOfStem.x, this.endOfStem.y, this.width, this.height);
         pop();
