@@ -35,10 +35,11 @@ class Flower {
         return this.history[this.history.length - 1]
     }
 
-    public update() {
+    public update(watercontainer: WaterContainer) {
         const newX = this.handlePlayerInput();
         this.grow(newX);
         this.move();
+        // if (watercontainer._waterlevel <=  )
     }
 
     private grow(x: number) {
