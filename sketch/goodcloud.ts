@@ -9,7 +9,7 @@ class GoodCloud {
     private width: number;
     private height: number;
     private r: number;
-    /*  private time: number; */
+    private time: number;
     private _hasChangedWaterLevel: boolean;
 
     public constructor(x: number, y: number, width: number, height: number) {
@@ -21,15 +21,15 @@ class GoodCloud {
         this.width = width;
         this.height = height;
         this.r = 38;
-        /*  this.time = 0; */
+        this.time = 0;
         this._hasChangedWaterLevel = false;
     }
 
     public update() {
-        /*  this.time += deltaTime;
-         if (this.time > 15000) {
-         } */
-        this.move();
+        this.time += deltaTime;
+        if (this.time > 15000) {
+            this.move();
+        }
     }
 
     public checkCollisionWithFlower(flower: Flower): boolean {
@@ -46,10 +46,6 @@ class GoodCloud {
 
     private move() {
         this.y = this.y + 2;
-        /* if (this.y > height * 4) {
-            this.y = -100;
-            this.x = random(30, 370);
-        } */
     }
 
     public draw() {
