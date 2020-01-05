@@ -32,6 +32,9 @@ class BadCloud {
         if (this.time > 1500) {
             this.move();
         }
+        if (millis() >= 15000) {
+            this.moveFaster();
+        }
     }
 
 
@@ -49,6 +52,10 @@ class BadCloud {
 
     private move() {
         this.y = this.y + 1.5;
+    }
+
+    private moveFaster() {
+        this.y = this.y + 2;
     }
 
     public draw() {
