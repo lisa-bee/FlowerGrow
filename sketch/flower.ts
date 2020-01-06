@@ -48,7 +48,7 @@ class Flower {
         //     this.history.push(v);
         // }
         // if (this.time > 2000) {
-        const y = this.endOfStem.y - 5;
+        const y = this.endOfStem.y - 4;
         var v = createVector(x, y);
         this.history.push(v);
         // }
@@ -68,7 +68,7 @@ class Flower {
     private move() {
         if (this.time > 410) {
             for (const point of this.history) {
-                point.y += 5;
+                point.y += 4;
             }
         }
     }
