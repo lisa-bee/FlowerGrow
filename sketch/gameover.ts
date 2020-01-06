@@ -1,4 +1,10 @@
+let flower0: p5.Image;
 class GameOver {
+    public flower0: p5.Image;
+    private flower0X: number;
+    private flower0Y: number;
+    private flower0Height: number;
+    private flower0Width: number;
     private gameOverX: number;
     private gameOverY: number;
     private message: string;
@@ -10,6 +16,11 @@ class GameOver {
 
 
     public constructor() {
+        this.flower0 = flower0;
+        this.flower0X = 200;
+        this.flower0Y = 175;
+        this.flower0Height = 90;
+        this.flower0Width = 90;
         this.gameOverX = 200;
         this.gameOverY = 300;
         this.message = "Grow Over!\nYou grew "
@@ -43,6 +54,10 @@ class GameOver {
         textAlign(CENTER);
         rectMode(CENTER);
         text(this.message + playerscore._score + " m.", this.gameOverX, this.gameOverY, 300, 70);
+        pop();
+        push();
+        imageMode(CENTER);
+        image(this.flower0, this.flower0X, this.flower0Y, this.flower0Width, this.flower0Height);
         pop();
     }
 }
