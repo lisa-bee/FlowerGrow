@@ -7,6 +7,7 @@ class Grass {
     public y: number;
     public width: number;
     public height: number;
+    private time: number;
 
 
     public constructor(grassImg: p5.Image, x: number, y: number, width: number, height: number) {
@@ -16,6 +17,7 @@ class Grass {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.time = 0;
     }
 
     public draw() {
@@ -29,7 +31,10 @@ class Grass {
     }
 
     private move() {
-        this.y = this.y + 1;
+        this.time += deltaTime;
+        if (this.time > 1500) {
+            this.y = this.y + 1.5;
+        }
     }
 
 }
@@ -40,6 +45,7 @@ class Pot {
     public y: number;
     public width: number;
     public height: number;
+    private time: number;
 
 
     public constructor(potImg: p5.Image, x: number, y: number, width: number, height: number) {
@@ -49,6 +55,7 @@ class Pot {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.time = 0;
     }
 
     public draw() {
@@ -62,7 +69,9 @@ class Pot {
     }
 
     private move() {
-        this.y = this.y + 1;
+        this.time += deltaTime;
+        if (this.time > 1500) {
+            this.y = this.y + 1.5;
+        }
     }
-
 }
