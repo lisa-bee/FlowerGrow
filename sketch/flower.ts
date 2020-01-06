@@ -22,11 +22,11 @@ class Flower {
     //private leafs: [];
     //private leafX: number;
     //private leafY: number;
-    private leafYLeft: number; 
+/*     private leafYLeft: number; 
     private leafXLeft: number;
 
     private leafYRight: number;
-    private leafXRight: number;
+    private leafXRight: number; */
 
 
     public constructor(x: number, y: number, private width: number, private height: number) {
@@ -39,10 +39,10 @@ class Flower {
         //this.leafs = []
         //this.leafX = this.endOfStem.x;
         //this.leafY = 300;
-        this.leafYLeft = 300; 
+/*         this.leafYLeft = 300; 
         this.leafXLeft = this.endOfStem.x;
         this.leafYRight = 300; 
-        this.leafXRight = this.endOfStem.x  
+        this.leafXRight = this.endOfStem.x  */ 
     }
 
     public get beginningOfStem() {
@@ -74,41 +74,40 @@ class Flower {
         if (this.time > 1500) {
             this.currentFlower = listOfFlowers.flower75;
         }
+        
     }
 
-    private growingLeaf(){
-
+    private growingLeaf(positionX:number, positionY:number){
 
         if (this.time > 1500) {
             let leafTime = 0;
-
-            if (millis() >= 3000 + leafTime ){
+           if (millis() >= 3000 + leafTime ){
                 
-                image(leafLeft, this.leafXLeft - 50, this.leafYLeft - 12, 50,25);
+                image(leafLeft, positionX - 40, positionY - 10, 40,20);
                 leafTime = millis(); 
                 
-                this.leafYLeft += 1.5;
+                //this.leafYLeft += 1.5;
 
-                if (this.leafYLeft >= 600){
+/*                 if (this.leafYLeft >= 600){
                     this.leafYLeft = 288;
                     this.leafXLeft = this.endOfStem.x;
-                }   
-            }
+                }  */  
+            } 
         }
 
-        if (this.time > 3000) {
+        if (this.time > 1500) {
 
             let leafTime = 0;
                 if (millis() >= 3000 + leafTime ){
-                    image(leafRight, this.leafXRight, this.leafYRight - 12, 50,25);
+                    image(leafRight, positionX, positionY - 12, 40,20);
                     leafTime = millis(); 
                     
-                    this.leafYRight += 1.5;
+                   // this.leafYRight += 1.5;
     
-                    if (this.leafYRight >= 600){
+/*                     if (this.leafYRight >= 600){
                         this.leafYRight = 288;
                         this.leafXRight = this.endOfStem.x;
-                    }   
+                    } */   
                 }
             }
     }
@@ -172,6 +171,7 @@ class Flower {
         this.keepSamePointsForDifferentDrawsAdjuster--;
         if (this.keepSamePointsForDifferentDrawsAdjuster === 0) this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
 
+        console.log(pointsToDraw)
         return pointsToDraw;
     }
 
@@ -184,12 +184,16 @@ class Flower {
         curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
         for (let i = 0; i < historyPositionsToDraw.length; i++) {
             curveVertex(historyPositionsToDraw[i].x, historyPositionsToDraw[i].y);
+           if(historyPositionsToDraw[i].y >= 320){
+            this.growingLeaf(historyPositionsToDraw[i].x,historyPositionsToDraw[i].y)
+           }
+            
         }
         curveVertex(historyPositionsToDraw[historyPositionsToDraw.length - 1].x - 1, historyPositionsToDraw[historyPositionsToDraw.length - 1].y - 1);
         endShape();
         push();
         //imageMode(CENTER);
-        this.growingLeaf();
+        //this.growingLeaf();
         pop();
         push();
         imageMode(CENTER);

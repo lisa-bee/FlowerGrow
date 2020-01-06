@@ -5,6 +5,7 @@ class GameArea {
     public badClouds: BadCloud[];
     private goodClouds: GoodCloud[];
     public beeSwarm: Bee[];
+    private time: number;
     private beeSpawnTime: number;
     private badCloudSpawnTime: number;
     private goodCloudSpawnTime: number;
@@ -26,6 +27,7 @@ class GameArea {
         this.beeStartingPointX = [0, 400];
         this.beeStartingPointY = [0, 600];
         this.beeSwarm = [];
+        this.time = 0;
         this.beeSpawnTime = 0;
         this.badCloudSpawnTime = 0;
         this.goodCloudSpawnTime = 0;
@@ -116,23 +118,28 @@ class GameArea {
 
     public spawnBee() {
 
-        if (millis() >= 10000 + this.beeSpawnTime) {
-            this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
-            this.beeSpawnTime = millis();
-        }
+        this.time += deltaTime;
+        if(this.time > 7000){
 
-        this.beeSwarm.forEach(bee => {
-            bee.checkCollisionWithFlower(this.flower);
-            bee.buzzTo(this.flower);
-            bee.update();
-            //bee.mouseClickedBee(mouseX, mouseY);
-            if (bee.checkCollisionWithFlower(this.flower)) {
-                if (bee.hasChangedWaterLevel === false) {
-                    this.waterContainer.decreaseWaterLevel(0.1);
-                    bee.hasChangedWaterLevel = true;
-                }
+            if (millis() >= 10000 + this.beeSpawnTime) {
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSpawnTime = millis();
             }
-        })
+
+            this.beeSwarm.forEach(bee => {
+                bee.checkCollisionWithFlower(this.flower);
+                bee.buzzTo(this.flower);
+                bee.update();
+                //bee.mouseClickedBee(mouseX, mouseY);
+                if (bee.checkCollisionWithFlower(this.flower)) {
+                    if (bee.hasChangedWaterLevel === false) {
+                        this.waterContainer.decreaseWaterLevel(0.1);
+                        bee.hasChangedWaterLevel = true;
+                    }
+                }
+            })
+        
+        }
     }
 
     public draw() {
