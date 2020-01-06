@@ -16,8 +16,7 @@ class GameArea {
     private isGameRunning: boolean;
     private gameOver: GameOver;
     private gameIsOver: boolean;
-    private DTime: number;
-    private DTime2: number;
+    private moreBadCloudsTime: number;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -37,8 +36,7 @@ class GameArea {
         this.isGameRunning = false;
         this.gameOver = new GameOver;
         this.gameIsOver = false;
-        this.DTime = 30000;
-        this.DTime2 = 0;
+        this.moreBadCloudsTime = 30000;
     }
 
 
@@ -119,9 +117,9 @@ class GameArea {
     }
 
     private spawnMoreBadClouds() {
-        if (millis() >= 2000 + this.DTime) {
+        if (millis() >= 1000 + this.moreBadCloudsTime) {
             this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
-            this.DTime = millis();
+            this.moreBadCloudsTime = millis();
         }
         for (const badCloud of this.badClouds) {
             if (badCloud.Y > height + 800) {
