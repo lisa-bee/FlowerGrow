@@ -23,7 +23,7 @@ class Flower {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
         this.r = 36;
-        this.onlyRenderEachXPoint = 40;
+        this.onlyRenderEachXPoint = 27;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
     }
@@ -33,7 +33,7 @@ class Flower {
     }
 
     public get endOfStem() {
-        return this.history[this.history.length - 1]
+        return this.history[this.history.length - 1];
     }
 
     public update(waterContainer: WaterContainer) {
@@ -56,31 +56,33 @@ class Flower {
     }
 
     private grow(x: number) {
-        const y = this.endOfStem.y - 1.5;
-        const maxLength = height / 2;
+        const y = this.endOfStem.y - 4;
         var v = createVector(x, y);
-
         this.history.push(v);
+
+        const maxLength = 100;
         if (this.history.length > maxLength) {
             this.history.shift();
         }
 
         this.time += deltaTime;
 
-        if (this.time > 5000) {
+        if (this.time > 1500) {
             this.currentFlower = listOfFlowers.flower75;
         }
     }
 
     private move() {
-        for (const point of this.history) {
-            point.y += 1.5;
+        if (this.time > 1200) {
+            for (const point of this.history) {
+                point.y += 4;
+            }
         }
     }
 
     private handlePlayerInput(): number {
         let x = this.endOfStem.x
-        if (this.time > 5000) {
+        if (this.time > 1500) {
             if (keyIsDown(65)) {
                 x -= 3;
             }
@@ -99,7 +101,6 @@ class Flower {
 
     private resolveHistoryPositionsToDraw(): Array<p5.Vector> {
         const pointsToDraw = [];
-        pointsToDraw.push(createVector(this.beginningOfStem.x, 600));
         pointsToDraw.push(this.beginningOfStem);
         for (let i = this.keepSamePointsForDifferentDrawsAdjuster % this.onlyRenderEachXPoint; i < this.history.length; i += this.onlyRenderEachXPoint) {
             pointsToDraw.push(this.history[i]);
