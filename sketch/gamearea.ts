@@ -72,7 +72,7 @@ class GameArea {
             if (goodCloud.Y > height + 800) {
                 this.goodClouds.shift();
             } // tar bort första molnet i arrayen
-            if (goodCloud.checkCollisionWithFlower(this.flower)) {
+            if (goodCloud.checkCollisionWithFlower(this.flower, this.waterContainer)) {
                 if (goodCloud.hasChangedWaterLevel === false) {
                     this.waterContainer.increaseWaterLevel(0.1);
                     goodCloud.hasChangedWaterLevel = true;

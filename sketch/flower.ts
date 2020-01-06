@@ -9,6 +9,7 @@ interface Flowers {
     flower25Brown: p5.Image,
     flower75: p5.Image,
     flower100: p5.Image,
+    flower100Brown: p5.Image
 }
 
 class Flower {

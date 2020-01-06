@@ -38,6 +38,7 @@ function preload() {
         flower25Brown: loadImage('/assets/images/flower_25_brown.png'),
         flower75: loadImage('/assets/images/flower_75.png'),
         flower100: loadImage('/assets/images/flower_100.png'),
+        flower100Brown: loadImage('/assets/images/flower_100_brown.png')
     }
 }
 
