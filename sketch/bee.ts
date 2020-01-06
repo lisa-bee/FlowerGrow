@@ -1,8 +1,8 @@
 let beeLeftImage: p5.Image;
 let beeRightImage: p5.Image;
 let beeDeadImage: p5.Image;
-let buzzingBee:p5.SoundFile;
-let beeBuzzToSound:p5.SoundFile;
+let buzzingBee: p5.SoundFile;
+let beeBuzzToSound: p5.SoundFile;
 let beeBuzzAwaySound: p5.SoundFile;
 
 
@@ -18,7 +18,7 @@ class Bee {
     private time: number;
     private _beeBuzzToSound: p5.SoundFile;
     //private _beeBuzzAwaySound: p5.SoundFile;
-    private _hasChangedWaterLevel : boolean;
+    private _hasChangedWaterLevel: boolean;
 
     public constructor(x: any, y: any, width: number, height: number) {
 
@@ -52,93 +52,96 @@ class Bee {
     public buzzTo(flower: Flower) {
         let endingPointY = 275;
 
-            if (this.x == flower.endOfStem.x - 25) {
-                this.x = this.x;
+        if (this.x == flower.endOfStem.x - 25) {
+            this.x = this.x;
+        }
+        else {
+            if (flower.endOfStem.x - 25 <= this.x) {
+                this.x -= 1;
+                this.img = beeLeftImage;
             }
             else {
-                if (flower.endOfStem.x - 25 <= this.x) {
-                    this.x -= 1;
-                    this.img = beeLeftImage;
-                }
-                else {
-                    this.x += 1;
-                    this.img = beeRightImage;
-                }
+                this.x += 1;
+                this.img = beeRightImage;
             }
+        }
 
-            if (this.y == endingPointY) {
-                this.y = this.y;
+        if (this.y == endingPointY) {
+            this.y = this.y;
+        }
+        else {
+            if (endingPointY <= this.y) {
+                this.y -= 1;
             }
             else {
-                if (endingPointY <= this.y) {
-                    this.y -= 1;
-                }
-                else {
-                    this.y += 1;
-                }
+                this.y += 1;
             }
+        }
 
-            if (this.isBeeDead) {
-                this.img = beeDeadImage;     
-            }
+        if (this.isBeeDead) {
+            this.img = beeDeadImage;
+        }
 
-            if(this.beeHitFlower && !this.isBeeDead){
-                this.buzzAwayAfterHitFlower(flower)
-            }
+        if (this.beeHitFlower && !this.isBeeDead) {
+            this.buzzAwayAfterHitFlower(flower)
+        }
 
-        if (game.beeSwarm.length >= 2){
-           //if(this.y >= 630 || this.y <= -30){
+        if (game.beeSwarm.length >= 2) {
+            //if(this.y >= 630 || this.y <= -30){
             game.beeSwarm.shift();
-        } 
+        }
     }
 
-    public handleBuzzToSounds(){
-        if(!this._beeBuzzToSound.isPlaying()){
+    public handleBuzzToSounds() {
+        if (!this._beeBuzzToSound.isPlaying()) {
             this._beeBuzzToSound.play();
         }
 
-        else if(this.isBeeDead || this.beeHitFlower){
+        else if (this.isBeeDead || this.beeHitFlower) {
             this._beeBuzzToSound.stop();
         }
- 
-/*         else if(this.y >= 630 || this.y <= -30){
-            this._beeBuzzToSound.stop();
-        }  */
+
+        /*         else if(this.y >= 630 || this.y <= -30){
+                    this._beeBuzzToSound.stop();
+                }  */
     }
 
-    private buzzAwayAfterHitFlower(flower:Flower){
+    private buzzAwayAfterHitFlower(flower: Flower) {
         this.time += deltaTime;
         if (this.time > 1000) {
             this.y -= 5;
-            if (flower.endOfStem.x >= 200){
+            if (flower.endOfStem.x >= 200) {
                 this.x -= 4;
                 this.img = beeLeftImage;
             }
-            else{
+            else {
                 this.x += 4;
                 this.img = beeRightImage;
             }
         }
     }
 
-    public checkCollisionWithFlower(flower: Flower): boolean {
+    public checkCollisionWithFlower(flower: Flower, waterContainer: WaterContainer): boolean {
 
-        if(!this.isBeeDead){
+        if (!this.isBeeDead) {
             let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
 
             if (d < this.r + flower.r) {
-                flower.currentFlower = listOfFlowers.flower25;
+                flower.currentFlower = listOfFlowers.flowerHurt;
                 this.beeHitFlower = true;
-                
-                if(!sadFlowerBeeSound.isPlaying() && !beeBuzzAwaySound.isPlaying()){
+
+                if (!sadFlowerBeeSound.isPlaying() && !beeBuzzAwaySound.isPlaying()) {
                     sadFlowerBeeSound.play(0.5);
                     beeBuzzAwaySound.play();
                 }
+                if (d < this.r + flower.r && waterContainer._waterlevel <= 0.25) {
+                    flower.currentFlower = listOfFlowers.flower25Brown;
+                }
                 return true;
             }
-        }  
+        }
 
-        else{
+        else {
             beeBuzzAwaySound.stop();
         }
 
@@ -155,7 +158,7 @@ class Bee {
     public update() {
         this.move();
         this.mouseClickedBee(mouseX, mouseY);
-        this.handleBuzzToSounds();   
+        this.handleBuzzToSounds();
         //this.beeBuzzingSound();
     }
 
@@ -165,7 +168,7 @@ class Bee {
         pop();
     }
 
-    public get hasChangedWaterLevel() : boolean {
+    public get hasChangedWaterLevel(): boolean {
         return this._hasChangedWaterLevel;
     }
 
