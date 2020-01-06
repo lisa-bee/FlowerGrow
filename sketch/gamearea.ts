@@ -117,7 +117,7 @@ class GameArea {
     }
 
     private spawnMoreBadClouds() {
-        if (millis() >= 1000 + this.moreBadCloudsTime) {
+        if (millis() >= 1800 + this.moreBadCloudsTime) {
             this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
             this.moreBadCloudsTime = millis();
         }
