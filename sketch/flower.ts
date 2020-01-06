@@ -22,7 +22,7 @@ class Flower {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
         this.r = 36;
-        this.onlyRenderEachXPoint = 8;
+        this.onlyRenderEachXPoint = 20;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
     }
@@ -48,7 +48,7 @@ class Flower {
         //     this.history.push(v);
         // }
         // if (this.time > 2000) {
-        const y = this.endOfStem.y - 13;
+        const y = this.endOfStem.y - 5;
         var v = createVector(x, y);
         this.history.push(v);
         // }
@@ -68,7 +68,7 @@ class Flower {
     private move() {
         if (this.time > 410) {
             for (const point of this.history) {
-                point.y += 13;
+                point.y += 5;
             }
         }
     }
