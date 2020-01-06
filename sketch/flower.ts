@@ -4,10 +4,13 @@ let sadFlowerBeeSound: p5.SoundFile;
 
 interface Flowers {
     bud: p5.Image,
+    flowerHurt: p5.Image,
     flower0: p5.Image,
     flower25: p5.Image,
+    flower25Brown: p5.Image,
     flower75: p5.Image,
     flower100: p5.Image,
+    flower100Brown: p5.Image
 }
 
 class Flower {
@@ -35,10 +38,26 @@ class Flower {
         return this.history[this.history.length - 1];
     }
 
-    public update() {
+    public update(waterContainer: WaterContainer) {
         const newX = this.handlePlayerInput();
         this.grow(newX);
         this.move();
+        this.time += deltaTime;
+        if (this.time > 1500) {
+            if (waterContainer._waterlevel <= 1) {
+                this.currentFlower = listOfFlowers.flower100;
+            }
+            if (waterContainer._waterlevel <= 0.75) {
+                this.currentFlower = listOfFlowers.flower75;
+            }
+            if (waterContainer._waterlevel <= 0.5) {
+                this.currentFlower = listOfFlowers.flower25;
+            }
+            if (waterContainer._waterlevel <= 0.25) {
+                this.currentFlower = listOfFlowers.flower0;
+            }
+        }
+
     }
 
     private grow(x: number) {
@@ -49,12 +68,6 @@ class Flower {
         const maxLength = 100;
         if (this.history.length > maxLength) {
             this.history.shift();
-        }
-
-        this.time += deltaTime;
-
-        if (this.time > 1500) {
-            this.currentFlower = listOfFlowers.flower75;
         }
     }
 
