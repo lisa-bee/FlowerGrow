@@ -28,8 +28,8 @@ function preload() {
     sadFlowerBeeSound = (window as any).loadSound('./assets/sounds/sadFlowerBeeSound.wav');
     beeBuzzToSound = (window as any).loadSound('./assets/sounds/beeBuzzToSound.wav');
     beeBuzzAwaySound = (window as any).loadSound('./assets/sounds/beeBuzzAwaySound.wav');
-    logo = loadImage('assets/images/logo.png')
-    flower0 = loadImage('/assets/images/flower_0.png')
+    logo = loadImage('assets/images/logo.png');
+    flower0 = loadImage('/assets/images/flower_0.png');
 
 
     listOfFlowers = {
