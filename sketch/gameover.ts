@@ -19,8 +19,8 @@ class GameOver {
         this.flower0 = flower0;
         this.flower0X = 200;
         this.flower0Y = 175;
-        this.flower0Height = 90;
-        this.flower0Width = 90;
+        this.flower0Height = 110;
+        this.flower0Width = 110;
         this.gameOverX = 200;
         this.gameOverY = 300;
         this.message = "Grow Over!\nYou grew "
