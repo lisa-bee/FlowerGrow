@@ -40,17 +40,20 @@ class Flower {
         const newX = this.handlePlayerInput();
         this.grow(newX);
         this.move();
-        if (waterContainer._waterlevel <= 1) {
-            this.currentFlower = listOfFlowers.flower100;
-        }
-        if (waterContainer._waterlevel <= 0.75) {
-            this.currentFlower = listOfFlowers.flower75;
-        }
-        if (waterContainer._waterlevel <= 0.5) {
-            this.currentFlower = listOfFlowers.flower25;
-        }
-        if (waterContainer._waterlevel <= 0.25) {
-            this.currentFlower = listOfFlowers.flower0;
+        this.time += deltaTime;
+        if (this.time > 1500) {
+            if (waterContainer._waterlevel <= 1) {
+                this.currentFlower = listOfFlowers.flower100;
+            }
+            if (waterContainer._waterlevel <= 0.75) {
+                this.currentFlower = listOfFlowers.flower75;
+            }
+            if (waterContainer._waterlevel <= 0.5) {
+                this.currentFlower = listOfFlowers.flower25;
+            }
+            if (waterContainer._waterlevel <= 0.25) {
+                this.currentFlower = listOfFlowers.flower0;
+            }
         }
 
     }
@@ -63,12 +66,6 @@ class Flower {
         const maxLength = 100;
         if (this.history.length > maxLength) {
             this.history.shift();
-        }
-
-        this.time += deltaTime;
-
-        if (this.time > 1500) {
-            this.currentFlower = listOfFlowers.flower75;
         }
     }
 
