@@ -33,6 +33,7 @@ function preload() {
 
     listOfFlowers = {
         bud: loadImage('/assets/images/bud_new.png'),
+        flowerHurt: loadImage('/assets/images/flower_hurt.png'),
         flower0: loadImage('/assets/images/flower_0.png'),
         flower25: loadImage('/assets/images/flower_25.png'),
         flower25Brown: loadImage('/assets/images/flower_25_brown.png'),

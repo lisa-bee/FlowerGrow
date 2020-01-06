@@ -127,7 +127,7 @@ class Bee {
             let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
 
             if (d < this.r + flower.r) {
-                flower.currentFlower = listOfFlowers.flower25;
+                flower.currentFlower = listOfFlowers.flowerHurt;
                 this.beeHitFlower = true;
 
                 if (!sadFlowerBeeSound.isPlaying() && !beeBuzzAwaySound.isPlaying()) {
