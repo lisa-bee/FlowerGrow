@@ -32,7 +32,7 @@ class Grass {
 
     private move() {
         this.time += deltaTime;
-        if (this.time > 900) {
+        if (this.time > 900) {  
             this.y = this.y + 1.5;
         }
     }
