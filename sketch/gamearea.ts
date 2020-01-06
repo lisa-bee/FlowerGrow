@@ -106,7 +106,7 @@ class GameArea {
             }
         }
 
-        
+
 
         // this.checkCollision()
         // for varje moln kolla om spelaren kolliderade
