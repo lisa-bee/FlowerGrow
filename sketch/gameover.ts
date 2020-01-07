@@ -1,6 +1,4 @@
-let flower0: p5.Image;
 class GameOver {
-    public flower0: p5.Image;
     private flower0X: number;
     private flower0Y: number;
     private flower0Height: number;
@@ -16,7 +14,6 @@ class GameOver {
 
 
     public constructor() {
-        this.flower0 = flower0;
         this.flower0X = 200;
         this.flower0Y = 175;
         this.flower0Height = 110;
@@ -57,7 +54,7 @@ class GameOver {
         pop();
         push();
         imageMode(CENTER);
-        image(this.flower0, this.flower0X, this.flower0Y, this.flower0Width, this.flower0Height);
+        image(listOfFlowers.flower0, this.flower0X, this.flower0Y, this.flower0Width, this.flower0Height);
         pop();
     }
 }
