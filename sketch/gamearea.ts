@@ -79,7 +79,7 @@ class GameArea {
             } // tar bort första molnet i arrayen
             if (goodCloud.checkCollisionWithFlower(this.flower, this.waterContainer)) {
                 if (goodCloud.hasChangedWaterLevel === false) {
-                    this.waterContainer.increaseWaterLevel(0.1);
+                    this.waterContainer.increaseWaterLevel(0.2);
                     goodCloud.hasChangedWaterLevel = true;
                 }
             }
@@ -104,7 +104,7 @@ class GameArea {
             } // tar bort första molnet i arrayen
             if (badCloud.checkCollisionWithFlower(this.flower, this.waterContainer)) {
                 if (badCloud.hasChangedWaterLevel === false) {
-                    this.waterContainer.decreaseWaterLevel(0.1);
+                    this.waterContainer.decreaseWaterLevel(0.2);
                     badCloud.hasChangedWaterLevel = true;
                 }
             }
@@ -147,7 +147,7 @@ class GameArea {
                 //bee.mouseClickedBee(mouseX, mouseY);
                 if (bee.checkCollisionWithFlower(this.flower, this.waterContainer)) {
                     if (bee.hasChangedWaterLevel === false) {
-                        this.waterContainer.decreaseWaterLevel(0.1);
+                        this.waterContainer.decreaseWaterLevel(0.2);
                         bee.hasChangedWaterLevel = true;
                     }
                 }
