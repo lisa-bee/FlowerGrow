@@ -130,8 +130,7 @@ class Flower {
         pop();
         push();
         noFill();
-        stroke('black');
-        strokeWeight(1)
+        noStroke();
         ellipseMode(CENTER);
         ellipse(this.endOfStem.x, this.endOfStem.y, this.r * 2, this.r * 2);
         pop();

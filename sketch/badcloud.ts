@@ -11,7 +11,6 @@ class BadCloud {
     private height: number;
     private r: number;
     private _hasChangedWaterLevel: boolean;
-    private time: number;
     
 
 
@@ -25,7 +24,6 @@ class BadCloud {
         this.height = height;
         this.r = 38;
         this._hasChangedWaterLevel = false;
-        this.time = 0;
     }
 
     public update() {
@@ -74,19 +72,15 @@ class BadCloud {
             this.y = this.y + 0.2;
         }
         if (millis() >= 90000){
-            this.y = this.y + 0.2;
+            this.y = this.y + 0.3;
         }
         if (millis() >= 100000){
-            this.y = this.y + 0.2;
+            this.y = this.y + 0.3;
         }
         if (millis() >= 110000){
-            this.y = this.y + 0.2;
+            this.y = this.y + 0.3;
         }
     }
-
-    /* private moveFaster() {
-        this.y = this.y + 2;
-    } */
 
     public draw() {
         push();
