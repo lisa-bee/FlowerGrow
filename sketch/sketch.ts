@@ -25,7 +25,7 @@ function preload() {
     leafRight = loadImage('./assets/images/leafRight.png');
     backgroundMusic = (window as any).loadSound('./assets/music/backgroundMusic.mp3');
     buzzingBee = (window as any).loadSound('./assets/sounds/bee-buzz.wav');
-    happyFlowerSound = (window as any).loadSound('./assets/sounds/happyFlower.wav');
+    happyFlowerSound = (window as any).loadSound('./assets/sounds/happyFlowerLaugh.wav');
     sadFlowerCloudSound = (window as any).loadSound('./assets/sounds/sadFlowerCloudSound.wav');
     sadFlowerBeeSound = (window as any).loadSound('./assets/sounds/sadFlowerBeeSound.wav');
     beeBuzzToSound = (window as any).loadSound('./assets/sounds/beeBuzzToSound.wav');

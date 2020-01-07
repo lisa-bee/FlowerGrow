@@ -40,7 +40,7 @@ class BadCloud {
         if (d < this.r + flower.r) {
             flower.currentFlower = listOfFlowers.flower25;
             if(!sadFlowerCloudSound.isPlaying()){
-                sadFlowerCloudSound.play(0.25);
+                sadFlowerCloudSound.play(0.5);
             }
             return true;
         }

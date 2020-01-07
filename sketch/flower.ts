@@ -24,7 +24,7 @@ class Flower {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
         this.r = 36;
-        this.onlyRenderEachXPoint = 35;
+        this.onlyRenderEachXPoint = 45;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
     }
@@ -45,10 +45,10 @@ class Flower {
 
     private grow(x: number) {
 
-        const y = this.endOfStem.y - 4;
+        const y = this.endOfStem.y - 2; // hastighet
         var v = createVector(x, y);
         this.history.push(v);
-        const maxLength = 100;
+        const maxLength = 140;
         if (this.history.length > maxLength) {
             this.history.shift();
         }
@@ -63,50 +63,16 @@ class Flower {
 
     private growingLeaf(positionX:number, positionY:number){
 
-        if (this.time > 1500) {
-
-                
-                image(leafLeft, positionX - 40, positionY - 10, 40,20);
-
-                image(leafRight, positionX, positionY - 12, 40,20);
-                    
-                    
-                   // this.leafYRight += 1.5;
-    
-/*                     if (this.leafYRight >= 600){
-                        this.leafYRight = 288;
-                        this.leafXRight = this.endOfStem.x;
-                    } */   
-                
-            
-    }
-
-/*     private growingLeaf(){
-        if (this.time > 3000) {
-
-        let leafTime = 0;
-        let leafY = 300; 
-        let leafX = this.endOfStem.x  
-
-        if (millis() >= 4500 + leafTime ){
-            image(leafRight, leafX, leafY - 12, 50,25);
-            leafTime = millis();  
+        if (this.time > 1500) {           
+                image(leafLeft, positionX - 25, positionY - 13, 25, 12);
+                image(leafRight, positionX + 2, positionY- 10, 25, 12);      
         }
-
-        leafY += 1.5;
-
-        if (leafY >= 600){
-            leafY = 288;
-            leafX = this.endOfStem.x;
-        }
-    }
-} */
     }
 
     private move() {
-        if (this.time > 1200) {
+        if (this.time > 2200) { // höjd
             for (const point of this.history) {
-                point.y += 4;
+                point.y += 2; //hastighet
             }
         }
     }
@@ -156,15 +122,12 @@ class Flower {
             curveVertex(historyPositionsToDraw[i].x, historyPositionsToDraw[i].y);
             
            if(historyPositionsToDraw[i].y >= 320){
-            this.growingLeaf(historyPositionsToDraw[i].x,historyPositionsToDraw[i].y)
-           }
-            
+                this.growingLeaf(historyPositionsToDraw[i].x,historyPositionsToDraw[i].y)
+           }   
         }
         curveVertex(historyPositionsToDraw[historyPositionsToDraw.length - 1].x - 1, historyPositionsToDraw[historyPositionsToDraw.length - 1].y - 1);
         endShape();
         push();
-        //imageMode(CENTER);
-        //this.growingLeaf();
         pop();
         push();
         imageMode(CENTER);
