@@ -30,15 +30,19 @@ function preload() {
     sadFlowerBeeSound = (window as any).loadSound('./assets/sounds/sadFlowerBeeSound.wav');
     beeBuzzToSound = (window as any).loadSound('./assets/sounds/beeBuzzToSound.wav');
     beeBuzzAwaySound = (window as any).loadSound('./assets/sounds/beeBuzzAwaySound.wav');
-    logo = loadImage('assets/images/logo.png')
+    logo = loadImage('assets/images/logo.png');
+    // flower0 = loadImage('/assets/images/flower_0.png');
 
 
     listOfFlowers = {
         bud: loadImage('/assets/images/bud_new.png'),
+        flowerHurt: loadImage('/assets/images/flower_hurt.png'),
         flower0: loadImage('/assets/images/flower_0.png'),
         flower25: loadImage('/assets/images/flower_25.png'),
+        flower25Brown: loadImage('/assets/images/flower_25_brown.png'),
         flower75: loadImage('/assets/images/flower_75.png'),
         flower100: loadImage('/assets/images/flower_100.png'),
+        flower100Brown: loadImage('/assets/images/flower_100_brown.png')
     }
 }
 
