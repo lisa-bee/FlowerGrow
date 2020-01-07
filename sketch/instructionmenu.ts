@@ -1,7 +1,7 @@
 let logo: p5.Image;
 
 class InstructionMenu {
-    private logo: p5.Image;
+    public logo: p5.Image;
     private logoX: number;
     private logoY: number;
     private logoHeight: number;
