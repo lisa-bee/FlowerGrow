@@ -6,6 +6,7 @@ class GameOver {
     private gameOverX: number;
     private gameOverY: number;
     private message: string;
+    private message2: string;
     private boxX: number;
     private boxY: number;
     private boxWidth: number;
@@ -20,7 +21,8 @@ class GameOver {
         this.flower0Width = 110;
         this.gameOverX = 200;
         this.gameOverY = 300;
-        this.message = "Grow Over!\nYou grew "
+        this.message = "Grow Over!\nYou grew ";
+        this.message2 = "Press enter to play again."
         this.boxX = 200;
         this.boxY = 300;
         this.boxWidth = 300;
@@ -45,12 +47,13 @@ class GameOver {
         rect(this.boxX, this.boxY, this.boxWidth, this.boxHeight, this.radius);
         pop();
         push();
-        textSize(30);
+        textSize(20);
         fill("black");
         noStroke();
         textAlign(CENTER);
         rectMode(CENTER);
-        text(this.message + playerscore._score + " m.", this.gameOverX, this.gameOverY, 300, 70);
+        text(this.message + playerscore._score + " m. \n\n Press enter to play again.", this.gameOverX, this.gameOverY, 300, 70);
+        text(this.message2, this.gameOverX, this.gameOverY, 200, 30)
         pop();
         push();
         imageMode(CENTER);
