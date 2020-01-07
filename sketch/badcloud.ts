@@ -29,9 +29,8 @@ class BadCloud {
     }
 
     
-    public update() {
-            this.move();
-        
+    public update(fallSpeedBadCloud: number) {
+        this.move(fallSpeedBadCloud);
     }
 
 
@@ -51,35 +50,8 @@ class BadCloud {
         return false;
     }
 
-    private move() {
-            if (millis() >= 0) {
-                this.y = this.y + 1.5;
-            }
-            if (millis() >= 15000) {
-                this.y = this.y + 0.2;
-            }
-            if (millis() >= 30000){
-                this.y = this.y + 0.2;
-            }
-            if (millis() >= 40000){
-                this.y = this.y + 0.2;
-            }
-            if (millis() >= 50000){
-                this.y = this.y + 0.2;
-            }
-            if (millis() >= 70000){
-                this.y = this.y + 0.2;
-            }
-            if (millis() >= 90000){
-                this.y = this.y + 0.3;
-            }
-            if (millis() >= 100000){
-                this.y = this.y + 0.3;
-            }
-            if (millis() >= 110000){
-                this.y = this.y + 0.3;
-            }
-        
+    private move(fallSpeedBadCloud: number) {
+        this.y = this.y + fallSpeedBadCloud;
     }
 
     public draw() {

@@ -52,3 +52,8 @@ function draw() {
     game.draw();
 }
 
+/* function keyPressed() {
+    if (game.hasEnded) {
+        game = new GameArea()
+    }
+} */
