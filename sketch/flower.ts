@@ -24,7 +24,7 @@ class Flower {
     public constructor(x: number, y: number, private width: number, private height: number) {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
-        this.r = 36;
+        this.r = 19;
         this.onlyRenderEachXPoint = 27;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
@@ -130,7 +130,8 @@ class Flower {
         pop();
         push();
         noFill();
-        noStroke();
+        stroke('black');
+        strokeWeight(1)
         ellipseMode(CENTER);
         ellipse(this.endOfStem.x, this.endOfStem.y, this.r * 2, this.r * 2);
         pop();

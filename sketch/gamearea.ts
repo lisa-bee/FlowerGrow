@@ -36,7 +36,7 @@ class GameArea {
         this.isGameRunning = false;
         this.gameOver = new GameOver;
         this.gameIsOver = false;
-        this.moreBadCloudsTime = 30000;
+        this.moreBadCloudsTime = 60000;
     }
 
 
@@ -91,8 +91,7 @@ class GameArea {
 
 
     private spawnBadCloud() {
-        if (millis() >= 4000 + this.badCloudSpawnTime) {
-            this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
+        if (millis() >= 2000 + this.badCloudSpawnTime) {
             this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
             this.badCloudSpawnTime = millis();
         }
@@ -117,7 +116,7 @@ class GameArea {
     }
 
     private spawnMoreBadClouds() {
-        if (millis() >= 1800 + this.moreBadCloudsTime) {
+        if (millis() >= 1000 + this.moreBadCloudsTime) {
             this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
             this.moreBadCloudsTime = millis();
         }

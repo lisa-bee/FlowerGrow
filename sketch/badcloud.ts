@@ -12,6 +12,7 @@ class BadCloud {
     private r: number;
     private _hasChangedWaterLevel: boolean;
     private time: number;
+    
 
 
     public constructor(x: number, y: number, width: number, height: number) {
@@ -28,13 +29,13 @@ class BadCloud {
     }
 
     public update() {
-        this.time += deltaTime;
-        if (this.time > 1500) {
+        /* if (millis() >= 20000) {
+            this.moveFaster();  
+        } 
+        else if (millis() >= 0) {
             this.move();
-        }
-       /*  if (millis() >= 30000 + this.time) {
-            this.moveFaster();
         } */
+        this.move();
     }
 
 
@@ -54,7 +55,33 @@ class BadCloud {
     }
 
     private move() {
-        this.y = this.y + 1.5;
+        if (millis() >= 0) {
+            this.y = this.y + 1.5;
+        }
+        if (millis() >= 15000) {
+            this.y = this.y + 0.1;
+        }
+        if (millis() >= 30000){
+            this.y = this.y + 0.2;
+        }
+        if (millis() >= 40000){
+            this.y = this.y + 0.2;
+        }
+        if (millis() >= 50000){
+            this.y = this.y + 0.2;
+        }
+        if (millis() >= 70000){
+            this.y = this.y + 0.2;
+        }
+        if (millis() >= 90000){
+            this.y = this.y + 0.2;
+        }
+        if (millis() >= 100000){
+            this.y = this.y + 0.2;
+        }
+        if (millis() >= 110000){
+            this.y = this.y + 0.2;
+        }
     }
 
     /* private moveFaster() {
