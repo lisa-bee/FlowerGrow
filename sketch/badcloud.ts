@@ -11,7 +11,8 @@ class BadCloud {
     private height: number;
     private r: number;
     private _hasChangedWaterLevel: boolean;
-    private time: number;
+    /* private time: number; */
+    
 
 
     public constructor(x: number, y: number, width: number, height: number) {
@@ -24,23 +25,23 @@ class BadCloud {
         this.height = height;
         this.r = 38;
         this._hasChangedWaterLevel = false;
-        this.time = 0;
+        /* this.time = 0; */
     }
 
+    
     public update() {
-        this.time += deltaTime;
-        if (this.time > 1500) {
             this.move();
-        }
+        
     }
 
 
     public checkCollisionWithFlower(flower: Flower, waterContainer: WaterContainer): boolean {
         const d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.r + flower.r) {
+            
             flower.currentFlower = listOfFlowers.flowerHurt;
             if (!sadFlowerCloudSound.isPlaying()) {
-                sadFlowerCloudSound.play(0.25);
+                sadFlowerCloudSound.play(0.5);
             }
             if (d < this.r + flower.r && waterContainer._waterlevel <= 0.25) {
                 flower.currentFlower = listOfFlowers.flower25Brown;
@@ -51,7 +52,34 @@ class BadCloud {
     }
 
     private move() {
-        this.y = this.y + 1.5;
+            if (millis() >= 0) {
+                this.y = this.y + 1.5;
+            }
+            if (millis() >= 15000) {
+                this.y = this.y + 0.2;
+            }
+            if (millis() >= 30000){
+                this.y = this.y + 0.2;
+            }
+            if (millis() >= 40000){
+                this.y = this.y + 0.2;
+            }
+            if (millis() >= 50000){
+                this.y = this.y + 0.2;
+            }
+            if (millis() >= 70000){
+                this.y = this.y + 0.2;
+            }
+            if (millis() >= 90000){
+                this.y = this.y + 0.3;
+            }
+            if (millis() >= 100000){
+                this.y = this.y + 0.3;
+            }
+            if (millis() >= 110000){
+                this.y = this.y + 0.3;
+            }
+        
     }
 
     public draw() {

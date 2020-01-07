@@ -11,25 +11,26 @@ function preload() {
     // Tyvärr har jag inte fått till den globala typningen för
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
-    bg = loadImage('assets/images/background400x600.png');
-    potImg = loadImage('assets/images/pot.png');
-    grassImg = loadImage('assets/images/grass.png');
-    badCloudImg1 = loadImage('assets/images/bad_cloud1.png');
-    badCloudImg2 = loadImage('assets/images/bad_cloud2.png');
-    badCloudImg3 = loadImage('assets/images/bad_cloud3.png');
-    goodCloudImg = loadImage('assets/images/good_cloud.png');
+    bg = loadImage('./assets/images/background400x600.png');
+    potImg = loadImage('./assets/images/pot.png');
+    grassImg = loadImage('./assets/images/grass.png');
+    badCloudImg1 = loadImage('./assets/images/bad_cloud1.png');
+    badCloudImg2 = loadImage('./assets/images/bad_cloud2.png');
+    badCloudImg3 = loadImage('./assets/images/bad_cloud3.png');
+    goodCloudImg = loadImage('./assets/images/good_cloud.png');
     beeLeftImage = loadImage('./assets/images/beeLeft.png');
     beeRightImage = loadImage('./assets/images/beeRight.png');
     beeDeadImage = loadImage('./assets/images/beeDead.png');
+    leafLeft = loadImage('./assets/images/leafLeft.png');
+    leafRight = loadImage('./assets/images/leafRight.png');
     backgroundMusic = (window as any).loadSound('./assets/music/backgroundMusic.mp3');
     buzzingBee = (window as any).loadSound('./assets/sounds/bee-buzz.wav');
-    happyFlowerSound = (window as any).loadSound('./assets/sounds/happyFlower.wav');
+    happyFlowerSound = (window as any).loadSound('./assets/sounds/happyFlowerLaugh.wav');
     sadFlowerCloudSound = (window as any).loadSound('./assets/sounds/sadFlowerCloudSound.wav');
     sadFlowerBeeSound = (window as any).loadSound('./assets/sounds/sadFlowerBeeSound.wav');
     beeBuzzToSound = (window as any).loadSound('./assets/sounds/beeBuzzToSound.wav');
     beeBuzzAwaySound = (window as any).loadSound('./assets/sounds/beeBuzzAwaySound.wav');
-    logo = loadImage('assets/images/logo.png');
-    // flower0 = loadImage('/assets/images/flower_0.png');
+    logo = loadImage('./assets/images/logo.png')
 
 
     listOfFlowers = {
