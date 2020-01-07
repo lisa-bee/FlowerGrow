@@ -24,7 +24,7 @@ class GameArea {
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
         this.pot = new Pot(potImg, 135, 450, 120, 100);
-        this.flower = new Flower(width / 2, 600, 70, 70);
+        this.flower = new Flower(width / 2, 550, 70, 70);
         this.badClouds = [];
         this.goodClouds = [];
         this.beeStartingPointX = [0, 400];
@@ -132,7 +132,7 @@ class GameArea {
 
 
     public spawnBee() {
-        if(this.time > 7000){
+        if (this.time > 7000) {
 
             if (millis() >= 10000 + this.beeSpawnTime) {
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
@@ -151,7 +151,7 @@ class GameArea {
                     }
                 }
             })
-        
+
         }
     }
 
