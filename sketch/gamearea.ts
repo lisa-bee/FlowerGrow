@@ -18,6 +18,8 @@ class GameArea {
     private gameOver: GameOver;
     private gameIsOver: boolean;
     private moreBadCloudsTime: number;
+    private fallSpeedBadCloud: number;
+    private fallSpeedGoodCloud: number;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -38,7 +40,9 @@ class GameArea {
         this.isGameRunning = false;
         this.gameOver = new GameOver;
         this.gameIsOver = false;
-        this.moreBadCloudsTime = 50000;
+        this.moreBadCloudsTime = 30000;
+        this.fallSpeedBadCloud = 1.5;
+        this.fallSpeedGoodCloud = 2;
     }
 
 
@@ -50,19 +54,22 @@ class GameArea {
         if (this.isGameRunning && !this.gameIsOver) {
             for (let i = 0; i < this.badClouds.length; i++) {
                 let badCloud = this.badClouds[i];
-                badCloud.update();
+                badCloud.update(this.fallSpeedBadCloud);
             }
             for (let i = 0; i < this.goodClouds.length; i++) {
                 let goodCloud = this.goodClouds[i];
-                goodCloud.update();
+                goodCloud.update(this.fallSpeedGoodCloud);
             }
             this.ground.update();
             this.pot.update();
-            this.flower.update(this.waterContainer);
+            this.flower.update(this.waterContainer, this.fallSpeedBadCloud);
             this.spawnBadCloud();
             this.spawnGoodCloud();
             this.spawnBee();
             this.spawnMoreBadClouds();
+            this.fallSpeedBadCloud *= 1.0002;
+            this.fallSpeedGoodCloud *= 1.0002;
+            this.time += deltaTime;
         }
     }
 
@@ -93,7 +100,7 @@ class GameArea {
 
 
     private spawnBadCloud() {
-        if (millis() >= 2000 + this.badCloudSpawnTime) {
+        if (millis() >= 1800 + this.badCloudSpawnTime) {
             this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
             this.badCloudSpawnTime = millis();
         }
@@ -125,8 +132,6 @@ class GameArea {
 
 
     public spawnBee() {
-
-        this.time += deltaTime;
         if(this.time > 7000){
 
             if (millis() >= 10000 + this.beeSpawnTime) {

@@ -40,10 +40,10 @@ class Flower {
         return this.history[this.history.length - 1];
     }
 
-    public update(waterContainer: WaterContainer) {
+    public update(waterContainer: WaterContainer, fallSpeed: number) {
         const newX = this.handlePlayerInput();
-        this.grow(newX);
-        this.move();
+        this.grow(newX, fallSpeed);
+        this.move(fallSpeed);
         this.time += deltaTime;
         if (this.time > 1500) {
             if (waterContainer._waterlevel <= 1) {
@@ -62,9 +62,9 @@ class Flower {
 
     }
 
-    private grow(x: number) {
+    private grow(x: number, fallSpeed: number) {
 
-        const y = this.endOfStem.y - 2; // hastighet
+        const y = this.endOfStem.y - fallSpeed; // hastighet
         var v = createVector(x, y);
         this.history.push(v);
         const maxLength = 140;
@@ -81,10 +81,10 @@ class Flower {
         }
     }
 
-    private move() {
+    private move(fallSpeed: number) {
         if (this.time > 2200) { // höjd
             for (const point of this.history) {
-                point.y += 2; //hastighet
+                point.y += fallSpeed; //hastighet
             }
         }
     }
