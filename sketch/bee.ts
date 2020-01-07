@@ -13,7 +13,7 @@ class Bee {
     private width: number;
     private height: number;
     public isBeeDead: boolean;
-    private r: number;
+    private radie: number;
     private beeHitFlower: boolean;
     private time: number;
     private _beeBuzzToSound: p5.SoundFile;
@@ -28,7 +28,7 @@ class Bee {
         this.width = width;
         this.height = height;
         this.isBeeDead = false;
-        this.r = this.width / 2;
+        this.radie = this.width / 2;
         this.beeHitFlower = false;
         this.time = 0;
         this._beeBuzzToSound = beeBuzzToSound;
@@ -126,7 +126,7 @@ class Bee {
         if (!this.isBeeDead) {
             let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
 
-            if (d < this.r + flower.r) {
+            if (d < this.radie + flower.radie) {
                 flower.currentFlower = listOfFlowers.flowerHurt;
                 this.beeHitFlower = true;
 
@@ -134,7 +134,7 @@ class Bee {
                     sadFlowerBeeSound.play(0.5);
                     beeBuzzAwaySound.play();
                 }
-                if (d < this.r + flower.r && waterContainer._waterlevel <= 0.25) {
+                if (d < this.radie + flower.radie && waterContainer._waterlevel <= 0.25) {
                     flower.currentFlower = listOfFlowers.flower25Brown;
                 }
                 return true;
