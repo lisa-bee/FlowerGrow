@@ -17,6 +17,7 @@ class GameArea {
     private isGameRunning: boolean;
     private gameOver: GameOver;
     private gameIsOver: boolean;
+    private moreBadCloudsTime: number;
 
     constructor() {
         this.ground = new Grass(grassImg, 0, 500, 600, 100);
@@ -37,6 +38,7 @@ class GameArea {
         this.isGameRunning = false;
         this.gameOver = new GameOver;
         this.gameIsOver = false;
+        this.moreBadCloudsTime = 50000;
     }
 
 
@@ -60,6 +62,7 @@ class GameArea {
             this.spawnBadCloud();
             this.spawnGoodCloud();
             this.spawnBee();
+            this.spawnMoreBadClouds();
         }
     }
 
@@ -90,8 +93,7 @@ class GameArea {
 
 
     private spawnBadCloud() {
-        if (millis() >= 4000 + this.badCloudSpawnTime) {
-            this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
+        if (millis() >= 2000 + this.badCloudSpawnTime) {
             this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
             this.badCloudSpawnTime = millis();
         }
@@ -113,6 +115,18 @@ class GameArea {
         // this.checkCollision()
         // for varje moln kolla om spelaren kolliderade
         // for varje geting kolla om spelaren kollideraqde
+    }
+
+    private spawnMoreBadClouds() {
+        if (millis() >= 900 + this.moreBadCloudsTime) {
+            this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
+            this.moreBadCloudsTime = millis();
+        }
+        for (const badCloud of this.badClouds) {
+            if (badCloud.Y > height + 800) {
+                this.badClouds.shift();
+            } // tar bort första molnet i arrayen
+        }
     }
 
 
