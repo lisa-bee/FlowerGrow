@@ -134,14 +134,42 @@ class GameArea {
     public spawnBee() {
 
         this.time += deltaTime;
-        if(this.time > 10000){
+        if(this.time > 100000){
+            if (millis() >= 4000 + this.beeSpawnTime) {
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));                
+                this.beeSpawnTime = millis();
+            }
+        }
+
+        else if(this.time > 80000){
+            if (millis() >= 4000 + this.beeSpawnTime) {
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSpawnTime = millis();
+            }
+        }
+
+        else if(this.time > 40000){
             if (millis() >= 5000 + this.beeSpawnTime) {
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSpawnTime = millis();
             }
+        }
+
+        else if(this.time > 20000){
+
+            if (millis() >= 4000 + this.beeSpawnTime) {
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSpawnTime = millis();
+            }
 
         }
+
         else if(this.time > 7000){
 
             if (millis() >= 10000 + this.beeSpawnTime) {

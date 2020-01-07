@@ -52,7 +52,7 @@ class Bee {
         this.y = this.y + random(-5, 5);
 
         if (this.isBeeDead) {
-            this.y = this.y + 6;
+            this.y = this.y + 8;
         }
     }
 
@@ -117,31 +117,29 @@ class Bee {
         }
 
         if (this.isBeeDead) {
-            /*             game.beeSwarm.forEach(Bee => {
-                            if(this.isBeeDead || this.beeHitFlower && this._beeBuzzToSound.isPlaying()){
-                                this._beeBuzzToSound.stop();
-                            }
-                        console.log('stooop')
-                        
-                        }) */
         this._beeBuzzToSound.stop();
-             if (game.beeSwarm.length >=2){
-                this._stopBeeBuzzToSound.playMode('untilDone');
-                this._stopBeeBuzzToSound.play();
+
+            if (game.beeSwarm.length > 1 && !this._beeBuzzToSound.isPlaying()){
+            this._stopBeeBuzzToSound.playMode('untilDone');
+            this._stopBeeBuzzToSound.play();
             } 
-            console.log('stooooop')
+            else if(game.beeSwarm.length == 0){
+                    this._stopBeeBuzzToSound.stop()
+                    
+                console.log('stooooop')
             }
-        else if(this.beeHitFlower){
-            if(this._beeBuzzToSound.isPlaying()){
-                this._beeBuzzToSound.stop();
+
+            if(this.beeHitFlower){
+                if(this._beeBuzzToSound.isPlaying()){
+                    this._beeBuzzToSound.stop();
+                }
+                if (this._stopBeeBuzzToSound.isPlaying() && this.beeHitFlower || this.isBeeDead){
+                    this._stopBeeBuzzToSound.stop();
+                } 
             }
-            if (this._stopBeeBuzzToSound.isPlaying() && this.beeHitFlower || this.isBeeDead){
-                this._stopBeeBuzzToSound.stop();
-            } 
+
+
         }
-
-
-
     
     }
 
