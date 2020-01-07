@@ -54,7 +54,7 @@ class GameArea {
             }
             this.ground.update();
             this.pot.update();
-            this.flower.update();
+            this.flower.update(this.waterContainer);
             this.spawnBadCloud();
             this.spawnGoodCloud();
             this.spawnBee();
@@ -72,7 +72,7 @@ class GameArea {
             if (goodCloud.Y > height + 800) {
                 this.goodClouds.shift();
             } // tar bort första molnet i arrayen
-            if (goodCloud.checkCollisionWithFlower(this.flower)) {
+            if (goodCloud.checkCollisionWithFlower(this.flower, this.waterContainer)) {
                 if (goodCloud.hasChangedWaterLevel === false) {
                     this.waterContainer.increaseWaterLevel(0.1);
                     goodCloud.hasChangedWaterLevel = true;
@@ -98,7 +98,7 @@ class GameArea {
             if (badCloud.Y > height + 800) {
                 this.badClouds.shift();
             } // tar bort första molnet i arrayen
-            if (badCloud.checkCollisionWithFlower(this.flower)) {
+            if (badCloud.checkCollisionWithFlower(this.flower, this.waterContainer)) {
                 if (badCloud.hasChangedWaterLevel === false) {
                     this.waterContainer.decreaseWaterLevel(0.1);
                     badCloud.hasChangedWaterLevel = true;
@@ -106,7 +106,7 @@ class GameArea {
             }
         }
 
-        
+
 
         // this.checkCollision()
         // for varje moln kolla om spelaren kolliderade
@@ -122,11 +122,11 @@ class GameArea {
         }
 
         this.beeSwarm.forEach(bee => {
-            bee.checkCollisionWithFlower(this.flower);
+            bee.checkCollisionWithFlower(this.flower, this.waterContainer);
             bee.buzzTo(this.flower);
             bee.update();
             //bee.mouseClickedBee(mouseX, mouseY);
-            if (bee.checkCollisionWithFlower(this.flower)) {
+            if (bee.checkCollisionWithFlower(this.flower, this.waterContainer)) {
                 if (bee.hasChangedWaterLevel === false) {
                     this.waterContainer.decreaseWaterLevel(0.1);
                     bee.hasChangedWaterLevel = true;
