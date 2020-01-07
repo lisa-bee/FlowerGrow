@@ -22,7 +22,7 @@ class GameOver {
         this.gameOverX = 200;
         this.gameOverY = 300;
         this.message = "Grow Over!\nYou grew ";
-        this.message2 = "Press enter to play again."
+        this.message2 = "\nPress enter to play again.";
         this.boxX = 200;
         this.boxY = 300;
         this.boxWidth = 300;
@@ -52,8 +52,7 @@ class GameOver {
         noStroke();
         textAlign(CENTER);
         rectMode(CENTER);
-        text(this.message + playerscore._score + " m. \n\n Press enter to play again.", this.gameOverX, this.gameOverY, 300, 70);
-        text(this.message2, this.gameOverX, this.gameOverY, 200, 30)
+        text(this.message + playerscore._score + " m." + this.message2, this.gameOverX, this.gameOverY, 300, 70);
         pop();
         push();
         imageMode(CENTER);
