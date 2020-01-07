@@ -109,12 +109,6 @@ class GameArea {
                 }
             }
         }
-
-
-
-        // this.checkCollision()
-        // for varje moln kolla om spelaren kolliderade
-        // for varje geting kolla om spelaren kollideraqde
     }
 
     private spawnMoreBadClouds() {
