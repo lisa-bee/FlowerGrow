@@ -52,12 +52,6 @@ function draw() {
     game.draw();
 }
 
-/* function keyPressed() {
-    if (game.hasEnded) {
-        game = new GameArea()
-    }
-} */
-
 function keyPressed(): boolean {
     if (keyCode === ENTER && game.gameIsOver) {
         game = new GameArea()
