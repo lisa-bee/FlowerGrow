@@ -1,3 +1,4 @@
+
 class GameArea {
     private ground: Grass;
     private pot: Pot;
@@ -133,28 +134,71 @@ class GameArea {
     public spawnBee() {
 
         this.time += deltaTime;
-        if(this.time > 7000){
+        if(this.time > 10000){
+            if (millis() >= 5000 + this.beeSpawnTime) {
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSpawnTime = millis();
+            }
+
+        }
+        else if(this.time > 7000){
 
             if (millis() >= 10000 + this.beeSpawnTime) {
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSpawnTime = millis();
             }
 
-            this.beeSwarm.forEach(bee => {
-                bee.checkCollisionWithFlower(this.flower, this.waterContainer);
-                bee.buzzTo(this.flower);
-                bee.update();
-                //bee.mouseClickedBee(mouseX, mouseY);
-                if (bee.checkCollisionWithFlower(this.flower, this.waterContainer)) {
-                    if (bee.hasChangedWaterLevel === false) {
-                        this.waterContainer.decreaseWaterLevel(0.1);
-                        bee.hasChangedWaterLevel = true;
-                    }
-                }
-            })
-        
         }
+
+        this.beeSwarm.forEach(bee => {
+            bee.checkCollisionWithFlower(this.flower, this.waterContainer);
+            bee.buzzTo(this.flower);
+            bee.update();
+            bee.mouseClickedBee(mouseX, mouseY);
+            //bee.mouseClickedBee(mouseX, mouseY);
+            if (bee.checkCollisionWithFlower(this.flower, this.waterContainer)) {
+                if (bee.hasChangedWaterLevel === false) {
+                    this.waterContainer.decreaseWaterLevel(0.1);
+                    bee.hasChangedWaterLevel = true;
+                }
+            }
+
+           if(bee.checkIfBeeOffScreen() == true){
+            this.deleteBeeFromArray();
+           }
+            
+/*             for (let index = 1; index < this.beeSwarm.length; index++) {
+                if(bee.CheckIfBeeOffScreen){
+                    this.beeSwarm.splice(index, 1);
+                }
+            } */
+            console.log(this.beeSwarm)
+        })
+        
     }
+
+    private deleteBeeFromArray(){  
+            let item = this.checkBeeToBeDeleted()
+            //item = this.checkBeeToBeDeleted();
+            this.beeSwarm.splice(item, 1);
+        
+        console.log(item);
+    }
+
+    private checkBeeToBeDeleted():number{
+        
+            //const todos = getTodosFromLocalStorage();
+            let index;
+            for (index = 0; index < this.beeSwarm.length; index++) {
+                if(this.beeSwarm[index].checkIfBeeOffScreen() == true){
+                    break;
+                }
+            }
+            console.log(index)
+            return index;
+        
+    } 
 
     public draw() {
         if (!this.isGameRunning) {

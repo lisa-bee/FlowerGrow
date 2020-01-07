@@ -5,6 +5,12 @@ let buzzingBee: p5.SoundFile;
 let beeBuzzToSound: p5.SoundFile;
 let beeBuzzAwaySound: p5.SoundFile;
 
+function clone<T extends Object>(instance: T): T {
+    const copy = new (instance.constructor as { new (): T })();
+    (Object as any).assign(copy, instance);
+    return copy;
+}
+
 
 class Bee {
     private img: p5.Image
@@ -17,8 +23,9 @@ class Bee {
     private beeHitFlower: boolean;
     private time: number;
     private _beeBuzzToSound: p5.SoundFile;
-    //private _beeBuzzAwaySound: p5.SoundFile;
+    private _stopBeeBuzzToSound: p5.SoundFile
     private _hasChangedWaterLevel: boolean;
+    //private _beeOutOffGameArea: boolean;
 
     public constructor(x: any, y: any, width: number, height: number) {
 
@@ -31,9 +38,10 @@ class Bee {
         this.r = this.width / 2;
         this.beeHitFlower = false;
         this.time = 0;
-        this._beeBuzzToSound = beeBuzzToSound;
-        //this._beeBuzzAwaySound = beeBuzzAwaySound;
+        this._beeBuzzToSound = clone(beeBuzzToSound);
+        this._stopBeeBuzzToSound = clone(beeBuzzToSound);
         this._hasChangedWaterLevel = false;
+        //this._beeOutOffGameArea = false;
     }
 
     public get isBeeClicked() {
@@ -44,7 +52,6 @@ class Bee {
         this.y = this.y + random(-5, 5);
 
         if (this.isBeeDead) {
-            //this.x = this.x //+ random(-5, 5)
             this.y = this.y + 6;
         }
     }
@@ -86,24 +93,56 @@ class Bee {
             this.buzzAwayAfterHitFlower(flower)
         }
 
-        if (game.beeSwarm.length >= 2) {
-            //if(this.y >= 630 || this.y <= -30){
+        // if (game.beeSwarm.length >= 3) {
+/*         if (this.y >= 630 || this.y <= -30){
             game.beeSwarm.shift();
+        } */
+    }
+
+    public checkIfBeeOffScreen(): boolean{
+        if (this.y >= 630 || this.y <= -30){
+            //game.beeSwarm.shift();
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
     public handleBuzzToSounds() {
-        if (!this._beeBuzzToSound.isPlaying()) {
+        if (!this.isBeeDead && !this.beeHitFlower) {
+            console.log('start')
+            this._beeBuzzToSound.playMode('untilDone');
             this._beeBuzzToSound.play();
         }
 
-        else if (this.isBeeDead || this.beeHitFlower) {
-            this._beeBuzzToSound.stop();
+        if (this.isBeeDead) {
+            /*             game.beeSwarm.forEach(Bee => {
+                            if(this.isBeeDead || this.beeHitFlower && this._beeBuzzToSound.isPlaying()){
+                                this._beeBuzzToSound.stop();
+                            }
+                        console.log('stooop')
+                        
+                        }) */
+        this._beeBuzzToSound.stop();
+             if (game.beeSwarm.length >=2){
+                this._stopBeeBuzzToSound.playMode('untilDone');
+                this._stopBeeBuzzToSound.play();
+            } 
+            console.log('stooooop')
+            }
+        else if(this.beeHitFlower){
+            if(this._beeBuzzToSound.isPlaying()){
+                this._beeBuzzToSound.stop();
+            }
+            if (this._stopBeeBuzzToSound.isPlaying() && this.beeHitFlower || this.isBeeDead){
+                this._stopBeeBuzzToSound.stop();
+            } 
         }
 
-        /*         else if(this.y >= 630 || this.y <= -30){
-                    this._beeBuzzToSound.stop();
-                }  */
+
+
+    
     }
 
     private buzzAwayAfterHitFlower(flower: Flower) {
@@ -131,6 +170,7 @@ class Bee {
                 this.beeHitFlower = true;
 
                 if (!sadFlowerBeeSound.isPlaying() && !beeBuzzAwaySound.isPlaying()) {
+                    console.log('buzzing away...')
                     sadFlowerBeeSound.play(0.5);
                     beeBuzzAwaySound.play();
                 }
@@ -159,7 +199,6 @@ class Bee {
         this.move();
         this.mouseClickedBee(mouseX, mouseY);
         this.handleBuzzToSounds();
-        //this.beeBuzzingSound();
     }
 
     public draw() {
