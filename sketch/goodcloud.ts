@@ -34,7 +34,7 @@ class GoodCloud {
         if (d < this.r + flower.r) {
             flower.currentFlower = listOfFlowers.flower100;
             if (!happyFlowerSound.isPlaying()) {
-                happyFlowerSound.play(0.7);
+                happyFlowerSound.play(0.5);
             }
             if (d < this.r + flower.r && waterContainer._waterlevel <= 0.25) {
                 flower.currentFlower = listOfFlowers.flower100Brown;

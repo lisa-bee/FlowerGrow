@@ -1,6 +1,8 @@
 let happyFlowerSound: p5.SoundFile;
 let sadFlowerCloudSound: p5.SoundFile;
 let sadFlowerBeeSound: p5.SoundFile;
+let leafLeft: p5.Image;
+let leafRight: p5.Image;
 
 interface Flowers {
     bud: p5.Image,
@@ -25,7 +27,7 @@ class Flower {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
         this.r = 19;
-        this.onlyRenderEachXPoint = 27;
+        this.onlyRenderEachXPoint = 45;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
     }
@@ -61,20 +63,28 @@ class Flower {
     }
 
     private grow(x: number) {
-        const y = this.endOfStem.y - 4;
+
+        const y = this.endOfStem.y - 2; // hastighet
         var v = createVector(x, y);
         this.history.push(v);
-
-        const maxLength = 100;
+        const maxLength = 140;
         if (this.history.length > maxLength) {
             this.history.shift();
         }
     }
 
+    private growingLeaf(positionX:number, positionY:number){
+
+        if (this.time > 1500) {           
+                image(leafLeft, positionX - 25, positionY - 13, 25, 12);
+                image(leafRight, positionX + 2, positionY- 10, 25, 12);      
+        }
+    }
+
     private move() {
-        if (this.time > 1200) {
+        if (this.time > 2200) { // höjd
             for (const point of this.history) {
-                point.y += 4;
+                point.y += 2; //hastighet
             }
         }
     }
@@ -109,6 +119,7 @@ class Flower {
         this.keepSamePointsForDifferentDrawsAdjuster--;
         if (this.keepSamePointsForDifferentDrawsAdjuster === 0) this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
 
+        console.log(pointsToDraw)
         return pointsToDraw;
     }
 
@@ -121,9 +132,15 @@ class Flower {
         curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
         for (let i = 0; i < historyPositionsToDraw.length; i++) {
             curveVertex(historyPositionsToDraw[i].x, historyPositionsToDraw[i].y);
+            
+           if(historyPositionsToDraw[i].y >= 320){
+                this.growingLeaf(historyPositionsToDraw[i].x,historyPositionsToDraw[i].y)
+           }   
         }
         curveVertex(historyPositionsToDraw[historyPositionsToDraw.length - 1].x - 1, historyPositionsToDraw[historyPositionsToDraw.length - 1].y - 1);
         endShape();
+        push();
+        pop();
         push();
         imageMode(CENTER);
         image(this.currentFlower, this.endOfStem.x, this.endOfStem.y, this.width, this.height);
@@ -134,5 +151,6 @@ class Flower {
         ellipseMode(CENTER);
         ellipse(this.endOfStem.x, this.endOfStem.y, this.r * 2, this.r * 2);
         pop();
+
     }
 }
