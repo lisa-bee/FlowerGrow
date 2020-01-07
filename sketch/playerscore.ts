@@ -12,11 +12,13 @@ class PlayerScore {
             this.score++;
             this.time = millis();
         }
-        strokeWeight(3);
-        stroke(100, 200, 0);
+        push();
+        strokeWeight(0.8);
+        stroke(50);
         fill(50);
         textSize(25);
         text(this.score + "m", 20, 580);
+        pop();
     }
     public draw() {
         this.printPlayerScore();
