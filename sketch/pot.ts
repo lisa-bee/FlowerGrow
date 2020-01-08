@@ -1,5 +1,4 @@
 let potImg: p5.Image;
-
 class Pot {
 
     public potImg: p5.Image;

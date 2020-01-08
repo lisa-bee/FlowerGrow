@@ -6,7 +6,7 @@ let beeBuzzToSound: p5.SoundFile;
 let beeBuzzAwaySound: p5.SoundFile;
 
 function clone<T extends Object>(instance: T): T {
-    const copy = new (instance.constructor as { new (): T })();
+    const copy = new (instance.constructor as { new(): T })();
     (Object as any).assign(copy, instance);
     return copy;
 }
@@ -93,24 +93,24 @@ class Bee {
         }
 
         if (this.isBeeDead) {
-        this._beeBuzzToSound.stop();
-            if (game.beeSwarm.length > 1 && !this._beeBuzzToSound.isPlaying()){
+            this._beeBuzzToSound.stop();
+            if (game.beeSwarm.length > 1 && !this._beeBuzzToSound.isPlaying()) {
                 this._secundaryBeeSound.playMode('untilDone');
                 this._secundaryBeeSound.play();
-            } 
-            
-            else if(game.beeSwarm.length == 0){
-                    this._secundaryBeeSound.stop()
-            } 
+            }
+
+            else if (game.beeSwarm.length == 0) {
+                this._secundaryBeeSound.stop()
+            }
         }
-        if(this.beeHitFlower){
-            if(this._beeBuzzToSound.isPlaying()){
+        if (this.beeHitFlower) {
+            if (this._beeBuzzToSound.isPlaying()) {
                 this._beeBuzzToSound.stop();
             }
 
-            if (this._secundaryBeeSound.isPlaying() && this.beeHitFlower || this.isBeeDead){
+            if (this._secundaryBeeSound.isPlaying() && this.beeHitFlower || this.isBeeDead) {
                 this._secundaryBeeSound.stop();
-            } 
+            }
         }
     }
 
@@ -171,11 +171,11 @@ class Bee {
         }
     }
 
-    public checkIfBeeOffScreen(): boolean{
-        if (this.y >= 630 || this.y <= -30){
+    public checkIfBeeOffScreen(): boolean {
+        if (this.y >= 630 || this.y <= -30) {
             return true;
         }
-        else{
+        else {
             return false;
         }
     }
