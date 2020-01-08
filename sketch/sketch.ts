@@ -23,7 +23,7 @@ function preload() {
     sadFlowerBeeSound = (window as any).loadSound('./assets/sounds/sadFlowerBeeSound.wav');
     beeBuzzToSound = (window as any).loadSound('./assets/sounds/beeBuzzToSound.wav');
     beeBuzzAwaySound = (window as any).loadSound('./assets/sounds/beeBuzzAwaySound.wav');
-    logo = loadImage('./assets/images/logo.png')
+    logo = loadImage('./assets/images/logo.png');
 
 
     listOfFlowers = {
@@ -55,7 +55,7 @@ function draw() {
 function keyPressed(): boolean {
     if (keyCode === ENTER && game.gameIsOver) {
         game = new GameArea()
-            return true;
+        return true;
     }
     return false;
 }    
