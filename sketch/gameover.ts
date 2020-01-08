@@ -55,7 +55,7 @@ class GameOver {
         pop();
         push();
         imageMode(CENTER);
-        image(listOfFlowers.flower0, this.flower0X, this.flower0Y, this.flower0Width, this.flower0Height);
+        image(flowerAssets.flower0, this.flower0X, this.flower0Y, this.flower0Width, this.flower0Height);
         pop();
     }
 }

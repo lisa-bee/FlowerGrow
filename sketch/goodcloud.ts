@@ -28,12 +28,12 @@ class GoodCloud {
     public checkCollisionWithFlower(flower: Flower, waterContainer: WaterContainer): boolean {
         const d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.radius + flower.radius) {
-            flower.currentFlower = listOfFlowers.flower100;
-            if (!soundEffects.happyFlowerSound.isPlaying()) {
-                soundEffects.happyFlowerSound.play(0.5);
+            flower.currentFlower = flowerAssets.flower100;
+            if (!flowerAssets.happyFlowerSound.isPlaying()) {
+                flowerAssets.happyFlowerSound.play(0.5);
             }
             if (d < this.radius + flower.radius && waterContainer._waterlevel <= 0.25) {
-                flower.currentFlower = listOfFlowers.flower100Brown;
+                flower.currentFlower = flowerAssets.flower100Brown;
             }
             return true;
         }
