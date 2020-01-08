@@ -10,7 +10,7 @@ class WaterContainer {
         this.y = 390;
         this.width = 25;
         this.height = 160;
-        this.waterlevel = 1; // %
+        this.waterlevel = 1;
     }
 
     public draw() {

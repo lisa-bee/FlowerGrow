@@ -61,7 +61,7 @@ class Flower {
     }
 
     private grow(x: number, fallSpeed: number) {
-        const y = this.endOfStem.y - fallSpeed; // hastighet
+        const y = this.endOfStem.y - fallSpeed;
         var v = createVector(x, y);
         this.history.push(v);
         const maxLength = 200;
@@ -76,9 +76,9 @@ class Flower {
     }
 
     private move(fallSpeed: number) {
-        if (this.time > 3100) { // höjd
+        if (this.time > 3100) {
             for (const point of this.history) {
-                point.y += fallSpeed; //hastighet
+                point.y += fallSpeed;
             }
         }
     }
