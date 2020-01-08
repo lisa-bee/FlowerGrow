@@ -1,3 +1,4 @@
+
 class GameArea {
     private grass: Grass;
     private pot: Pot;
@@ -47,7 +48,6 @@ class GameArea {
         this.keyPressed = false;
     }
 
-
     public update() {
         this.gameIsOver = this.gameOver.endGame(this.waterContainer);
         if (!this.isGameRunning) {
@@ -85,7 +85,7 @@ class GameArea {
         for (const goodCloud of this.goodClouds) {
             if (goodCloud.Y > height + 800) {
                 this.goodClouds.shift();
-            } // tar bort första molnet i arrayen
+            } 
             if (goodCloud.checkCollisionWithFlower(this.flower, this.waterContainer)) {
                 if (goodCloud.hasChangedWaterLevel === false) {
                     this.waterContainer.increaseWaterLevel(0.2);
@@ -93,11 +93,6 @@ class GameArea {
                 }
             }
         }
-
-        // this.checkCollision()
-        // for varje moln kolla om spelaren kolliderade
-        // for varje geting kolla om spelaren kollideraqde
-
     }
 
 
@@ -110,7 +105,7 @@ class GameArea {
         for (const badCloud of this.badClouds) {
             if (badCloud.Y > height + 800) {
                 this.badClouds.shift();
-            } // tar bort första molnet i arrayen
+            } 
             if (badCloud.checkCollisionWithFlower(this.flower, this.waterContainer)) {
                 if (badCloud.hasChangedWaterLevel === false) {
                     this.waterContainer.decreaseWaterLevel(0.2);
@@ -128,34 +123,80 @@ class GameArea {
         for (const badCloud of this.badClouds) {
             if (badCloud.Y > height + 800) {
                 this.badClouds.shift();
-            } // tar bort första molnet i arrayen
+            }
         }
     }
 
 
     public spawnBee() {
-        if(this.time > 7000){
 
+        if(this.time > 100000){
+            if (millis() >= 4000 + this.beeSpawnTime) {
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));                
+                this.beeSpawnTime = millis();
+            }
+        }
+
+        else if(this.time > 80000){
+            if (millis() >= 4000 + this.beeSpawnTime) {
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSpawnTime = millis();
+            }
+        }
+
+        else if(this.time > 40000){
+            if (millis() >= 5000 + this.beeSpawnTime) {
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSpawnTime = millis();
+            }
+        }
+
+        else if(this.time > 7000){
             if (millis() >= 10000 + this.beeSpawnTime) {
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSpawnTime = millis();
             }
-
-            this.beeSwarm.forEach(bee => {
-                bee.checkCollisionWithFlower(this.flower, this.waterContainer);
-                bee.buzzTo(this.flower);
-                bee.update();
-                //bee.mouseClickedBee(mouseX, mouseY);
-                if (bee.checkCollisionWithFlower(this.flower, this.waterContainer)) {
-                    if (bee.hasChangedWaterLevel === false) {
-                        this.waterContainer.decreaseWaterLevel(0.2);
-                        bee.hasChangedWaterLevel = true;
-                    }
-                }
-            })
-        
         }
+
+        this.beeSwarm.forEach(bee => {
+            bee.checkCollisionWithFlower(this.flower, this.waterContainer);
+            bee.buzzTo(this.flower);
+            bee.update();
+            bee.mouseClickedBee(mouseX, mouseY);
+            if (bee.checkCollisionWithFlower(this.flower, this.waterContainer)) {
+                if (bee.hasChangedWaterLevel === false) {
+                    this.waterContainer.decreaseWaterLevel(0.2);
+                    bee.hasChangedWaterLevel = true;
+                }
+            }
+
+           if(bee.checkIfBeeOffScreen() == true){
+                this.deleteBeeFromArray();
+           }
+        })       
     }
+
+    private deleteBeeFromArray(){  
+            let item = this.checkBeeToBeDeleted()
+            //item = this.checkBeeToBeDeleted();
+            this.beeSwarm.splice(item, 1);
+    }
+
+    private checkBeeToBeDeleted():number{
+            let index;
+            for (index = 0; index < this.beeSwarm.length; index++) {
+                if(this.beeSwarm[index].checkIfBeeOffScreen() == true){
+                    break;
+                }
+            }
+            return index;   
+    } 
 
     public draw() {
         if (!this.isGameRunning) {
