@@ -18,7 +18,7 @@ interface Flowers {
 class Flower {
     public currentFlower: p5.Image;
     private time: number;
-    public readonly r: number;
+    public readonly radie: number;
     private history: p5.Vector[];
     private onlyRenderEachXPoint: number;
     private keepSamePointsForDifferentDrawsAdjuster: number;
@@ -26,7 +26,7 @@ class Flower {
     public constructor(x: number, y: number, private width: number, private height: number) {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
-        this.r = 19;
+        this.radie = 19;
         this.onlyRenderEachXPoint = 45;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
@@ -40,10 +40,10 @@ class Flower {
         return this.history[this.history.length - 1];
     }
 
-    public update(waterContainer: WaterContainer) {
+    public update(waterContainer: WaterContainer, fallSpeed: number) {
         const newX = this.handlePlayerInput();
-        this.grow(newX);
-        this.move();
+        this.grow(newX, fallSpeed);
+        this.move(fallSpeed);
         this.time += deltaTime;
         if (this.time > 1500) {
             if (waterContainer._waterlevel <= 1) {
@@ -62,9 +62,9 @@ class Flower {
 
     }
 
-    private grow(x: number) {
+    private grow(x: number, fallSpeed: number) {
 
-        const y = this.endOfStem.y - 2; // hastighet
+        const y = this.endOfStem.y - fallSpeed; // hastighet
         var v = createVector(x, y);
         this.history.push(v);
         const maxLength = 140;
@@ -81,10 +81,10 @@ class Flower {
         }
     }
 
-    private move() {
+    private move(fallSpeed: number) {
         if (this.time > 2200) { // höjd
             for (const point of this.history) {
-                point.y += 2; //hastighet
+                point.y += fallSpeed; //hastighet
             }
         }
     }
@@ -98,11 +98,11 @@ class Flower {
             else if (keyIsDown(68)) {
                 x += 3;
             }
-            if (x > width - this.r) {
-                x = width - this.r;
+            if (x > width - this.radie) {
+                x = width - this.radie;
             }
-            if (x < this.r) {
-                x = this.r;
+            if (x < this.radie) {
+                x = this.radie;
             }
         }
         return x;
@@ -148,7 +148,7 @@ class Flower {
         noFill();
         noStroke();
         ellipseMode(CENTER);
-        ellipse(this.endOfStem.x, this.endOfStem.y, this.r * 2, this.r * 2);
+        ellipse(this.endOfStem.x, this.endOfStem.y, this.radie * 2, this.radie * 2);
         pop();
 
     }
