@@ -16,10 +16,11 @@ class GameArea {
     private waterContainer: WaterContainer;
     private isGameRunning: boolean;
     private gameOver: GameOver;
-    private gameIsOver: boolean;
+    public gameIsOver: boolean;
     private moreBadCloudsTime: number;
     private fallSpeedBadCloud: number;
     private fallSpeedGoodCloud: number;
+    public keyPressed: boolean;
 
     constructor() {
         this.grass = new Grass(grassImg, 0, 500, 600, 100);
@@ -43,6 +44,7 @@ class GameArea {
         this.moreBadCloudsTime = 30000;
         this.fallSpeedBadCloud = 1.5;
         this.fallSpeedGoodCloud = 2;
+        this.keyPressed = false;
     }
 
 
