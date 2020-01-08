@@ -1,6 +1,3 @@
-
-
-
 interface BeeImages {
     beeLeftImage: p5.Image;
     beeRightImage: p5.Image;
@@ -14,17 +11,17 @@ function clone<T extends Object>(instance: T): T {
 }
 
 class Bee {
-    private img: p5.Image
+    private img: p5.Image;
     private x: number;
     private y: number;
     private width: number;
     private height: number;
     private isBeeDead: boolean;
-    private radie: number;
+    private radius: number;
     private beeHitFlower: boolean;
     private time: number;
     private _beeBuzzToSound: p5.SoundFile;
-    private _secundaryBeeSound: p5.SoundFile
+    private _secundaryBeeSound: p5.SoundFile;
     private _hasChangedWaterLevel: boolean;
 
     public constructor(x: any, y: any, width: number, height: number) {
@@ -34,7 +31,7 @@ class Bee {
         this.width = width;
         this.height = height;
         this.isBeeDead = false;
-        this.radie = this.width / 2;
+        this.radius = this.width / 2;
         this.beeHitFlower = false;
         this.time = 0;
         this._beeBuzzToSound = clone(soundEffects.beeBuzzToSound);
@@ -84,7 +81,7 @@ class Bee {
         }
 
         if (this.beeHitFlower && !this.isBeeDead) {
-            this.buzzAwayAfterHitFlower(flower)
+            this.buzzAwayAfterHitFlower(flower);
         }
     }
 
@@ -102,7 +99,7 @@ class Bee {
             }
 
             else if (game.beeSwarm.length == 0) {
-                this._secundaryBeeSound.stop()
+                this._secundaryBeeSound.stop();
             }
         }
         if (this.beeHitFlower) {
@@ -136,7 +133,7 @@ class Bee {
         if (!this.isBeeDead) {
             let d = dist(this.x + 25, this.y + 25, flower.endOfStem.x, flower.endOfStem.y);
 
-            if (d < this.radie + flower.radie) {
+            if (d < this.radius + flower.radius) {
                 flower.currentFlower = listOfFlowers.flowerHurt;
                 this.beeHitFlower = true;
 
@@ -144,17 +141,15 @@ class Bee {
                     soundEffects.sadFlowerBeeSound.play(0.5);
                     soundEffects.beeBuzzAwaySound.play();
                 }
-                if (d < this.radie + flower.radie && waterContainer._waterlevel <= 0.25) {
+                if (d < this.radius + flower.radius && waterContainer._waterlevel <= 0.25) {
                     flower.currentFlower = listOfFlowers.flower25Brown;
                 }
                 return true;
             }
         }
-
         else {
             soundEffects.beeBuzzAwaySound.stop();
         }
-
         return false;
     }
 
@@ -167,7 +162,6 @@ class Bee {
     }
 
     private mouseClickedBee(mouseClickX: number, mouseClickY: number) {
-
         if (mouseIsPressed && mouseClickX > this.x && mouseClickX < this.x + this.width && mouseClickY > this.y && mouseClickY < this.y + this.height) {
             this.isBeeDead = true;
         }
