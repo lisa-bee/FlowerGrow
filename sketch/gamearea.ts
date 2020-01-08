@@ -1,5 +1,5 @@
 class GameArea {
-    private ground: Grass;
+    private grass: Grass;
     private pot: Pot;
     private flower: Flower;
     public badClouds: BadCloud[];
@@ -23,7 +23,7 @@ class GameArea {
     public keyPressed: boolean;
 
     constructor() {
-        this.ground = new Grass(grassImg, 0, 500, 600, 100);
+        this.grass = new Grass(grassImg, 0, 500, 600, 100);
         this.pot = new Pot(potImg, 135, 450, 120, 100);
         this.flower = new Flower(width / 2, 600, 70, 70);
         this.badClouds = [];
@@ -62,7 +62,7 @@ class GameArea {
                 let goodCloud = this.goodClouds[i];
                 goodCloud.update(this.fallSpeedGoodCloud);
             }
-            this.ground.update();
+            this.grass.update();
             this.pot.update();
             this.flower.update(this.waterContainer, this.fallSpeedBadCloud);
             this.spawnBadCloud();
@@ -166,7 +166,7 @@ class GameArea {
         }
         else if (this.isGameRunning && !this.gameIsOver) {
             this.flower.draw();
-            this.ground.draw();
+            this.grass.draw();
             this.pot.draw();
             this.beeSwarm.forEach(bee => {
                 bee.draw();
