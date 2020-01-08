@@ -3,10 +3,10 @@ let potImg: p5.Image;
 class Pot {
 
     public potImg: p5.Image;
-    public x: number;
-    public y: number;
-    public width: number;
-    public height: number;
+    private x: number;
+    private y: number;
+    private width: number;
+    private height: number;
     private time: number;
 
 

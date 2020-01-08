@@ -2,7 +2,6 @@ let grassImg: p5.Image;
 class Grass {
 
     public grassImg: p5.Image;
-    public potImg: p5.Image;
     private x: number;
     private y: number;
     private width: number;
@@ -13,7 +12,6 @@ class Grass {
     public constructor(grassImg: p5.Image, x: number, y: number, width: number, height: number) {
 
         this.grassImg = grassImg;
-        this.potImg = potImg;
         this.x = x;
         this.y = y;
         this.width = width;
