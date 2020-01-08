@@ -1,6 +1,9 @@
-let badCloudImg1: p5.Image;
-let badCloudImg2: p5.Image;
-let badCloudImg3: p5.Image;
+interface BadCloudImages {
+    badCloudImg1: p5.Image;
+    badCloudImg2: p5.Image;
+    badCloudImg3: p5.Image;
+}
+
 class BadCloud {
 
     public badCloud: [p5.Image, p5.Image, p5.Image];
@@ -14,7 +17,7 @@ class BadCloud {
 
     public constructor(x: number, y: number, width: number, height: number) {
 
-        this.badCloud = [badCloudImg1, badCloudImg2, badCloudImg3];
+        this.badCloud = [badCloudImages.badCloudImg1, badCloudImages.badCloudImg2, badCloudImages.badCloudImg3];
         this.badCloudImg = random(this.badCloud);
         this.x = x;
         this.y = y;
@@ -35,8 +38,8 @@ class BadCloud {
         if (d < this.radie + flower.radie) {
 
             flower.currentFlower = listOfFlowers.flowerHurt;
-            if (!sadFlowerCloudSound.isPlaying()) {
-                sadFlowerCloudSound.play(0.5);
+            if (!soundEffects.sadFlowerCloudSound.isPlaying()) {
+                soundEffects.sadFlowerCloudSound.play(0.5);
             }
             if (d < this.radie + flower.radie && waterContainer._waterlevel <= 0.25) {
                 flower.currentFlower = listOfFlowers.flower25Brown;

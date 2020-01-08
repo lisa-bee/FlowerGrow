@@ -1,9 +1,3 @@
-let happyFlowerSound: p5.SoundFile;
-let sadFlowerCloudSound: p5.SoundFile;
-let sadFlowerBeeSound: p5.SoundFile;
-let leafLeft: p5.Image;
-let leafRight: p5.Image;
-
 interface Flowers {
     bud: p5.Image,
     flowerHurt: p5.Image,
@@ -13,6 +7,11 @@ interface Flowers {
     flower75: p5.Image,
     flower100: p5.Image,
     flower100Brown: p5.Image
+}
+
+interface LeafImages {
+    leafLeft: p5.Image;
+    leafRight: p5.Image;
 }
 
 class Flower {
@@ -74,8 +73,8 @@ class Flower {
     }
 
     private growingLeaf(positionX: number, positionY: number) {
-        image(leafLeft, positionX - 23, positionY - 6, 23, 12);
-        image(leafRight, positionX, positionY - 6, 23, 12);
+        image(leafImages.leafLeft, positionX - 23, positionY - 6, 23, 12);
+        image(leafImages.leafRight, positionX, positionY - 6, 23, 12);
     }
 
     private move(fallSpeed: number) {

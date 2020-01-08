@@ -31,8 +31,8 @@ class GoodCloud {
         const d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.radie + flower.radie) {
             flower.currentFlower = listOfFlowers.flower100;
-            if (!happyFlowerSound.isPlaying()) {
-                happyFlowerSound.play(0.5);
+            if (!soundEffects.happyFlowerSound.isPlaying()) {
+                soundEffects.happyFlowerSound.play(0.5);
             }
             if (d < this.radie + flower.radie && waterContainer._waterlevel <= 0.25) {
                 flower.currentFlower = listOfFlowers.flower100Brown;

@@ -1,3 +1,11 @@
+interface SoundEffects {
+    buzzingBee: p5.SoundFile;
+    beeBuzzToSound: p5.SoundFile;
+    beeBuzzAwaySound: p5.SoundFile;
+    happyFlowerSound: p5.SoundFile;
+    sadFlowerCloudSound: p5.SoundFile;
+    sadFlowerBeeSound: p5.SoundFile;
+}
 
 class GameArea {
     private grass: Grass;
@@ -129,27 +137,30 @@ class GameArea {
 
     public spawnBee() {
 
-        if (this.time > 100000) {
-            if (millis() >= 4000 + this.beeSpawnTime) {
-                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
-                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
-                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
-                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
-                this.beeSpawnTime = millis();
-            }
-        }
-
-        else if (this.time > 80000) {
-            if (millis() >= 4000 + this.beeSpawnTime) {
-                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
-                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
-                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
-                this.beeSpawnTime = millis();
-            }
-        }
-
-        else if (this.time > 40000) {
+        if(this.time > 150000){
             if (millis() >= 5000 + this.beeSpawnTime) {
+
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSpawnTime = millis();
+            }
+        }
+
+        else if(this.time > 90000){
+            if (millis() >= 5000 + this.beeSpawnTime) {
+
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
+                this.beeSpawnTime = millis();
+            }
+        }
+
+        else if(this.time > 50000){
+            if (millis() >= 5500 + this.beeSpawnTime) {
+
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSpawnTime = millis();
