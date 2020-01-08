@@ -42,7 +42,7 @@ class Bee {
         this._hasChangedWaterLevel = false;
     }
 
-    public move() {
+    private move() {
         this.y = this.y + random(-5, 5);
 
         if (this.isBeeDead) {
@@ -166,7 +166,7 @@ class Bee {
         this._hasChangedWaterLevel = boolean;
     }
 
-    public mouseClickedBee(mouseClickX: number, mouseClickY: number) {
+    private mouseClickedBee(mouseClickX: number, mouseClickY: number) {
 
         if (mouseIsPressed && mouseClickX > this.x && mouseClickX < this.x + this.width && mouseClickY > this.y && mouseClickY < this.y + this.height) {
             this.isBeeDead = true;
@@ -186,6 +186,7 @@ class Bee {
         this.move();
         this.mouseClickedBee(mouseX, mouseY);
         this.handleBuzzToSounds();
+        //bee.mouseClickedBee(mouseX, mouseY);
     }
 
     public draw() {
