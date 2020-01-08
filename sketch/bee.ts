@@ -180,7 +180,6 @@ class Bee {
         this.move();
         this.mouseClickedBee(mouseX, mouseY);
         this.handleBuzzToSounds();
-        //bee.mouseClickedBee(mouseX, mouseY);
     }
 
     public draw() {
