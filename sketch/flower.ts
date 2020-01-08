@@ -116,7 +116,6 @@ class Flower {
         this.keepSamePointsForDifferentDrawsAdjuster--;
         if (this.keepSamePointsForDifferentDrawsAdjuster === 0) this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
 
-        console.log(pointsToDraw)
         return pointsToDraw;
     }
 
