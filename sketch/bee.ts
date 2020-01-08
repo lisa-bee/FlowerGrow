@@ -162,7 +162,6 @@ class Bee {
     }
 
     private mouseClickedBee(mouseClickX: number, mouseClickY: number) {
-
         if (mouseIsPressed && mouseClickX > this.x && mouseClickX < this.x + this.width && mouseClickY > this.y && mouseClickY < this.y + this.height) {
             this.isBeeDead = true;
         }

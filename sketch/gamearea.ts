@@ -133,7 +133,6 @@ class GameArea {
     }
 
     private spawnBee() {
-
         if(this.time > 150000){
             if (millis() >= 5000 + this.beeSpawnTime) {
 
