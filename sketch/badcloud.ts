@@ -5,43 +5,39 @@ interface BadCloudImages {
 }
 
 class BadCloud {
-
     public badCloud: [p5.Image, p5.Image, p5.Image];
     public badCloudImg: p5.Image;
     private x: number;
     private y: number;
     private width: number;
     private height: number;
-    private radie: number;
+    private radius: number;
     private _hasChangedWaterLevel: boolean;
 
     public constructor(x: number, y: number, width: number, height: number) {
-
         this.badCloud = [badCloudImages.badCloudImg1, badCloudImages.badCloudImg2, badCloudImages.badCloudImg3];
         this.badCloudImg = random(this.badCloud);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.radie = 38;
+        this.radius = 38;
         this._hasChangedWaterLevel = false;
     }
-
 
     public update(fallSpeedBadCloud: number) {
         this.move(fallSpeedBadCloud);
     }
 
-
     public checkCollisionWithFlower(flower: Flower, waterContainer: WaterContainer): boolean {
         const d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
-        if (d < this.radie + flower.radie) {
-
+        if (d < this.radius + flower.radius) {
             flower.currentFlower = listOfFlowers.flowerHurt;
+            
             if (!soundEffects.sadFlowerCloudSound.isPlaying()) {
                 soundEffects.sadFlowerCloudSound.play(0.5);
             }
-            if (d < this.radie + flower.radie && waterContainer._waterlevel <= 0.25) {
+            if (d < this.radius + flower.radius && waterContainer._waterlevel <= 0.25) {
                 flower.currentFlower = listOfFlowers.flower25Brown;
             }
             return true;
@@ -62,10 +58,10 @@ class BadCloud {
         noFill();
         noStroke();
         ellipseMode(CENTER);
-        ellipse(this.x, this.y, this.radie * 2, this.radie * 2);
+        ellipse(this.x, this.y, this.radius * 2, this.radius * 2);
         pop();
-
     }
+
     public get hasChangedWaterLevel(): boolean {
         return this._hasChangedWaterLevel;
     }

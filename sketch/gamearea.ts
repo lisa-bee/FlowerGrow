@@ -100,7 +100,6 @@ class GameArea {
         }
     }
 
-
     private spawnBadCloud() {
         if (this.time >= 50000) {
             if (millis() >= 900 + this.badCloudSpawnTime) {
@@ -114,14 +113,12 @@ class GameArea {
                 this.badCloudSpawnTime = millis();
             }
         }
-
         if (this.time >= 0) {
             if (millis() >= 1800 + this.badCloudSpawnTime) {
                 this.badClouds.push(new BadCloud(random(0, 400), random(-100, -700), 100, 70));
                 this.badCloudSpawnTime = millis();
             }
         }
-
         for (const badCloud of this.badClouds) {
             if (badCloud.Y > height + 800) {
                 this.badClouds.shift();
@@ -136,7 +133,6 @@ class GameArea {
     }
 
     public spawnBee() {
-
         if(this.time > 150000){
             if (millis() >= 5000 + this.beeSpawnTime) {
 
@@ -147,26 +143,21 @@ class GameArea {
                 this.beeSpawnTime = millis();
             }
         }
-
         else if(this.time > 90000){
             if (millis() >= 5000 + this.beeSpawnTime) {
-
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSpawnTime = millis();
             }
         }
-
         else if(this.time > 50000){
             if (millis() >= 5500 + this.beeSpawnTime) {
-
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSpawnTime = millis();
             }
         }
-
         else if (this.time > 7000) {
             if (millis() >= 10000 + this.beeSpawnTime) {
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
@@ -185,7 +176,6 @@ class GameArea {
                     bee.hasChangedWaterLevel = true;
                 }
             }
-
             if (bee.checkIfBeeOffScreen() == true) {
                 this.deleteBeeFromArray();
             }
@@ -193,7 +183,7 @@ class GameArea {
     }
 
     private deleteBeeFromArray() {
-        let indexPosition = this.checkBeeToBeDeleted()
+        let indexPosition = this.checkBeeToBeDeleted();
         this.beeSwarm.splice(indexPosition, 1);
     }
 
@@ -231,5 +221,4 @@ class GameArea {
             this.waterContainer.draw();
         }
     }
-
 }

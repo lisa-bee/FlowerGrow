@@ -17,7 +17,7 @@ interface LeafImages {
 class Flower {
     public currentFlower: p5.Image;
     private time: number;
-    public readonly radie: number;
+    public readonly radius: number;
     private history: p5.Vector[];
     private onlyRenderEachXPoint: number;
     private keepSamePointsForDifferentDrawsAdjuster: number;
@@ -25,7 +25,7 @@ class Flower {
     public constructor(x: number, y: number, private width: number, private height: number) {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
-        this.radie = 22;
+        this.radius = 22;
         this.onlyRenderEachXPoint = 45;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
@@ -58,11 +58,9 @@ class Flower {
                 this.currentFlower = listOfFlowers.flower0;
             }
         }
-
     }
 
     private grow(x: number, fallSpeed: number) {
-
         const y = this.endOfStem.y - fallSpeed; // hastighet
         var v = createVector(x, y);
         this.history.push(v);
@@ -86,7 +84,7 @@ class Flower {
     }
 
     private handlePlayerInput(): number {
-        let x = this.endOfStem.x
+        let x = this.endOfStem.x;
         if (this.time > 2000) {
             if (keyIsDown(65)) {
                 x -= 3;
@@ -94,11 +92,11 @@ class Flower {
             else if (keyIsDown(68)) {
                 x += 3;
             }
-            if (x > width - this.radie) {
-                x = width - this.radie;
+            if (x > width - this.radius) {
+                x = width - this.radius;
             }
-            if (x < this.radie) {
-                x = this.radie;
+            if (x < this.radius) {
+                x = this.radius;
             }
         }
         return x;
@@ -119,7 +117,7 @@ class Flower {
     }
 
     public draw() {
-        stroke(100, 215, 46)
+        stroke(100, 215, 46);
         strokeWeight(6);
         noFill();
         const historyPositionsToDraw = this.resolveHistoryPositionsToDraw();
@@ -132,7 +130,7 @@ class Flower {
         endShape();
         push();
         for (let i = 0; i < historyPositionsToDraw.length; i++) {
-            this.growingLeaf(historyPositionsToDraw[i].x, historyPositionsToDraw[i].y)
+            this.growingLeaf(historyPositionsToDraw[i].x, historyPositionsToDraw[i].y);
         }
         pop();
         push();
@@ -143,8 +141,7 @@ class Flower {
         noFill();
         noStroke();
         ellipseMode(CENTER);
-        ellipse(this.endOfStem.x, this.endOfStem.y, this.radie * 2, this.radie * 2);
+        ellipse(this.endOfStem.x, this.endOfStem.y, this.radius * 2, this.radius * 2);
         pop();
-
     }
 }
