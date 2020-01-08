@@ -132,7 +132,8 @@ class GameArea {
         }
     }
 
-    public spawnBee() {
+    private spawnBee() {
+
         if(this.time > 150000){
             if (millis() >= 5000 + this.beeSpawnTime) {
 
@@ -169,7 +170,6 @@ class GameArea {
             bee.checkCollisionWithFlower(this.flower, this.waterContainer);
             bee.buzzTo(this.flower);
             bee.update();
-            bee.mouseClickedBee(mouseX, mouseY);
             if (bee.checkCollisionWithFlower(this.flower, this.waterContainer)) {
                 if (bee.hasChangedWaterLevel === false) {
                     this.waterContainer.decreaseWaterLevel(0.2);
