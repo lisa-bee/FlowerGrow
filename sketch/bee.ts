@@ -1,9 +1,11 @@
-let beeLeftImage: p5.Image;
-let beeRightImage: p5.Image;
-let beeDeadImage: p5.Image;
-let buzzingBee: p5.SoundFile;
-let beeBuzzToSound: p5.SoundFile;
-let beeBuzzAwaySound: p5.SoundFile;
+
+
+
+interface BeeImages {
+    beeLeftImage: p5.Image;
+    beeRightImage: p5.Image;
+    beeDeadImage: p5.Image;
+}
 
 function clone<T extends Object>(instance: T): T {
     const copy = new (instance.constructor as { new (): T })();
@@ -26,7 +28,7 @@ class Bee {
     private _hasChangedWaterLevel: boolean;
 
     public constructor(x: any, y: any, width: number, height: number) {
-        this.img = beeRightImage;
+        this.img = beeImages.beeRightImage;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -35,8 +37,8 @@ class Bee {
         this.radie = this.width / 2;
         this.beeHitFlower = false;
         this.time = 0;
-        this._beeBuzzToSound = clone(beeBuzzToSound);
-        this._secundaryBeeSound = clone(beeBuzzToSound);
+        this._beeBuzzToSound = clone(soundEffects.beeBuzzToSound);
+        this._secundaryBeeSound = clone(soundEffects.beeBuzzToSound);
         this._hasChangedWaterLevel = false;
     }
 
@@ -57,11 +59,11 @@ class Bee {
         else {
             if (flower.endOfStem.x - 25 <= this.x) {
                 this.x -= 1;
-                this.img = beeLeftImage;
+                this.img = beeImages.beeLeftImage;
             }
             else {
                 this.x += 1;
-                this.img = beeRightImage;
+                this.img = beeImages.beeRightImage;
             }
         }
 
@@ -78,7 +80,7 @@ class Bee {
         }
 
         if (this.isBeeDead) {
-            this.img = beeDeadImage;
+            this.img = beeImages.beeDeadImage;
         }
 
         if (this.beeHitFlower && !this.isBeeDead) {
@@ -120,11 +122,11 @@ class Bee {
             this.y -= 5;
             if (flower.endOfStem.x >= 200) {
                 this.x -= 4;
-                this.img = beeLeftImage;
+                this.img = beeImages.beeLeftImage;
             }
             else {
                 this.x += 4;
-                this.img = beeRightImage;
+                this.img = beeImages.beeRightImage;
             }
         }
     }
@@ -138,9 +140,9 @@ class Bee {
                 flower.currentFlower = listOfFlowers.flowerHurt;
                 this.beeHitFlower = true;
 
-                if (!sadFlowerBeeSound.isPlaying() && !beeBuzzAwaySound.isPlaying()) {
-                    sadFlowerBeeSound.play(0.5);
-                    beeBuzzAwaySound.play();
+                if (!soundEffects.sadFlowerBeeSound.isPlaying() && !soundEffects.beeBuzzAwaySound.isPlaying()) {
+                    soundEffects.sadFlowerBeeSound.play(0.5);
+                    soundEffects.beeBuzzAwaySound.play();
                 }
                 if (d < this.radie + flower.radie && waterContainer._waterlevel <= 0.25) {
                     flower.currentFlower = listOfFlowers.flower25Brown;
@@ -150,7 +152,7 @@ class Bee {
         }
 
         else {
-            beeBuzzAwaySound.stop();
+            soundEffects.beeBuzzAwaySound.stop();
         }
 
         return false;
