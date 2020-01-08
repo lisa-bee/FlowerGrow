@@ -18,7 +18,7 @@ class WaterContainer {
         strokeWeight(3);
         stroke(6, 61, 153);
         fill(50);
-        rect(this.x, this.y, this.width, this.height, 10);
+        rect(this.x, this.y, this.width, this.height, 100);
         noStroke();
         const c = color(31, 99, 224);
         fill(c);
