@@ -1,12 +1,3 @@
-interface SoundEffects {
-    buzzingBee: p5.SoundFile;
-    beeBuzzToSound: p5.SoundFile;
-    beeBuzzAwaySound: p5.SoundFile;
-    happyFlowerSound: p5.SoundFile;
-    sadFlowerCloudSound: p5.SoundFile;
-    sadFlowerBeeSound: p5.SoundFile;
-}
-
 class GameArea {
     private grass: Grass;
     private pot: Pot;
@@ -81,20 +72,21 @@ class GameArea {
     }
 
     private spawnGoodCloud() {
-
-        if (millis() >= random(10000, 28000) + this.goodCloudSpawnTime) {
-            this.goodClouds.push(new GoodCloud(random(0, 400), -100, 90, 110));
-            this.goodCloudSpawnTime = millis();
-        }
-
-        for (const goodCloud of this.goodClouds) {
-            if (goodCloud.Y > height + 800) {
-                this.goodClouds.shift();
+        if(this.time >= 4000){
+            if (millis() >= random(10000, 28000) + this.goodCloudSpawnTime) {
+                this.goodClouds.push(new GoodCloud(random(0, 400), -100, 90, 110));
+                this.goodCloudSpawnTime = millis();
             }
-            if (goodCloud.checkCollisionWithFlower(this.flower, this.waterContainer)) {
-                if (goodCloud.hasChangedWaterLevel === false) {
-                    this.waterContainer.increaseWaterLevel(0.2);
-                    goodCloud.hasChangedWaterLevel = true;
+
+            for (const goodCloud of this.goodClouds) {
+                if (goodCloud.Y > height + 800) {
+                    this.goodClouds.shift();
+                }
+                if (goodCloud.checkCollisionWithFlower(this.flower, this.waterContainer)) {
+                    if (goodCloud.hasChangedWaterLevel === false) {
+                        this.waterContainer.increaseWaterLevel(0.2);
+                        goodCloud.hasChangedWaterLevel = true;
+                    }
                 }
             }
         }

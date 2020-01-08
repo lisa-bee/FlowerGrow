@@ -1,7 +1,7 @@
-interface BadCloudImages {
-    badCloudImg1: p5.Image;
-    badCloudImg2: p5.Image;
-    badCloudImg3: p5.Image;
+interface BadCloudAssets {
+    badCloudImg1: p5.Image,
+    badCloudImg2: p5.Image,
+    badCloudImg3: p5.Image,
 }
 
 class BadCloud {
@@ -15,7 +15,7 @@ class BadCloud {
     private _hasChangedWaterLevel: boolean;
 
     public constructor(x: number, y: number, width: number, height: number) {
-        this.badCloud = [badCloudImages.badCloudImg1, badCloudImages.badCloudImg2, badCloudImages.badCloudImg3];
+        this.badCloud = [badCloudAssets.badCloudImg1, badCloudAssets.badCloudImg2, badCloudAssets.badCloudImg3];
         this.badCloudImg = random(this.badCloud);
         this.x = x;
         this.y = y;
@@ -32,13 +32,13 @@ class BadCloud {
     public checkCollisionWithFlower(flower: Flower, waterContainer: WaterContainer): boolean {
         const d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.radius + flower.radius) {
-            flower.currentFlower = listOfFlowers.flowerHurt;
+            flower.currentFlower = flowerAssets.flowerHurt;
             
-            if (!soundEffects.sadFlowerCloudSound.isPlaying()) {
-                soundEffects.sadFlowerCloudSound.play(0.5);
+            if (!flowerAssets.sadFlowerCloudSound.isPlaying()) {
+                flowerAssets.sadFlowerCloudSound.play(0.5);
             }
             if (d < this.radius + flower.radius && waterContainer._waterlevel <= 0.25) {
-                flower.currentFlower = listOfFlowers.flower25Brown;
+                flower.currentFlower = flowerAssets.flower25Brown;
             }
             return true;
         }

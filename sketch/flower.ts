@@ -1,4 +1,4 @@
-interface Flowers {
+interface FlowerAssets {
     bud: p5.Image,
     flowerHurt: p5.Image,
     flower0: p5.Image,
@@ -6,12 +6,12 @@ interface Flowers {
     flower25Brown: p5.Image,
     flower75: p5.Image,
     flower100: p5.Image,
-    flower100Brown: p5.Image
-}
-
-interface LeafImages {
-    leafLeft: p5.Image;
-    leafRight: p5.Image;
+    flower100Brown: p5.Image,
+    leafLeft: p5.Image,
+    leafRight: p5.Image,
+    happyFlowerSound: p5.SoundFile,
+    sadFlowerCloudSound: p5.SoundFile,
+    sadFlowerBeeSound: p5.SoundFile,
 }
 
 class Flower {
@@ -23,7 +23,7 @@ class Flower {
     private keepSamePointsForDifferentDrawsAdjuster: number;
 
     public constructor(x: number, y: number, private width: number, private height: number) {
-        this.currentFlower = listOfFlowers.bud;
+        this.currentFlower = flowerAssets.bud;
         this.time = 0;
         this.radius = 22;
         this.onlyRenderEachXPoint = 45;
@@ -46,16 +46,16 @@ class Flower {
         this.time += deltaTime;
         if (this.time > 2500) {
             if (waterContainer._waterlevel <= 1) {
-                this.currentFlower = listOfFlowers.flower100;
+                this.currentFlower = flowerAssets.flower100;
             }
             if (waterContainer._waterlevel <= 0.75) {
-                this.currentFlower = listOfFlowers.flower75;
+                this.currentFlower = flowerAssets.flower75;
             }
             if (waterContainer._waterlevel <= 0.5) {
-                this.currentFlower = listOfFlowers.flower25;
+                this.currentFlower = flowerAssets.flower25;
             }
             if (waterContainer._waterlevel <= 0.25) {
-                this.currentFlower = listOfFlowers.flower0;
+                this.currentFlower = flowerAssets.flower0;
             }
         }
     }
@@ -71,8 +71,8 @@ class Flower {
     }
 
     private growingLeaf(positionX: number, positionY: number) {
-        image(leafImages.leafLeft, positionX - 23, positionY - 6, 23, 12);
-        image(leafImages.leafRight, positionX, positionY - 6, 23, 12);
+        image(flowerAssets.leafLeft, positionX - 23, positionY - 6, 23, 12);
+        image(flowerAssets.leafRight, positionX, positionY - 6, 23, 12);
     }
 
     private move(fallSpeed: number) {
