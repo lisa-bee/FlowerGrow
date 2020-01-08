@@ -26,7 +26,7 @@ class Flower {
     public constructor(x: number, y: number, private width: number, private height: number) {
         this.currentFlower = listOfFlowers.bud;
         this.time = 0;
-        this.radie = 19;
+        this.radie = 22;
         this.onlyRenderEachXPoint = 45;
         this.keepSamePointsForDifferentDrawsAdjuster = this.onlyRenderEachXPoint;
         this.history = [createVector(x, y)];
@@ -45,7 +45,7 @@ class Flower {
         this.grow(newX, fallSpeed);
         this.move(fallSpeed);
         this.time += deltaTime;
-        if (this.time > 1500) {
+        if (this.time > 2500) {
             if (waterContainer._waterlevel <= 1) {
                 this.currentFlower = listOfFlowers.flower100;
             }
@@ -67,22 +67,19 @@ class Flower {
         const y = this.endOfStem.y - fallSpeed; // hastighet
         var v = createVector(x, y);
         this.history.push(v);
-        const maxLength = 140;
+        const maxLength = 200;
         if (this.history.length > maxLength) {
             this.history.shift();
         }
     }
 
-    private growingLeaf(positionX:number, positionY:number){
-
-        if (this.time > 1500) {           
-                image(leafLeft, positionX - 25, positionY - 13, 25, 12);
-                image(leafRight, positionX + 2, positionY- 10, 25, 12);      
-        }
+    private growingLeaf(positionX: number, positionY: number) {
+        image(leafLeft, positionX - 23, positionY - 6, 23, 12);
+        image(leafRight, positionX, positionY - 6, 23, 12);
     }
 
     private move(fallSpeed: number) {
-        if (this.time > 2200) { // höjd
+        if (this.time > 3100) { // höjd
             for (const point of this.history) {
                 point.y += fallSpeed; //hastighet
             }
@@ -91,7 +88,7 @@ class Flower {
 
     private handlePlayerInput(): number {
         let x = this.endOfStem.x
-        if (this.time > 1500) {
+        if (this.time > 2000) {
             if (keyIsDown(65)) {
                 x -= 3;
             }
@@ -131,14 +128,13 @@ class Flower {
         curveVertex(historyPositionsToDraw[0].x, historyPositionsToDraw[0].y);
         for (let i = 0; i < historyPositionsToDraw.length; i++) {
             curveVertex(historyPositionsToDraw[i].x, historyPositionsToDraw[i].y);
-            
-           if(historyPositionsToDraw[i].y >= 320){
-                this.growingLeaf(historyPositionsToDraw[i].x,historyPositionsToDraw[i].y)
-           }   
         }
         curveVertex(historyPositionsToDraw[historyPositionsToDraw.length - 1].x - 1, historyPositionsToDraw[historyPositionsToDraw.length - 1].y - 1);
         endShape();
         push();
+        for (let i = 0; i < historyPositionsToDraw.length; i++) {
+            this.growingLeaf(historyPositionsToDraw[i].x, historyPositionsToDraw[i].y)
+        }
         pop();
         push();
         imageMode(CENTER);
