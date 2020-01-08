@@ -55,7 +55,7 @@ function draw() {
 function keyPressed(): boolean {
     if (keyCode === ENTER && game.gameIsOver) {
         game = new GameArea()
-        return true;
+            return true;
     }
     return false;
 }    
