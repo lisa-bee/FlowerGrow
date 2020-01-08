@@ -10,7 +10,6 @@ class GoodCloud {
     private height: number;
     private radie: number;
     private _hasChangedWaterLevel: boolean;
-    /* private time: number; */
 
     public constructor(x: number, y: number, width: number, height: number) {
 
@@ -22,7 +21,6 @@ class GoodCloud {
         this.height = height;
         this.radie = 38;
         this._hasChangedWaterLevel = false;
-        /* this.time = 0; */
     }
 
     public update(fallSpeedGoodCloud: number) {

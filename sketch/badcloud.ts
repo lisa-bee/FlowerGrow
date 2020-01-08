@@ -14,9 +14,6 @@ class BadCloud {
     private height: number;
     private radie: number;
     private _hasChangedWaterLevel: boolean;
-    /* private time: number; */
-    
-
 
     public constructor(x: number, y: number, width: number, height: number) {
 
@@ -28,10 +25,9 @@ class BadCloud {
         this.height = height;
         this.radie = 38;
         this._hasChangedWaterLevel = false;
-        /* this.time = 0; */
     }
 
-    
+
     public update(fallSpeedBadCloud: number) {
         this.move(fallSpeedBadCloud);
     }
@@ -40,7 +36,7 @@ class BadCloud {
     public checkCollisionWithFlower(flower: Flower, waterContainer: WaterContainer): boolean {
         const d = dist(this.x, this.y, flower.endOfStem.x, flower.endOfStem.y);
         if (d < this.radie + flower.radie) {
-            
+
             flower.currentFlower = listOfFlowers.flowerHurt;
             if (!soundEffects.sadFlowerCloudSound.isPlaying()) {
                 soundEffects.sadFlowerCloudSound.play(0.5);
