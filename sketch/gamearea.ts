@@ -130,7 +130,6 @@ class GameArea {
 
     public spawnBee() {
 
-        this.time += deltaTime;
         if(this.time > 100000){
             if (millis() >= 4000 + this.beeSpawnTime) {
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
