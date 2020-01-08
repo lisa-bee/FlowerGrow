@@ -5,6 +5,12 @@ let buzzingBee: p5.SoundFile;
 let beeBuzzToSound: p5.SoundFile;
 let beeBuzzAwaySound: p5.SoundFile;
 
+function clone<T extends Object>(instance: T): T {
+    const copy = new (instance.constructor as { new (): T })();
+    (Object as any).assign(copy, instance);
+    return copy;
+}
+
 class Bee {
     private img: p5.Image
     private x: number;
