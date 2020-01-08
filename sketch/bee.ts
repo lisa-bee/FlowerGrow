@@ -5,30 +5,21 @@ let buzzingBee: p5.SoundFile;
 let beeBuzzToSound: p5.SoundFile;
 let beeBuzzAwaySound: p5.SoundFile;
 
-function clone<T extends Object>(instance: T): T {
-    const copy = new (instance.constructor as { new (): T })();
-    (Object as any).assign(copy, instance);
-    return copy;
-}
-
-
 class Bee {
     private img: p5.Image
     private x: number;
     private y: number;
     private width: number;
     private height: number;
-    public isBeeDead: boolean;
+    private isBeeDead: boolean;
     private r: number;
     private beeHitFlower: boolean;
     private time: number;
     private _beeBuzzToSound: p5.SoundFile;
-    private _stopBeeBuzzToSound: p5.SoundFile
+    private _secundaryBeeSound: p5.SoundFile
     private _hasChangedWaterLevel: boolean;
-    //private _beeOutOffGameArea: boolean;
 
     public constructor(x: any, y: any, width: number, height: number) {
-
         this.img = beeRightImage;
         this.x = x;
         this.y = y;
@@ -39,13 +30,8 @@ class Bee {
         this.beeHitFlower = false;
         this.time = 0;
         this._beeBuzzToSound = clone(beeBuzzToSound);
-        this._stopBeeBuzzToSound = clone(beeBuzzToSound);
+        this._secundaryBeeSound = clone(beeBuzzToSound);
         this._hasChangedWaterLevel = false;
-        //this._beeOutOffGameArea = false;
-    }
-
-    public get isBeeClicked() {
-        return this.isBeeDead;
     }
 
     public move() {
@@ -92,55 +78,34 @@ class Bee {
         if (this.beeHitFlower && !this.isBeeDead) {
             this.buzzAwayAfterHitFlower(flower)
         }
-
-        // if (game.beeSwarm.length >= 3) {
-/*         if (this.y >= 630 || this.y <= -30){
-            game.beeSwarm.shift();
-        } */
     }
 
-    public checkIfBeeOffScreen(): boolean{
-        if (this.y >= 630 || this.y <= -30){
-            //game.beeSwarm.shift();
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public handleBuzzToSounds() {
+    private handleBuzzToSounds() {
         if (!this.isBeeDead && !this.beeHitFlower) {
-            console.log('start')
             this._beeBuzzToSound.playMode('untilDone');
             this._beeBuzzToSound.play();
         }
 
         if (this.isBeeDead) {
         this._beeBuzzToSound.stop();
-
             if (game.beeSwarm.length > 1 && !this._beeBuzzToSound.isPlaying()){
-            this._stopBeeBuzzToSound.playMode('untilDone');
-            this._stopBeeBuzzToSound.play();
+                this._secundaryBeeSound.playMode('untilDone');
+                this._secundaryBeeSound.play();
             } 
+            
             else if(game.beeSwarm.length == 0){
-                    this._stopBeeBuzzToSound.stop()
-                    
-                console.log('stooooop')
-            }
-
-            if(this.beeHitFlower){
-                if(this._beeBuzzToSound.isPlaying()){
-                    this._beeBuzzToSound.stop();
-                }
-                if (this._stopBeeBuzzToSound.isPlaying() && this.beeHitFlower || this.isBeeDead){
-                    this._stopBeeBuzzToSound.stop();
-                } 
-            }
-
-
+                    this._secundaryBeeSound.stop()
+            } 
         }
-    
+        if(this.beeHitFlower){
+            if(this._beeBuzzToSound.isPlaying()){
+                this._beeBuzzToSound.stop();
+            }
+
+            if (this._secundaryBeeSound.isPlaying() && this.beeHitFlower || this.isBeeDead){
+                this._secundaryBeeSound.stop();
+            } 
+        }
     }
 
     private buzzAwayAfterHitFlower(flower: Flower) {
@@ -168,7 +133,6 @@ class Bee {
                 this.beeHitFlower = true;
 
                 if (!sadFlowerBeeSound.isPlaying() && !beeBuzzAwaySound.isPlaying()) {
-                    console.log('buzzing away...')
                     sadFlowerBeeSound.play(0.5);
                     beeBuzzAwaySound.play();
                 }
@@ -186,10 +150,27 @@ class Bee {
         return false;
     }
 
+    public get hasChangedWaterLevel(): boolean {
+        return this._hasChangedWaterLevel;
+    }
+
+    public set hasChangedWaterLevel(boolean) {
+        this._hasChangedWaterLevel = boolean;
+    }
+
     public mouseClickedBee(mouseClickX: number, mouseClickY: number) {
 
         if (mouseIsPressed && mouseClickX > this.x && mouseClickX < this.x + this.width && mouseClickY > this.y && mouseClickY < this.y + this.height) {
             this.isBeeDead = true;
+        }
+    }
+
+    public checkIfBeeOffScreen(): boolean{
+        if (this.y >= 630 || this.y <= -30){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
@@ -203,13 +184,5 @@ class Bee {
         push();
         image(this.img, this.x, this.y, this.width, this.height);
         pop();
-    }
-
-    public get hasChangedWaterLevel(): boolean {
-        return this._hasChangedWaterLevel;
-    }
-
-    public set hasChangedWaterLevel(boolean) {
-        this._hasChangedWaterLevel = boolean;
     }
 }

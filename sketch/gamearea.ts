@@ -42,7 +42,6 @@ class GameArea {
         this.moreBadCloudsTime = 50000;
     }
 
-
     public update() {
         this.gameIsOver = this.gameOver.endGame(this.waterContainer);
         if (!this.isGameRunning) {
@@ -161,22 +160,12 @@ class GameArea {
             }
         }
 
-        else if(this.time > 20000){
-
-            if (millis() >= 4000 + this.beeSpawnTime) {
-                this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
-                this.beeSpawnTime = millis();
-            }
-
-        }
-
         else if(this.time > 7000){
 
             if (millis() >= 10000 + this.beeSpawnTime) {
                 this.beeSwarm.push(new Bee(random(this.beeStartingPointX), random(this.beeStartingPointY), 50, 50));
                 this.beeSpawnTime = millis();
             }
-
         }
 
         this.beeSwarm.forEach(bee => {
@@ -184,7 +173,6 @@ class GameArea {
             bee.buzzTo(this.flower);
             bee.update();
             bee.mouseClickedBee(mouseX, mouseY);
-            //bee.mouseClickedBee(mouseX, mouseY);
             if (bee.checkCollisionWithFlower(this.flower, this.waterContainer)) {
                 if (bee.hasChangedWaterLevel === false) {
                     this.waterContainer.decreaseWaterLevel(0.1);
@@ -193,39 +181,25 @@ class GameArea {
             }
 
            if(bee.checkIfBeeOffScreen() == true){
-            this.deleteBeeFromArray();
+                this.deleteBeeFromArray();
            }
-            
-/*             for (let index = 1; index < this.beeSwarm.length; index++) {
-                if(bee.CheckIfBeeOffScreen){
-                    this.beeSwarm.splice(index, 1);
-                }
-            } */
-            console.log(this.beeSwarm)
-        })
-        
+        })       
     }
 
     private deleteBeeFromArray(){  
             let item = this.checkBeeToBeDeleted()
             //item = this.checkBeeToBeDeleted();
             this.beeSwarm.splice(item, 1);
-        
-        console.log(item);
     }
 
     private checkBeeToBeDeleted():number{
-        
-            //const todos = getTodosFromLocalStorage();
             let index;
             for (index = 0; index < this.beeSwarm.length; index++) {
                 if(this.beeSwarm[index].checkIfBeeOffScreen() == true){
                     break;
                 }
             }
-            console.log(index)
-            return index;
-        
+            return index;   
     } 
 
     public draw() {
