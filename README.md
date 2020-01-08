@@ -6,7 +6,5 @@ GANTT: https://app.teamweek.com/#pg/9HPltn6EvuumccJ_V7ggS3eFn5NegMcd
 
 GOOGLE DOCS: https://medieinstitutet-my.sharepoint.com/:w:/g/personal/lisa_bengtsson_medieinstitutet_se/ER2wWfWYvJdBmfD8DT2h4tYBVcEZCZEKdOiTMXu49sc-KQ?e=KEgDhr
 
-POWERPOINT PRESENTATION: https://medieinstitutet-my.sharepoint.com/:p:/g/personal/lisa_bengtsson_medieinstitutet_se/EcA2chy80NxFvsMChpJR8VgB2mSC4UG8of48nemGdQ0cBg?e=CS4N9B
-
 CLASS DIAGRAM: https://www.lucidchart.com/invitations/accept/732c36b7-269c-4c8a-8eb6-b8fc048b2b00
 
