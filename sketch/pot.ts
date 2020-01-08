@@ -1,6 +1,6 @@
 let potImg: p5.Image;
-class Pot {
 
+class Pot {
     public potImg: p5.Image;
     private x: number;
     private y: number;
@@ -8,9 +8,7 @@ class Pot {
     private height: number;
     private time: number;
 
-
     public constructor(potImg: p5.Image, x: number, y: number, width: number, height: number) {
-
         this.potImg = potImg;
         this.x = x;
         this.y = y;

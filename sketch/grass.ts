@@ -1,6 +1,6 @@
 let grassImg: p5.Image;
-class Grass {
 
+class Grass {
     public grassImg: p5.Image;
     private x: number;
     private y: number;
@@ -8,9 +8,7 @@ class Grass {
     private height: number;
     private time: number;
 
-
     public constructor(grassImg: p5.Image, x: number, y: number, width: number, height: number) {
-
         this.grassImg = grassImg;
         this.x = x;
         this.y = y;
@@ -35,5 +33,4 @@ class Grass {
             this.y = this.y + 1.5;
         }
     }
-
 }

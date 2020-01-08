@@ -20,6 +20,7 @@ class PlayerScore {
         text(this.score + "m", 20, 580);
         pop();
     }
+
     public draw() {
         this.printPlayerScore();
     }
@@ -27,6 +28,4 @@ class PlayerScore {
     public get _score() {
         return this.score;
     }
-
 }
-

@@ -13,7 +13,6 @@ class GameOver {
     private boxHeight: number;
     private radius: number;
 
-
     public constructor() {
         this.flower0X = 200;
         this.flower0Y = 175;

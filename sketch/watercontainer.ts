@@ -24,6 +24,7 @@ class WaterContainer {
         fill(c);
         const steps = 5 * this.waterlevel;
         const stepSize = this.height / 5;
+
         for (let i = 1; i <= steps; i++) {
             if (i == 1) {
                 rect(this.x + 1.5, this.y + this.height - (i * stepSize) - 1.5, this.width - 3, stepSize, 0, 0, 100, 100);
@@ -50,5 +51,4 @@ class WaterContainer {
     public get _waterlevel() {
         return this.waterlevel;
     }
-
 }

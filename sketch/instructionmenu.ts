@@ -37,7 +37,6 @@ class InstructionMenu {
         if (keyCode === ENTER) {
             return true;
         }
-
         return false;
     }
 
@@ -63,6 +62,4 @@ class InstructionMenu {
         image(this.logo, this.logoX, this.logoY, this.logoWidth, this.logoHeight);
         pop();
     }
-
-
 }
