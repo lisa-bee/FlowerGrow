@@ -8,3 +8,4 @@ GOOGLE DOCS: https://medieinstitutet-my.sharepoint.com/:w:/g/personal/lisa_bengt
 
 CLASS DIAGRAM: https://www.lucidchart.com/invitations/accept/732c36b7-269c-4c8a-8eb6-b8fc048b2b00
 
+GITHUB PAGES: https://lisa-bee.github.io/FlowerGrow/
