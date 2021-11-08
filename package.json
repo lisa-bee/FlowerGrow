@@ -13,5 +13,6 @@
     "live-server": "^1.2.1",
     "typescript": "^3.7.3"
     "set-value": ">=4.0.1"
+    "glob-parent": ">=5.1.2"
   }
 }
